@@ -121,7 +121,29 @@
             </div>
         </section>
     </main>
+<!-- Panel Lateral del Carrito (Desplegable) -->
+    <section class="cart-sidebar" id="cart-sidebar" aria-labelledby="cart-sidebar-title" aria-hidden="true" tabindex="-1">
+        <div class="cart-sidebar__header">
+            <h2 class="cart-sidebar__title" id="cart-sidebar-title">Tu Cesta de Cursos</h2>
+            <button class="cart-sidebar__close-btn" id="btn-close-cart" aria-label="Cerrar carrito de compras">
+                ✕
+            </button>
+        </div>
 
+        <!-- Lista de productos dentro del carrito -->
+        <ul class="cart-sidebar__list" id="cart-items-list" aria-label="Productos en el carrito">
+            <!-- Los cursos añadidos se cargarán aquí dinámicamente con JavaScript -->
+            <li class="cart-sidebar__empty-message">Tu carrito está vacío actualmente.</li>
+        </ul>
+
+        <div class="cart-sidebar__footer">
+            <p class="cart-sidebar__total-text">Total:</p>
+            <p class="cart-sidebar__total-price" id="cart-total-price" aria-label="Total: 0 euros">0,00€</p>
+            <button class="cart-sidebar__checkout-btn" id="btn-checkout" disabled aria-label="Proceder al pago (botón desactivado, carrito vacío)">
+                Proceder al pago
+            </button>
+        </div>
+    </section>
     <script type="module" src="src/js/main.js"></script>
 </body>
 </html>
