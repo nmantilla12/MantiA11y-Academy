@@ -3,9 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MantiA11y Academy - Cursos de Desarrollo Web Accesibles</title> 
 </head>
 <body>
-    
+
+    <header class="header">
+        <div class="header__logo-container">
+            <a href="#" class="header__logo-link">
+                <h1 class="header__title">MantiA11y Academy</h1>
+            </a>
+        </div>
+
+        <section class="a11y-panel" aria-label="Panel de accesibilidad">
+            <button class="a11y-panel__btn a11y-panel__btn--contrast" id="btn-contrast" aria-label="Activar alto contraste">
+                🌓 Contraste
+            </button>
+            <button class="a11y-panel__btn a11y-panel__btn--text-up" id="btn-text-up" aria-label="Aumentar tamaño de fuente">
+                A+
+            </button>
+            <button class="a11y-panel__btn a11y-panel__btn--text-down" id="btn-text-down" aria-label="Disminuir tamaño de fuente">
+                A-
+            </button>
+        </section>
+
+        <nav class="header__nav" aria-label="Navegación principal">
+            <ul class="header__nav-list">
+                <li class="header__nav-item">
+                    <a href="#catalogo" class="header__nav-link">Cursos</a>
+                </li>
+                <li class="header__nav-item">
+                    <button class="header__cart-button" id="btn-cart" aria-label="Abrir carrito de compras, 0 artículos en la cesta" aria-expanded="false">
+                        🛒 <span class="header__cart-badge" id="cart-count">0</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="catalog" id="catalogo" aria-labelledby="catalog-title">
+            <h2 class="catalog__title" id="catalog-title">Nuestros Cursos Adaptados</h2>
+            
+            <div class="catalog__grid">
+
+                <article class="course-card">
+                    <div class="course-card__image-container">
+                        <img src="https://picsum.photos/300/200?random=1" alt="Ilustración sobre desarrollo web accesible con código HTML en pantalla" class="course-card__img">
+                    </div>
+                    <div class="course-card__content">
+                        <h3 class="course-card__title">HTML5 Semántico y Accesibilidad Web</h3>
+                        <p class="course-card__description">Aprende a maquetar sitios web utilizando estándares WCAG y etiquetas semánticas desde cero.</p>
+                        <p class="course-card__price" aria-label="Precio: 49 euros con 99 céntimos">49,99€</p>
+                        <button class="course-card__add-btn" aria-label="Añadir curso de HTML5 Semántico al carrito">Añadir al carrito</button>
+                    </div>
+                </article>      
+
+                <article class="course-card">
+                    <div class="course-card__image-container">
+                        <img src="https://picsum.photos/300/200?random=2" alt="Esquema de cajas CSS y paleta de colores de alto contraste" class="course-card__img">
+                    </div>
+                    <div class="course-card__content">
+                        <h3 class="course-card__title">CSS Moderno y Estilos Accesibles</h3>
+                        <p class="course-card__description">Domina Flexbox, Grid y combinaciones de color con el contraste idóneo para baja visión.</p>
+                        <p class="course-card__price" aria-label="Precio: 39 euros con 99 céntimos">39,99€</p>
+                        <button class="course-card__add-btn" aria-label="Añadir curso de CSS Moderno al carrito">Añadir al carrito</button>
+                    </div>
+                </article>
+
+                <article class="course-card">
+                    <div class="course-card__image-container">
+                        <img src="https://picsum.photos/300/200?random=3" alt="Pantalla de código JavaScript con etiquetas ARIA dinámicas" class="course-card__img">
+                    </div>
+                    <div class="course-card__content">
+                        <h3 class="course-card__title">JavaScript y Atributos ARIA Dinámicos</h3>
+                        <p class="course-card__description">Crea menús, modales y carritos interactivos controlados por teclado y lectores de pantalla.</p>
+                        <p class="course-card__price" aria-label="Precio: 59 euros con 99 céntimos">59,99€</p>
+                        <button class="course-card__add-btn" aria-label="Añadir curso de JavaScript y ARIA al carrito">Añadir al carrito</button>
+                    </div>
+                </article>
+
+                <article class="course-card">
+                    <div class="course-card__image-container">
+                        <img src="https://picsum.photos/300/200?random=4" alt="Logotipo de React con un lector de pantalla activo" class="course-card__img">
+                    </div>
+                    <div class="course-card__content">
+                        <h3 class="course-card__title">React A11y: Componentes Accesibles</h3>
+                        <p class="course-card__description">Aprende a gestionar el enfoque del teclado y estados dinámicos en aplicaciones SPA modernas.</p>
+                        <p class="course-card__price" aria-label="Precio: 69 euros con 99 céntimos">69,99€</p>
+                        <button class="course-card__add-btn" aria-label="Añadir curso de React Accesible al carrito">Añadir al carrito</button>
+                    </div>
+                </article>
+
+                <article class="course-card">
+                    <div class="course-card__image-container">
+                        <img src="https://picsum.photos/300/200?random=5" alt="Persona utilizando una web navegando únicamente con el teclado" class="course-card__img">
+                    </div>
+                    <div class="course-card__content">
+                        <h3 class="course-card__title">Auditorías de Accesibilidad y WCAG 2.2</h3>
+                        <p class="course-card__description">Descubre cómo usar herramientas automáticas y lectores de pantalla reales para testear tus webs.</p>
+                        <p class="course-card__price" aria-label="Precio: 29 euros con 99 céntimos">29,99€</p>
+                        <button class="course-card__add-btn" aria-label="Añadir curso de Auditorías al carrito">Añadir al carrito</button>
+                    </div>
+                </article>
+
+                <article class="course-card">
+                    <div class="course-card__image-container">
+                        <img src="https://picsum.photos/300/200?random=6" alt="Interfaz de usuario limpia con tipografía legible y botones grandes" class="course-card__img">
+                    </div>
+                    <div class="course-card__content">
+                        <h3 class="course-card__title">Diseño de Interfaces Inclusivas (UX/UI)</h3>
+                        <p class="course-card__description">Principios de diseño para crear interfaces amigables para personas con neurodivergencias.</p>
+                        <p class="course-card__price" aria-label="Precio: 44 euros con 99 céntimos">44,99€</p>
+                        <button class="course-card__add-btn" aria-label="Añadir curso de Diseño Inclusivo al carrito">Añadir al carrito</button>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="src/js/main.js"></script>
 </body>
 </html>
