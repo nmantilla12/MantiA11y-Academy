@@ -7,7 +7,7 @@
   width: 100%;
   max-width: 450px;
   height: 100vh;
-  background-color: variables.$color-bg-light;
+  background-color: variables.$color-surface-card;
   box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
@@ -24,14 +24,14 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem;
-    border-bottom: 1px solid variables.$color-border;
+    border-bottom: 1px solid variables.$color-outline-variant;
   }
 
   &__title {
-    font-family: variables.$font-primary; 
+    font-family: variables.$font-family-accessible;
     font-size: 1.25rem;
     font-weight: 700;
-    color: variables.$color-text-dark;
+    color: variables.$color-on-surface;
   }
 
   &__close-btn {
@@ -39,14 +39,14 @@
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: variables.$color-text-dark; 
+    color: variables.$color-on-surface;
     padding: 0.5rem;
     transition: color 0.2s ease;
 
     &:hover,
     &:focus {
-      color: variables.$color-focus; 
-      outline: 2px solid variables.$color-focus; 
+      color: variables.$color-primary;
+      outline: 2px solid variables.$color-primary;
       outline-offset: 3px;
     }
   }
@@ -60,43 +60,43 @@
   }
 
   &__empty-message {
-    font-family: variables.$font-primary;
+    font-family: variables.$font-family-accessible;
     text-align: center;
-    color: lighten(variables.$color-text-dark, 25%); 
+    color: variables.$color-on-surface-variant;
     font-size: 1rem;
     margin-top: 2rem;
   }
 
   &__footer {
     padding: 1.5rem;
-    border-top: 1px solid variables.$color-border; 
-    background-color: lighten(variables.$color-border, 5%); 
+    border-top: 1px solid variables.$color-outline-variant;
+    background-color: variables.$color-surface-low;
   }
 
   &__total-text {
-    font-family: variables.$font-primary;
+    font-family: variables.$font-family-accessible;
     font-size: 0.875rem;
-    color: lighten(variables.$color-text-dark, 25%);
+    color: variables.$color-on-surface-variant;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: 0.25rem;
   }
 
   &__total-price {
-    font-family: variables.$font-primary;
+    font-family: variables.$font-family-accessible;
     font-size: 2rem;
     font-weight: 800;
-    color: variables.$color-text-dark;
+    color: variables.$color-on-surface;
     margin-bottom: 1.5rem;
   }
 
   &__checkout-btn {
     width: 100%;
     padding: 1rem;
-    background-color: variables.$color-accent; 
-    color: variables.$color-bg-light;
+    background-color: variables.$color-primary;
+    color: variables.$color-surface-card;
     border: none;
-    border-radius: 8px;
+    border-radius: variables.$border-radius-lg;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
@@ -104,14 +104,14 @@
 
     &:hover:not(:disabled),
     &:focus:not(:disabled) {
-      background-color: variables.$color-accent-hover; 
-      outline: 3px solid variables.$color-focus; 
+      background-color: darken(variables.$color-primary, 10%);
+      outline: 3px solid variables.$color-primary;
       outline-offset: 2px;
     }
 
     &:disabled {
-      background-color: variables.$color-disabled;
-      color: lighten(variables.$color-text-dark, 30%);
+      background-color: variables.$color-outline-variant;
+      color: variables.$color-on-surface-variant;
       cursor: not-allowed;
     }
   }
