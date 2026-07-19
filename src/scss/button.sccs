@@ -1,0 +1,30 @@
+.c-button {
+  padding: 1rem 2rem;
+  border-radius: $border-radius-lg;
+  border: none;
+  font-family: $font-family-accessible;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-block;
+  text-decoration: none;
+
+  &--primary {
+    background-color: $color-primary;
+    color: #ffffff;
+  }
+
+  &--secondary {
+    background-color: transparent;
+    border: 2px solid $color-primary;
+    color: $color-primary;
+  }
+
+  &:hover {
+    filter: brightness(1.2);
+  }
+
+  &:focus-visible {
+    outline: 3px solid #FFD700;
+    outline-offset: 2px;
+  }
+}
