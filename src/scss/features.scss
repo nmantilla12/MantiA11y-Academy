@@ -1,0 +1,38 @@
+.c-features {
+  padding: 4rem 2rem;
+  background-color: $color-surface-card;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__item {
+    padding: 2rem;
+    border: 1px solid $color-outline-variant;
+    border-radius: $border-radius-lg;
+    background-color: $color-surface-low;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    color: $color-primary;
+    margin-bottom: 1rem;
+  }
+
+  &__description {
+    color: $color-on-surface-variant;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
