@@ -1,0 +1,21 @@
+.c-hero {
+  padding: 4rem 2rem;
+  background-color: $color-surface-card;
+  text-align: center;
+  border-bottom: 2px solid $color-outline-variant;
+
+  &__title {
+    font-size: 3rem;
+    color: $color-primary;
+    margin-bottom: 1rem;
+  }
+
+  &__text {
+    font-size: 1.25rem;
+    color: $color-on-surface-variant;
+    margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

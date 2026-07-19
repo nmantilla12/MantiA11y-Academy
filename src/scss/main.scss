@@ -1,0 +1,16 @@
+@import 'variables';
+@import 'buttons';
+@import 'hero';
+@import 'features';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family-accessible;
+  background-color: $color-surface-low;
+  color: $color-on-surface;
+}

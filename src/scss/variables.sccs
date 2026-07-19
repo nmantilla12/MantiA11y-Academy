@@ -1,0 +1,9 @@
+$color-surface-low: #f3f3f6;
+$color-surface-card: #ffffff;
+$color-on-surface: #1a1c1e;
+$color-on-surface-variant: #424752;
+$color-primary: #003f87;
+$color-outline-variant: #c2c6d4;
+
+$border-radius-lg: 0.5rem;
+$font-family-accessible: 'Atkinson Hyperlegible Next', sans-serif;
