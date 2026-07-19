@@ -48,87 +48,97 @@
             </div>
         </div>
     </header>
+<<<<<<< HEAD
+=======
+
+    <section class="accessibility-features" aria-labelledby="a11y-title">
+        <div class="accessibility-features__container">
+            <h2 id="a11y-title" class="accessibility-features__title">Panel de Accesibilidad e Inclusión</h2>
+            <p class="accessibility-features__subtitle">Descubre cómo adaptar la plataforma a tus necesidades y fórmate con nosotros.</p>
+
+            <div class="accessibility-features__grid">
+                <article class="a11y-card">
+                    <header class="a11y-card__header">
+                        <span class="a11y-card__icon" aria-hidden="true">👁️</span>
+                        <h3 class="a11y-card__name">Accesibilidad Visual</h3>
+                    </header>
+                    <p class="a11y-card__description">Diseñado con la tipografía Atkinson Hyperlegible Next para optimizar la lectura en casos de baja visión y dislexia.</p>
+                    <span class="a11y-card__price">0,00 €</span>
+                    <a href="#" class="a11y-card__link" aria-label="Saber más sobre las opciones visuales gratuitas">Ver opciones</a>
+                </article>
+
+                <article class="a11y-card">
+                    <header class="a11y-card__header">
+                        <span class="a11y-card__icon" aria-hidden="true">⌨️</span>
+                        <h3 class="a11y-card__name">Navegación Motriz</h3>
+                    </header>
+                    <p class="a11y-card__description">Navegación 100% asistida por teclado. Hemos priorizado el orden de tabulación lógica e integrado un indicador de foco.</p>
+                    <span class="a11y-card__price">0,00 €</span>
+                    <a href="#" class="a11y-card__link" aria-label="Ver guía de navegación por teclado">Explorar guías</a>
+                </article>
+
+                <article class="a11y-card">
+                    <header class="a11y-card__header">
+                        <span class="a11y-card__icon" aria-hidden="true">📚</span>
+                        <h3 class="a11y-card__name">Inclusión Cognitiva</h3>
+                    </header>
+                    <p class="a11y-card__description">Aplicamos pautas de Lectura Fácil y reducción de distracciones visuales en todos nuestros contenidos.</p>
+                    <span class="a11y-card__price">0,00 €</span>
+                    <a href="#" class="a11y-card__link" aria-label="Inscribirse gratis en los cursos de inclusión cognitiva">Inscribirse gratis</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="c-features">
+        <div class="c-features__grid">
+            <article class="c-features__item">
+                <h3 class="c-features__title">Accesibilidad Web</h3>
+                <p class="c-features__description">Aprende los fundamentos para crear sitios web inclusivos y funcionales para todos los usuarios.</p>
+            </article>
+
+            <article class="c-features__item">
+                <h3 class="c-features__title">Metodología BEM</h3>
+                <p class="c-features__description">Estructura tu código CSS de forma modular, escalable y fácil de mantener a largo plazo.</p>
+            </article>
+
+            <article class="c-features__item">
+                <h3 class="c-features__title">Diseño Responsivo</h3>
+                <p class="c-features__description">Adapta tus interfaces a cualquier dispositivo utilizando técnicas modernas de CSS Grid y Flexbox.</p>
+            </article>
+        </div>
+    </section>
+>>>>>>> feature/MTY-21-seccion-features
 
     <main id="main-content">
         
         <!-- SECCIÓN 1: Catálogo de Cursos -->
         <section class="catalog" id="catalogo" aria-labelledby="catalog-title">
             <h2 class="catalog__title" id="catalog-title">Nuestros Cursos Adaptados</h2>
-            
             <div class="catalog__grid">
-
                 <article class="course-card">
                     <div class="course-card__image-container">
-                        <img src="https://picsum.photos/300/200?random=1" alt="Ilustración sobre desarrollo web accesible con código HTML en pantalla" class="course-card__img">
+                        <img src="https://picsum.photos/300/200?random=1" alt="Ilustración sobre desarrollo web accesible" class="course-card__img">
                     </div>
                     <div class="course-card__content">
                         <h3 class="course-card__title">HTML5 Semántico y Accesibilidad Web</h3>
-                        <p class="course-card__description">Aprende a maquetar sitios web utilizando estándares WCAG y etiquetas semánticas desde cero.</p>
+                        <p class="course-card__description">Aprende a maquetar sitios web utilizando estándares WCAG y etiquetas semánticas.</p>
                         <p class="course-card__price" aria-label="Precio: 49 euros con 99 céntimos">49,99€</p>
                         <button class="course-card__add-btn" aria-label="Añadir curso de HTML5 Semántico al carrito">Añadir al carrito</button>
                     </div>
-                </article>      
+                </article>
 
                 <article class="course-card">
                     <div class="course-card__image-container">
-                        <img src="https://picsum.photos/300/200?random=2" alt="Esquema de cajas CSS y paleta de colores de alto contraste" class="course-card__img">
+                        <img src="https://picsum.photos/300/200?random=2" alt="Esquema de cajas CSS" class="course-card__img">
                     </div>
                     <div class="course-card__content">
                         <h3 class="course-card__title">CSS Moderno y Estilos Accesibles</h3>
-                        <p class="course-card__description">Domina Flexbox, Grid y combinaciones de color con el contraste idóneo para baja visión.</p>
+                        <p class="course-card__description">Domina Flexbox, Grid y combinaciones de color con el contraste idóneo.</p>
                         <p class="course-card__price" aria-label="Precio: 39 euros con 99 céntimos">39,99€</p>
                         <button class="course-card__add-btn" aria-label="Añadir curso de CSS Moderno al carrito">Añadir al carrito</button>
                     </div>
                 </article>
-
-                <article class="course-card">
-                    <div class="course-card__image-container">
-                        <img src="https://picsum.photos/300/200?random=3" alt="Pantalla de código JavaScript con etiquetas ARIA dinámicas" class="course-card__img">
-                    </div>
-                    <div class="course-card__content">
-                        <h3 class="course-card__title">JavaScript y Atributos ARIA Dinámicos</h3>
-                        <p class="course-card__description">Crea menús, modales y carritos interactivos controlados por teclado y lectores de pantalla.</p>
-                        <p class="course-card__price" aria-label="Precio: 59 euros con 99 céntimos">59,99€</p>
-                        <button class="course-card__add-btn" aria-label="Añadir curso de JavaScript y ARIA al carrito">Añadir al carrito</button>
-                    </div>
-                </article>
-
-                <article class="course-card">
-                    <div class="course-card__image-container">
-                        <img src="https://picsum.photos/300/200?random=4" alt="Logotipo de React con un lector de pantalla activo" class="course-card__img">
-                    </div>
-                    <div class="course-card__content">
-                        <h3 class="course-card__title">React A11y: Componentes Accesibles</h3>
-                        <p class="course-card__description">Aprende a gestionar el enfoque del teclado y estados dinámicos en aplicaciones SPA modernas.</p>
-                        <p class="course-card__price" aria-label="Precio: 69 euros con 99 céntimos">69,99€</p>
-                        <button class="course-card__add-btn" aria-label="Añadir curso de React Accesible al carrito">Añadir al carrito</button>
-                    </div>
-                </article>
-
-                <article class="course-card">
-                    <div class="course-card__image-container">
-                        <img src="https://picsum.photos/300/200?random=5" alt="Persona utilizando una web navegando únicamente con el teclado" class="course-card__img">
-                    </div>
-                    <div class="course-card__content">
-                        <h3 class="course-card__title">Auditorías de Accesibilidad y WCAG 2.2</h3>
-                        <p class="course-card__description">Descubre cómo usar herramientas automáticas y lectores de pantalla reales para testear tus webs.</p>
-                        <p class="course-card__price" aria-label="Precio: 29 euros con 99 céntimos">29,99€</p>
-                        <button class="course-card__add-btn" aria-label="Añadir curso de Auditorías al carrito">Añadir al carrito</button>
-                    </div>
-                </article>
-
-                <article class="course-card">
-                    <div class="course-card__image-container">
-                        <img src="https://picsum.photos/300/200?random=6" alt="Interfaz de usuario limpia con tipografía legible y botones grandes" class="course-card__img">
-                    </div>
-                    <div class="course-card__content">
-                        <h3 class="course-card__title">Diseño de Interfaces Inclusivas (UX/UI)</h3>
-                        <p class="course-card__description">Principios de diseño para crear interfaces amigables para personas con neurodivergencias.</p>
-                        <p class="course-card__price" aria-label="Precio: 44 euros con 99 céntimos">44,99€</p>
-                        <button class="course-card__add-btn" aria-label="Añadir curso de Diseño Inclusivo al carrito">Añadir al carrito</button>
-                    </div>
-                </article>
-
             </div>
         </section>
 
@@ -182,24 +192,19 @@
     <section class="cart-sidebar" id="cart-sidebar" aria-labelledby="cart-sidebar-title" aria-hidden="true" tabindex="-1">
         <div class="cart-sidebar__header">
             <h2 class="cart-sidebar__title" id="cart-sidebar-title">Tu Cesta de Cursos</h2>
-            <button class="cart-sidebar__close-btn" id="btn-close-cart" aria-label="Cerrar carrito de compras">
-                ✕
-            </button>
+            <button class="cart-sidebar__close-btn" id="btn-close-cart" aria-label="Cerrar carrito de compras">✕</button>
         </div>
-
         <ul class="cart-sidebar__list" id="cart-items-list" aria-label="Productos en el carrito">
             <li class="cart-sidebar__empty-message">Tu carrito está vacío actualmente.</li>
         </ul>
-
         <div class="cart-sidebar__footer">
             <p class="cart-sidebar__total-text">Total:</p>
             <p class="cart-sidebar__total-price" id="cart-total-price" aria-label="Total: 0 euros">0,00€</p>
-            <button class="cart-sidebar__checkout-btn" id="btn-checkout" disabled aria-label="Proceder al pago (botón desactivado, carrito vacío)">
-                Proceder al pago
-            </button>
+            <button class="cart-sidebar__checkout-btn" id="btn-checkout" disabled aria-label="Proceder al pago">Proceder al pago</button>
         </div>
     </section>
 
     <script type="module" src="src/js/main.js"></script>
 </body>
 </html>
+
