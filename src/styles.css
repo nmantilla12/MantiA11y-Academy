@@ -1,0 +1,106 @@
+$color-dark: #333;
+$color-light: #fff;
+$color-border: #767676;
+$color-hover: #000;
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.course-card {
+  border: 1px solid #ccc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s;
+
+  &:hover {
+    border-color: $color-hover;
+  }
+}
+
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 400px;
+  height: 100%;
+  background: $color-light;
+  transition: right 0.3s ease;
+  z-index: 1000;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  &--open {
+    right: 0;
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &-footer {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid $color-border;
+  }
+
+  &-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  &-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid $color-border;
+  }
+
+  &-remove-btn {
+    background: $color-dark;
+    color: $color-light;
+    border: 1px solid $color-dark;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+
+    &:hover, &:focus {
+      background: $color-hover;
+      border-color: $color-hover;
+    }
+  }
+}
+
+.high-contrast {
+  background-color: $color-hover !important;
+  color: $color-light !important;
+}
+
+.header-skip-link {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+
+  &:focus {
+    position: static;
+    width: auto;
+    height: auto;
+  }
+}

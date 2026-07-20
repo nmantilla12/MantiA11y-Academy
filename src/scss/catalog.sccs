@@ -1,0 +1,27 @@
+// _catalog.scss
+@use 'variables';
+
+.catalog {
+  padding: 4rem 2rem;
+  
+  &-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: variables.$color-on-surface;
+  }
+
+  &-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+.course-card {
+  border: 1px solid variables.$color-outline-variant;
+  border-radius: variables.$border-radius-lg;
+  padding: 1.5rem;
+  // Añade aquí los estilos de tus tarjetas (títulos, botones, etc.)
+}
