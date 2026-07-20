@@ -1,6 +1,16 @@
-const Button = ({ onClick, children }) => {
+import React from 'react';
+
+const Button = ({ onClick, children, ariaLabel }) => {
   return (
-    <button onClick={onClick} style={{ padding: '8px 16px', cursor: 'pointer' }}>
+    <button 
+      onClick={onClick} 
+      aria-label={ariaLabel}
+      className="btn-accessible"
+      style={{ 
+        padding: '8px 16px', 
+        cursor: 'pointer' 
+      }}
+    >
       {children}
     </button>
   );
