@@ -1,16 +1,17 @@
-@import 'variables';
-@import 'reset';
-@import 'header';
-@import 'hero';
-@import 'features';
-@import 'catalog';
-@import 'cart';
-@import 'button';
+// Importaciones de archivos (usando @use para mantener consistencia)
+@use 'variables'; 
+@use 'reset';
+@use 'header';
+@use 'hero';
+@use 'features';
+@use 'catalog';
+@use 'cart';
+@use 'button';
 
 body {
-  font-family: $font-family-accessible;
-  background-color: $color-surface;
-  color: $color-on-surface;
+  font-family: variables.$font-family-accessible;
+  background-color: variables.$color-surface;
+  color: variables.$color-on-surface;
   line-height: 1.5;
 }
 
@@ -18,15 +19,15 @@ body {
   position: absolute;
   top: -100px;
   left: 16px;
-  background-color: $color-primary;
-  color: $color-on-primary;
+  background-color: variables.$color-primary;
+  color: variables.$color-on-primary;
   padding: 12px 20px;
-  border-radius: $border-radius-sm;
+  border-radius: variables.$border-radius-sm;
   z-index: 9999;
   text-decoration: none;
   font-weight: 600;
 
-  @include focus-visible-style;
+  @include variables.focus-visible-style;
 
   &:focus {
     top: 16px;

@@ -10,7 +10,7 @@
 
   &-primary {
     background-color: $color-primary;
-    color: #ffffff;
+    color: $color-on-primary; // Usamos la variable del sistema
   }
 
   &-secondary {
@@ -23,8 +23,6 @@
     filter: brightness(1.2);
   }
 
-  &:focus-visible {
-    outline: 3px solid #FFD700;
-    outline-offset: 2px;
-  }
+  // Usamos el mixin del MTY-22 para consistencia en todo el proyecto
+  @include focus-visible-style;
 }

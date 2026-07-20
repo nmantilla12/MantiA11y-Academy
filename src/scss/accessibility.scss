@@ -1,7 +1,7 @@
-@import 'variables'; // Corregido: sin la extensión .sccs y sin el guion bajo doble si así lo prefieres
+@import 'variables';
 
 .accessibility-features {
-    background-color: $color-surface-low;
+    background-color: $color-surface-container-low; // Ajustado
     padding: 4rem 2rem;
     font-family: $font-family-accessible;
 
@@ -33,7 +33,7 @@
 }
 
 .a11y-card {
-    background-color: $color-surface-card;
+    background-color: $color-surface-container; // Ajustado
     border: 1px solid $color-outline-variant;
     border-radius: $border-radius-lg;
     padding: 2rem;
@@ -83,9 +83,7 @@
             text-decoration: underline;
         }
 
-        &:focus-visible {
-            outline: 3px solid $color-primary;
-            outline-offset: 4px;
-        }
+        // Aplicamos el mixin para accesibilidad del MTY-22
+        @include focus-visible-style;
     }
 }

@@ -1,7 +1,7 @@
-@use '../variables';
+@use 'variables';
 
 .header {
-  background-color: variables.$color-surface-low;
+  background-color: variables.$color-surface-container-low; // Ajustado
   border-bottom: 1px solid variables.$color-outline-variant;
   padding: 1rem 2rem;
   position: sticky;
@@ -13,10 +13,12 @@
     top: -100px;
     left: 0;
     background: variables.$color-primary;
-    color: white;
+    color: variables.$color-on-primary; // Ajustado
     padding: 8px 16px;
     z-index: 101;
     transition: top 0.2s ease;
+
+    @include variables.focus-visible-style; // Usamos el mixin oficial
 
     &:focus {
       top: 0;
@@ -29,11 +31,11 @@
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    gap: 1rem;
+    gap: variables.$stack-md; // Ajustado
   }
 
   &-menu-btn {
-    display: none; // Se mostrará solo en móvil
+    display: none; 
   }
 
   &-logo-link {
@@ -41,6 +43,7 @@
     font-size: 1.5rem;
     font-weight: bold;
     color: variables.$color-on-surface;
+    @include variables.focus-visible-style; // Mejora de accesibilidad
   }
 
   &-logo-accent {
@@ -50,12 +53,15 @@
   // Panel de accesibilidad
   .a11y-panel {
     display: flex;
-    gap: 0.5rem;
+    gap: variables.$stack-sm; // Ajustado
   }
 
   .a11y-panel-btn {
     padding: 0.5rem;
     cursor: pointer;
+    background: none;
+    border: none;
+    @include variables.focus-visible-style; // Mejora de accesibilidad
   }
 
   // Navegación
@@ -65,7 +71,7 @@
 
   &-menu-list {
     display: flex;
-    gap: 2rem;
+    gap: variables.$stack-lg; // Ajustado
     list-style: none;
   }
 
@@ -73,6 +79,7 @@
     text-decoration: none;
     color: variables.$color-on-surface;
     font-weight: 500;
+    @include variables.focus-visible-style; // Mejora de accesibilidad
 
     &:hover, &-active {
       color: variables.$color-primary;
@@ -87,6 +94,7 @@
     font-size: 1.25rem;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: variables.$stack-sm; // Ajustado
+    @include variables.focus-visible-style; // Mejora de accesibilidad
   }
 }

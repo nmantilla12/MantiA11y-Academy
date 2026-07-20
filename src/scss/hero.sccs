@@ -1,8 +1,8 @@
-@use '../variables';
+@use 'variables';
 
 .hero {
   padding: 4rem 2rem;
-  background-color: variables.$color-surface-card;
+  background-color: variables.$color-surface-container; // Ajustado
   text-align: center;
   border-bottom: 2px solid variables.$color-outline-variant;
 
@@ -15,25 +15,25 @@
     display: inline-block;
     padding: 0.5rem 1rem;
     background: rgba(variables.$color-primary, 0.1);
-    border-radius: 20px;
-    margin-bottom: 1rem;
+    border-radius: variables.$border-radius-full; // Ajustado
+    margin-bottom: variables.$stack-md; // Ajustado
   }
 
   &-title {
     font-size: 3rem;
     color: variables.$color-primary;
-    margin-bottom: 1rem;
+    margin-bottom: variables.$stack-md; // Ajustado
 
     &-accent {
       font-style: italic;
-      color: variables.$color-secondary;
+      color: variables.$color-on-surface; // Sustituido: color-secondary no existía en variables
     }
   }
 
   &-description {
     font-size: 1.25rem;
     color: variables.$color-on-surface-variant;
-    margin-bottom: 2rem;
+    margin-bottom: variables.$stack-lg; // Ajustado
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -42,6 +42,6 @@
   &-actions {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: variables.$stack-md; // Ajustado
   }
 }

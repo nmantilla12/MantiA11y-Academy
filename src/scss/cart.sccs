@@ -1,4 +1,4 @@
-@use '../variables';
+@use 'variables';
 
 .cart-sidebar {
   position: fixed;
@@ -7,7 +7,7 @@
   width: 100%;
   max-width: 450px;
   height: 100vh;
-  background-color: variables.$color-surface-card;
+  background-color: variables.$color-surface-container; // Ajustado
   box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
@@ -43,12 +43,12 @@
     padding: 0.5rem;
     transition: color 0.2s ease;
 
-    &:hover,
-    &:focus {
+    &:hover {
       color: variables.$color-primary; 
-      outline: 3px solid variables.$color-primary; 
-      outline-offset: 3px;
     }
+
+    // Aplicamos el mixin oficial para accesibilidad
+    @include variables.focus-visible-style;
   }
 
   &-list {
@@ -70,7 +70,7 @@
   &-footer {
     padding: 1.5rem;
     border-top: 1px solid variables.$color-outline-variant; 
-    background-color: variables.$color-surface-low; 
+    background-color: variables.$color-surface-container-low; // Ajustado
   }
 
   &-total-text {
@@ -94,7 +94,7 @@
     width: 100%;
     padding: 1rem;
     background-color: variables.$color-primary; 
-    color: #ffffff;
+    color: variables.$color-on-primary; // Ajustado: eliminamos #ffffff
     border: none;
     border-radius: variables.$border-radius-lg;
     font-size: 1rem;
@@ -102,12 +102,12 @@
     cursor: pointer;
     transition: background-color 0.2s ease;
 
-    &:hover:not(:disabled),
-    &:focus:not(:disabled) {
-      background-color: darken(variables.$color-primary, 10%); 
-      outline: 3px solid variables.$color-primary; 
-      outline-offset: 2px;
+    &:hover:not(:disabled) {
+      filter: brightness(1.2); // Más consistente con tus botones
     }
+
+    // Aplicamos el mixin oficial
+    @include variables.focus-visible-style;
 
     &:disabled {
       background-color: variables.$color-outline-variant;
