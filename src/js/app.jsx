@@ -5,6 +5,13 @@ import Layout from './components/layout/layout';
 import Coursecard from './components/coursecard/coursecard';
 import useRouteFocus from './hooks/useRouteFocus';
 
+// Array de cursos para renderizar dinámicamente el catálogo
+const COURSES = [
+  { id: 1, title: "Desarrollo Accesible", price: 29.99 },
+  { id: 2, title: "Diseño Inclusivo", price: 34.99 },
+  { id: 3, title: "Web Semántica", price: 24.99 }
+];
+
 // Este componente dispara el hook para mover el foco al cambiar de ruta
 const FocusManager = () => {
   useRouteFocus();
@@ -42,11 +49,16 @@ function App() {
             <Route 
               path="/" 
               element={
-                <Coursecard 
-                  title="Desarrollo Accesible" 
-                  price={29.99} 
-                  onAddClick={() => addToCart({ title: "Desarrollo Accesible", price: 29.99 })}
-                />
+                <div className="course-grid">
+                  {COURSES.map((course) => (
+                    <Coursecard 
+                      key={course.id}
+                      title={course.title} 
+                      price={course.price} 
+                      onAddClick={() => addToCart(course)}
+                    />
+                  ))}
+                </div>
               } 
             />
             {/* Aquí irán tus próximas rutas */}

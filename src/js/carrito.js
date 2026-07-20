@@ -1,5 +1,5 @@
 // =========================================================
-// 1. ESTADO: Cargar desde localStorage o iniciar vacío
+// 1. ESTADO Y VARIABLES DE ACCESIBILIDAD
 // =========================================================
 let cart = JSON.parse(localStorage.getItem('mantiA11y-cart')) || [
     { name: "Desarrollo Web Accesible", quantity: 1, price: 149.99 },
@@ -7,31 +7,54 @@ let cart = JSON.parse(localStorage.getItem('mantiA11y-cart')) || [
     { name: "WCAG 2.2 Essentials", quantity: 1, price: 79.99 }
 ];
 
+let triggerElement = null; // Guarda el botón que abre el carrito
+const cartModal = document.getElementById('cart-modal');
+const cartItemsListEl = document.getElementById('cart-items-list');
+
 function saveCart() {
     localStorage.setItem('mantiA11y-cart', JSON.stringify(cart));
 }
 
 // =========================================================
-// 2. LÓGICA DE NEGOCIO
+// 2. GESTIÓN DE FOCO Y ACCESIBILIDAD
 // =========================================================
-function addProduct(name, price, quantity = 1) {
-    const cleanName = name.trim();
-    const courseFound = cart.find(item => item.name.toLowerCase() === cleanName.toLowerCase());
-
-    if (courseFound) {
-        courseFound.quantity += quantity;
-    } else {
-        cart.push({ name: cleanName, quantity: quantity, price: parseFloat(price) });
-    }
-    saveCart();
-    updateUI();
+function openCart() {
+    triggerElement = document.activeElement; // Guardamos quién abrió
+    cartModal.style.display = 'block';
+    // Enfocar el botón de cerrar al abrir para empezar el ciclo
+    const closeBtn = cartModal.querySelector('.btn-close'); 
+    closeBtn?.focus();
 }
 
-// =========================================================
-// 3. RENDERIZADO Y DELEGACIÓN DE EVENTOS
-// =========================================================
-const cartItemsListEl = document.getElementById('cart-items-list');
+function closeCart() {
+    cartModal.style.display = 'none';
+    if (triggerElement) triggerElement.focus(); // Retorno de foco
+}
 
+// Focus Trap: Bucle de navegación por tabulador
+cartModal?.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab') {
+        const focusable = cartModal.querySelectorAll('button, [href]');
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey) {
+            if (document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            }
+        } else {
+            if (document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        }
+    }
+});
+
+// =========================================================
+// 3. LÓGICA DE NEGOCIO Y UI
+// =========================================================
 function updateUI() {
     const cartCountEl = document.getElementById('cart-count');
     const cartTotalPriceEl = document.getElementById('cart-total-price');
@@ -39,14 +62,12 @@ function updateUI() {
 
     if (!cartItemsListEl) return;
 
-    // Actualizar contadores globales
     let totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
     if (cartCountEl) cartCountEl.textContent = totalItems;
 
     let currentTotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
     if (cartTotalPriceEl) cartTotalPriceEl.textContent = `${currentTotal.toFixed(2).replace('.', ',')}€`;
 
-    // Renderizado de lista
     cartItemsListEl.innerHTML = '';
     
     if (cart.length === 0) {
@@ -72,7 +93,6 @@ function updateUI() {
     }
 }
 
-// Delegación de eventos (Funciona con elementos dinámicos)
 cartItemsListEl?.addEventListener('click', (e) => {
     const name = e.target.getAttribute('data-name');
     if (!name) return;
@@ -92,3 +112,10 @@ cartItemsListEl?.addEventListener('click', (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', updateUI);
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && cartModal.style.display === 'block') {
+        closeCart();
+        document.getElementById('btn-cart').setAttribute('aria-expanded', 'false');
+    }
+});
+

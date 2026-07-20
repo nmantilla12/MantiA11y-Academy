@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MantiA11y Academy - Cursos de Desarrollo Web Accesibles</title>
-    <!-- Asegúrate de tener tu archivo de estilos en esta ruta -->
     <link rel="stylesheet" href="src/css/styles.css">
 </head>
 <body>
@@ -46,13 +45,17 @@
         </article>
     </main>
 
-    <section class="cart-sidebar" id="cart-sidebar" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+    <!-- Modal del carrito con los IDs necesarios para el JS y accesibilidad -->
+    <section class="cart-sidebar" id="cart-modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="cart-title">
         <div class="cart-sidebar-header">
             <h2 class="cart-sidebar-title" id="cart-title">Tu Cesta</h2>
-            <button class="cart-sidebar-close-btn" id="btn-close-cart" aria-label="Cerrar carrito">✕</button>
+            <!-- Clase btn-close añadida para que el JS detecte el foco -->
+            <button class="cart-sidebar-close-btn btn-close" id="btn-close-cart" aria-label="Cerrar carrito">✕</button>
         </div>
         
-        <ul class="cart-sidebar-list" id="cart-items-list"></ul>
+        <ul class="cart-sidebar-list" id="cart-items-list">
+            <!-- Los items se inyectan mediante JS -->
+        </ul>
         
         <div class="cart-sidebar-footer">
             <p>Total: <span id="cart-total-price">0,00€</span></p>
