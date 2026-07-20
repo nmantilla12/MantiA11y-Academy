@@ -1,35 +1,33 @@
-$color-surface: #fcf8f9;
-$color-surface-dim: #dcd9da;
-$color-surface-bright: #fcf8f9;
-$color-surface-container-lowest: #ffffff;
-$color-surface-container-low: #f6f3f4;
-$color-surface-container: #f0edee;
-$color-surface-container-high: #eae7e8;
-$color-surface-container-highest: #e5e2e3;
-$color-on-surface: #1b1b1c;
-$color-on-surface-variant: #424752;
-$color-primary: #003f87;
-$color-on-primary: #ffffff;
-$color-outline: #727784;
-$color-outline-variant: #c2c6d4;
-$color-focus-ring: #FFD700;
+@use 'variables';
 
-$border-radius-sm: 0.25rem;
-$border-radius-md: 0.5rem;
-$border-radius-lg: 1rem;
-$border-radius-full: 9999px;
+// Reset básico y configuración base de accesibilidad
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-$font-family-accessible: 'Atkinson Hyperlegible Next', sans-serif;
+body {
+  font-family: variables.$font-family-accessible;
+  background-color: variables.$color-surface;
+  color: variables.$color-on-surface;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
 
-$stack-sm: 8px;
-$stack-md: 16px;
-$stack-lg: 32px;
-$touch-target-min: 48px;
+// Asegurar que los botones y elementos interactivos 
+// utilicen los estilos base de foco definidos en el sistema
+button, a, input, select, textarea {
+  @include variables.focus-visible-style;
+}
 
-@mixin focus-visible-style {
-  &:focus-visible {
-    outline: 3px solid $color-focus-ring;
-    outline-offset: 3px;
-    box-shadow: 0 0 0 6px rgba(0, 86, 179, 0.5);
-  }
+// Reset para listas
+ul, ol {
+  list-style: none;
+}
+
+// Mejora de accesibilidad para imágenes
+img {
+  max-width: 100%;
+  display: block;
 }

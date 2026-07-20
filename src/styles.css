@@ -1,28 +1,26 @@
-$color-dark: #333;
-$color-light: #fff;
-$color-border: #767676;
-$color-hover: #000;
+@use 'variables';
 
 .catalog-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  padding: 2rem;
+  gap: variables.$stack-lg;
+  padding: variables.$stack-lg;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .course-card {
-  border: 1px solid #ccc;
-  padding: 1.5rem;
-  border-radius: 8px;
+  border: 1px solid variables.$color-outline-variant;
+  padding: variables.$stack-md;
+  border-radius: variables.$border-radius-lg;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transition: transform 0.2s;
+  background-color: variables.$color-surface-container-lowest;
 
   &:hover {
-    border-color: $color-hover;
+    border-color: variables.$color-primary;
   }
 }
 
@@ -32,11 +30,11 @@ $color-hover: #000;
   right: -400px;
   width: 400px;
   height: 100%;
-  background: $color-light;
+  background: variables.$color-surface-container;
   transition: right 0.3s ease;
   z-index: 1000;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
+  padding: variables.$stack-md;
   display: flex;
   flex-direction: column;
 
@@ -52,8 +50,8 @@ $color-hover: #000;
 
   &-footer {
     margin-top: auto;
-    padding-top: 1rem;
-    border-top: 1px solid $color-border;
+    padding-top: variables.$stack-sm;
+    border-top: 1px solid variables.$color-outline;
   }
 
   &-list {
@@ -65,29 +63,32 @@ $color-hover: #000;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.8rem 0;
-    border-bottom: 1px solid $color-border;
+    padding: variables.$stack-sm 0;
+    border-bottom: 1px solid variables.$color-outline-variant;
   }
 
   &-remove-btn {
-    background: $color-dark;
-    color: $color-light;
-    border: 1px solid $color-dark;
+    background: variables.$color-primary;
+    color: variables.$color-on-primary;
+    border: 1px solid variables.$color-primary;
     padding: 0.4rem 0.8rem;
-    border-radius: 4px;
+    border-radius: variables.$border-radius-sm;
     cursor: pointer;
     font-weight: bold;
 
-    &:hover, &:focus {
-      background: $color-hover;
-      border-color: $color-hover;
+    @include variables.focus-visible-style;
+
+    &:hover {
+      filter: brightness(1.2);
     }
   }
 }
 
+// Nota: Eliminamos .high-contrast si el sistema ya usa variables globales,
+// pero si necesitas mantenerlo, usa los tokens:
 .high-contrast {
-  background-color: $color-hover !important;
-  color: $color-light !important;
+  background-color: variables.$color-contrast-high-background !important;
+  color: variables.$color-on-primary !important;
 }
 
 .header-skip-link {
@@ -102,5 +103,6 @@ $color-hover: #000;
     position: static;
     width: auto;
     height: auto;
+    @include variables.focus-visible-style;
   }
 }
