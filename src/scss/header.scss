@@ -1,7 +1,7 @@
 @use 'variables';
 
 .header {
-  background-color: variables.$color-surface-container-low; // Ajustado
+  background-color: variables.$color-surface-container-low;
   border-bottom: 1px solid variables.$color-outline-variant;
   padding: 1rem 2rem;
   position: sticky;
@@ -13,12 +13,12 @@
     top: -100px;
     left: 0;
     background: variables.$color-primary;
-    color: variables.$color-on-primary; // Ajustado
+    color: variables.$color-on-primary;
     padding: 8px 16px;
     z-index: 101;
     transition: top 0.2s ease;
 
-    @include variables.focus-visible-style; // Usamos el mixin oficial
+    @include variables.focus-visible-style;
 
     &:focus {
       top: 0;
@@ -31,7 +31,7 @@
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    gap: variables.$stack-md; // Ajustado
+    gap: variables.$stack-md;
   }
 
   &-menu-btn {
@@ -43,17 +43,16 @@
     font-size: 1.5rem;
     font-weight: bold;
     color: variables.$color-on-surface;
-    @include variables.focus-visible-style; // Mejora de accesibilidad
+    @include variables.focus-visible-style;
   }
 
   &-logo-accent {
     color: variables.$color-primary;
   }
 
-  // Panel de accesibilidad
   .a11y-panel {
     display: flex;
-    gap: variables.$stack-sm; // Ajustado
+    gap: variables.$stack-sm;
   }
 
   .a11y-panel-btn {
@@ -61,17 +60,16 @@
     cursor: pointer;
     background: none;
     border: none;
-    @include variables.focus-visible-style; // Mejora de accesibilidad
+    @include variables.focus-visible-style;
   }
 
-  // Navegación
   &-nav {
     display: flex;
   }
 
   &-menu-list {
     display: flex;
-    gap: variables.$stack-lg; // Ajustado
+    gap: variables.$stack-lg;
     list-style: none;
   }
 
@@ -79,7 +77,7 @@
     text-decoration: none;
     color: variables.$color-on-surface;
     font-weight: 500;
-    @include variables.focus-visible-style; // Mejora de accesibilidad
+    @include variables.focus-visible-style;
 
     &:hover, &-active {
       color: variables.$color-primary;
@@ -94,7 +92,7 @@
     font-size: 1.25rem;
     display: flex;
     align-items: center;
-    gap: variables.$stack-sm; // Ajustado
-    @include variables.focus-visible-style; // Mejora de accesibilidad
+    gap: variables.$stack-sm;
+    @include variables.focus-visible-style;
   }
 }

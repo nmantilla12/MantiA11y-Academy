@@ -1,11 +1,26 @@
-import Layout from './components/layout/layout'; 
-import './styles/main.scss';
+import react, { useState } from 'react';
+import layout from './components/layout/layout';
+import coursecard from './components/coursecard/coursecard';
 
 function App() {
+  const [cart, setCart] = useState([]);
+
+  const addToCart = (product) => {
+    console.log("Añadiendo:", product.title);
+    setCart([...cart, product]);
+  };
+
+  const removeFromCart = (index) => {
+    setCart(cart.filter((_, i) => i !== index));
+  };
+
   return (
-    <Layout>
-      <h1>Bienvenida a MantiA11y Academy</h1>
-      <p>El contenido principal irá aquí.</p>
+    <Layout cart={cart} removeFromCart={removeFromCart}>
+      <Coursecard 
+        title="Desarrollo Accesible" 
+        price={29.99} 
+        onAddClick={() => addToCart({ title: "Desarrollo Accesible", price: 29.99 })}
+      />
     </Layout>
   );
 }

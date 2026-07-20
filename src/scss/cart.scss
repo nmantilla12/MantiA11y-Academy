@@ -7,7 +7,7 @@
   width: 100%;
   max-width: 450px;
   height: 100vh;
-  background-color: variables.$color-surface-container; // Ajustado
+  background-color: variables.$color-surface-container;
   box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
@@ -15,7 +15,8 @@
   transition: transform 0.3s ease-in-out;
   transform: translateX(100%);
 
-  &-open {
+  // Estado para abrir con JS
+  &[aria-hidden="false"] {
     transform: translateX(0);
   }
 
@@ -46,8 +47,6 @@
     &:hover {
       color: variables.$color-primary; 
     }
-
-    // Aplicamos el mixin oficial para accesibilidad
     @include variables.focus-visible-style;
   }
 
@@ -57,6 +56,30 @@
     padding: 1.5rem;
     list-style: none;
     margin: 0;
+  }
+
+  // Estilos de items dentro de la lista (generados por JS)
+  &-item {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 0.75rem 0; 
+    border-bottom: 1px solid variables.$color-outline-variant;
+  }
+
+  &-actions {
+    display: flex; 
+    gap: 0.5rem; 
+    align-items: center;
+
+    button {
+      padding: variables.$stack-sm;
+      border-radius: variables.$border-radius-sm;
+      border: 1px solid variables.$color-outline-variant;
+      background: variables.$color-surface-container-lowest;
+      cursor: pointer;
+      @include variables.focus-visible-style;
+    }
   }
 
   &-empty-message {
@@ -70,7 +93,7 @@
   &-footer {
     padding: 1.5rem;
     border-top: 1px solid variables.$color-outline-variant; 
-    background-color: variables.$color-surface-container-low; // Ajustado
+    background-color: variables.$color-surface-container-low;
   }
 
   &-total-text {
@@ -94,19 +117,18 @@
     width: 100%;
     padding: 1rem;
     background-color: variables.$color-primary; 
-    color: variables.$color-on-primary; // Ajustado: eliminamos #ffffff
+    color: variables.$color-on-primary;
     border: none;
     border-radius: variables.$border-radius-lg;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: filter 0.2s ease;
 
     &:hover:not(:disabled) {
-      filter: brightness(1.2); // Más consistente con tus botones
+      filter: brightness(1.2);
     }
 
-    // Aplicamos el mixin oficial
     @include variables.focus-visible-style;
 
     &:disabled {

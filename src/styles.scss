@@ -1,108 +1,37 @@
-@use 'variables';
-
-.catalog-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: variables.$stack-lg;
-  padding: variables.$stack-lg;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+@use '../../variables' as variables;
 
 .course-card {
+  background-color: variables.$color-surface-container;
   border: 1px solid variables.$color-outline-variant;
-  padding: variables.$stack-md;
   border-radius: variables.$border-radius-lg;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.2s;
-  background-color: variables.$color-surface-container-lowest;
 
-  &:hover {
-    border-color: variables.$color-primary;
-  }
-}
-
-.cart-sidebar {
-  position: fixed;
-  top: 0;
-  right: -400px;
-  width: 400px;
-  height: 100%;
-  background: variables.$color-surface-container;
-  transition: right 0.3s ease;
-  z-index: 1000;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-  padding: variables.$stack-md;
-  display: flex;
-  flex-direction: column;
-
-  &--open {
-    right: 0;
+  &__content {
+    margin-bottom: 1.5rem;
   }
 
-  &-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  &__icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
   }
 
-  &-footer {
+  &__title {
+    color: variables.$color-on-surface;
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+  }
+
+  &__description {
+    color: variables.$color-on-surface-variant;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+
+  &__actions {
     margin-top: auto;
-    padding-top: variables.$stack-sm;
-    border-top: 1px solid variables.$color-outline;
-  }
-
-  &-list {
-    list-style: none;
-    padding: 0;
-  }
-
-  &-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: variables.$stack-sm 0;
-    border-bottom: 1px solid variables.$color-outline-variant;
-  }
-
-  &-remove-btn {
-    background: variables.$color-primary;
-    color: variables.$color-on-primary;
-    border: 1px solid variables.$color-primary;
-    padding: 0.4rem 0.8rem;
-    border-radius: variables.$border-radius-sm;
-    cursor: pointer;
-    font-weight: bold;
-
-    @include variables.focus-visible-style;
-
-    &:hover {
-      filter: brightness(1.2);
-    }
-  }
-}
-
-// Nota: Eliminamos .high-contrast si el sistema ya usa variables globales,
-// pero si necesitas mantenerlo, usa los tokens:
-.high-contrast {
-  background-color: variables.$color-contrast-high-background !important;
-  color: variables.$color-on-primary !important;
-}
-
-.header-skip-link {
-  position: absolute;
-  left: -10000px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-
-  &:focus {
-    position: static;
-    width: auto;
-    height: auto;
-    @include variables.focus-visible-style;
   }
 }

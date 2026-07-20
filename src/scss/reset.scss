@@ -1,19 +1,11 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+// 1. Reset (base de todo)
+@import 'reset';
 
-body {
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
+// 2. Variables (configuración)
+@import 'variables';
 
-img, picture, video, canvas, svg {
-  display: block;
-  max-width: 100%;
-}
-
-input, button, textarea, select {
-  font: inherit;
-}
+// 3. Tus componentes
+@import 'accessibility';
+@import 'button';
+@import 'carr';
+@import 'components/coursecard/style';

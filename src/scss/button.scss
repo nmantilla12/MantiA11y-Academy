@@ -1,28 +1,29 @@
+@use 'variables';
+
 .button {
   padding: 1rem 2rem;
-  border-radius: $border-radius-lg;
+  border-radius: variables.$border-radius-lg;
   border: none;
-  font-family: $font-family-accessible;
+  font-family: variables.$font-family-accessible;
   cursor: pointer;
   transition: all 0.2s ease;
   display: inline-block;
   text-decoration: none;
 
-  &-primary {
-    background-color: $color-primary;
-    color: $color-on-primary; // Usamos la variable del sistema
+  &-primary { 
+    background-color: variables.$color-primary; 
+    color: variables.$color-on-primary; 
+  }
+  
+  &-secondary { 
+    background-color: transparent; 
+    border: 2px solid variables.$color-primary; 
+    color: variables.$color-primary; 
+  }
+  
+  &:hover { 
+    filter: brightness(1.2); 
   }
 
-  &-secondary {
-    background-color: transparent;
-    border: 2px solid $color-primary;
-    color: $color-primary;
-  }
-
-  &:hover {
-    filter: brightness(1.2);
-  }
-
-  // Usamos el mixin del MTY-22 para consistencia en todo el proyecto
-  @include focus-visible-style;
+  @include variables.focus-visible-style;
 }

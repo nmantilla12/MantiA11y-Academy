@@ -16,11 +16,13 @@
                     <span class="header-logo-text">Manti<span class="header-logo-accent">A11y</span> Academy</span>
                 </a>
             </div>
+            
             <section class="a11y-panel" aria-label="Panel de accesibilidad">
                 <button class="a11y-panel-btn" id="btn-contrast" aria-label="Activar alto contraste">🌓 Contraste</button>
                 <button class="a11y-panel-btn" id="btn-text-up" aria-label="Aumentar tamaño de fuente">A+</button>
                 <button class="a11y-panel-btn" id="btn-text-down" aria-label="Disminuir tamaño de fuente">A-</button>
             </section>
+
             <div class="header-actions">
                 <button class="header-cart-btn" id="btn-cart" aria-haspopup="dialog" aria-expanded="false" aria-label="Abrir carrito de compras">
                     <span aria-hidden="true">🛒</span>
@@ -34,22 +36,52 @@
         <article class="course-card">
             <h3 class="course-card__title">Desarrollo Accesible</h3>
             <p class="course-card__price">29,99€</p>
-            <button class="course-card__add-btn">Añadir al carrito</button>
+            <button class="course-card__add-btn" data-name="Desarrollo Accesible" data-price="29.99">
+                Añadir al carrito
+            </button>
         </article>
     </main>
 
-    <section class="cart-sidebar" id="cart-sidebar" aria-hidden="true">
+    <!-- Sidebar del Carrito -->
+    <section class="cart-sidebar" id="cart-sidebar" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cart-title">
         <div class="cart-sidebar-header">
-            <h2 class="cart-sidebar-title">Tu Cesta</h2>
+            <h2 class="cart-sidebar-title" id="cart-title">Tu Cesta</h2>
             <button class="cart-sidebar-close-btn" id="btn-close-cart" aria-label="Cerrar carrito">✕</button>
         </div>
-        <ul class="cart-sidebar-list" id="cart-items-list"></ul>
+        
+        <!-- Lista dinámica: el foco bajará naturalmente a estos elementos si existen -->
+        <ul class="cart-sidebar-list" id="cart-items-list">
+            <!-- Los productos se inyectan aquí dinámicamente -->
+        </ul>
+        
         <div class="cart-sidebar-footer">
             <p>Total: <span id="cart-total-price">0,00€</span></p>
             <button class="cart-sidebar-checkout-btn" id="btn-checkout" disabled>Finalizar compra</button>
         </div>
     </section>
 
-    <script src="src/js/main.js"></script>
+    <!-- Script principal -->
+    <script src="src/js/carrito.js"></script>
+    
+    <script>
+        // Lógica adicional para asegurar el foco al abrir
+        const btnCart = document.getElementById('btn-cart');
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const btnClose = document.getElementById('btn-close-cart');
+
+        btnCart.addEventListener('click', () => {
+            cartSidebar.setAttribute('aria-hidden', 'false');
+            btnCart.setAttribute('aria-expanded', 'true');
+            // Mover el foco a la X al abrir para empezar la navegación
+            setTimeout(() => btnClose.focus(), 100);
+        });
+
+        btnClose.addEventListener('click', () => {
+            cartSidebar.setAttribute('aria-hidden', 'true');
+            btnCart.setAttribute('aria-expanded', 'false');
+            // Devolver el foco al botón que abrió el carrito
+            btnCart.focus();
+        });
+    </script>
 </body>
 </html>

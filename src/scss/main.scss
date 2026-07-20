@@ -1,12 +1,8 @@
-// Importaciones de archivos (usando @use para mantener consistencia)
-@use 'variables'; 
+@use 'variables';
 @use 'reset';
-@use 'header';
-@use 'hero';
-@use 'features';
-@use 'catalog';
-@use 'cart';
+@use 'accessibility';
 @use 'button';
+// Agrega aquí el resto de tus archivos (@use 'header', 'cart', etc.)
 
 body {
   font-family: variables.$font-family-accessible;
@@ -29,7 +25,5 @@ body {
 
   @include variables.focus-visible-style;
 
-  &:focus {
-    top: 16px;
-  }
+  &:focus { top: 16px; }
 }
