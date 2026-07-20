@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AccessibilityProvider } from '../context/AccessibilityContext';
 import Layout from './components/layout/layout';
@@ -12,7 +12,16 @@ const FocusManager = () => {
 };
 
 function App() {
-  const [cart, setCart] = useState([]);
+  // Inicialización perezosa: carga del localStorage si existe, si no, array vacío
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem('mantiA11y-cart');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+  // Efecto para sincronizar el carrito con localStorage cada vez que cambie
+  useEffect(() => {
+    localStorage.setItem('mantiA11y-cart', JSON.stringify(cart));
+  }, [cart]);
 
   const addToCart = (product) => {
     setCart([...cart, product]);
