@@ -1,9 +1,35 @@
-$color-surface-low: #f3f3f6;
-$color-surface-card: #ffffff;
-$color-on-surface: #1a1c1e;
+$color-surface: #fcf8f9;
+$color-surface-dim: #dcd9da;
+$color-surface-bright: #fcf8f9;
+$color-surface-container-lowest: #ffffff;
+$color-surface-container-low: #f6f3f4;
+$color-surface-container: #f0edee;
+$color-surface-container-high: #eae7e8;
+$color-surface-container-highest: #e5e2e3;
+$color-on-surface: #1b1b1c;
 $color-on-surface-variant: #424752;
 $color-primary: #003f87;
+$color-on-primary: #ffffff;
+$color-outline: #727784;
 $color-outline-variant: #c2c6d4;
+$color-focus-ring: #FFD700;
 
-$border-radius-lg: 0.5rem;
+$border-radius-sm: 0.25rem;
+$border-radius-md: 0.5rem;
+$border-radius-lg: 1rem;
+$border-radius-full: 9999px;
+
 $font-family-accessible: 'Atkinson Hyperlegible Next', sans-serif;
+
+$stack-sm: 8px;
+$stack-md: 16px;
+$stack-lg: 32px;
+$touch-target-min: 48px;
+
+@mixin focus-visible-style {
+  &:focus-visible {
+    outline: 3px solid $color-focus-ring;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 6px rgba(0, 86, 179, 0.5);
+  }
+}

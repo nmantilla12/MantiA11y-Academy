@@ -1,21 +1,47 @@
-.c-hero {
-  padding: 4rem 2rem;
-  background-color: $color-surface-card;
-  text-align: center;
-  border-bottom: 2px solid $color-outline-variant;
+@use '../variables';
 
-  &__title {
-    font-size: 3rem;
-    color: $color-primary;
+.hero {
+  padding: 4rem 2rem;
+  background-color: variables.$color-surface-card;
+  text-align: center;
+  border-bottom: 2px solid variables.$color-outline-variant;
+
+  &-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  &-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(variables.$color-primary, 0.1);
+    border-radius: 20px;
     margin-bottom: 1rem;
   }
 
-  &__text {
+  &-title {
+    font-size: 3rem;
+    color: variables.$color-primary;
+    margin-bottom: 1rem;
+
+    &-accent {
+      font-style: italic;
+      color: variables.$color-secondary;
+    }
+  }
+
+  &-description {
     font-size: 1.25rem;
-    color: $color-on-surface-variant;
+    color: variables.$color-on-surface-variant;
     margin-bottom: 2rem;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  &-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
   }
 }

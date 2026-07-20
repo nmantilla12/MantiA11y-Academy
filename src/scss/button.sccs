@@ -1,4 +1,4 @@
-.c-button {
+.button {
   padding: 1rem 2rem;
   border-radius: $border-radius-lg;
   border: none;
@@ -8,12 +8,12 @@
   display: inline-block;
   text-decoration: none;
 
-  &--primary {
+  &-primary {
     background-color: $color-primary;
     color: #ffffff;
   }
 
-  &--secondary {
+  &-secondary {
     background-color: transparent;
     border: 2px solid $color-primary;
     color: $color-primary;

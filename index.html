@@ -3,208 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MantiA11y Academy - Cursos de Desarrollo Web Accesibles</title> 
+    <title>MantiA11y Academy - Cursos de Desarrollo Web Accesibles</title>
+    <link rel="stylesheet" href="src/css/styles.css">
 </head>
 <body>
 
     <header class="header">
-        <a href="#main-content" class="header__skip-link">Saltar al contenido principal</a>
-
-        <div class="header__container">
-            <div class="header__logo">
-                <a href="/" class="header__logo-link" aria-label="MantiA11y Academy - Inicio">
-                    <span class="header__logo-text">Manti<span class="header__logo-accent">A11y</span> Academy</span>
+        <a href="#main-content" class="header-skip-link">Saltar al contenido principal</a>
+        <div class="header-container">
+            <div class="header-logo">
+                <a href="/" class="header-logo-link" aria-label="MantiA11y Academy - Inicio">
+                    <span class="header-logo-text">Manti<span class="header-logo-accent">A11y</span> Academy</span>
                 </a>
             </div>
-
             <section class="a11y-panel" aria-label="Panel de accesibilidad">
-                <button class="a11y-panel__btn a11y-panel__btn--contrast" id="btn-contrast" aria-label="Activar alto contraste">
-                    🌓 Contraste
-                </button>
-                <button class="a11y-panel__btn a11y-panel__btn--text-up" id="btn-text-up" aria-label="Aumentar tamaño de fuente">
-                    A+
-                </button>
-                <button class="a11y-panel__btn a11y-panel__btn--text-down" id="btn-text-down" aria-label="Disminuir tamaño de fuente">
-                    A-
-                </button>
+                <button class="a11y-panel-btn" id="btn-contrast" aria-label="Activar alto contraste">🌓 Contraste</button>
+                <button class="a11y-panel-btn" id="btn-text-up" aria-label="Aumentar tamaño de fuente">A+</button>
+                <button class="a11y-panel-btn" id="btn-text-down" aria-label="Disminuir tamaño de fuente">A-</button>
             </section>
-
-            <nav class="header__nav" aria-label="Navegación principal">
-                <ul class="header__menu-list">
-                    <li class="header__menu-item">
-                        <a href="/" class="header__menu-link header__menu-link--active" aria-current="page">Inicio</a>
-                    </li>
-                    <li class="header__menu-item">
-                        <a href="#catalogo" class="header__menu-link">Cursos</a>
-                    </li>
-                </ul>
-            </nav>
-
-            <div class="header__actions">
-                <button class="header__cart-btn" id="btn-cart" aria-haspopup="dialog" aria-expanded="false" aria-label="Abrir carrito de compras, 0 artículos">
-                    <span class="header__cart-icon" aria-hidden="true">🛒</span>
-                    <span class="header__cart-badge" id="cart-count">0</span>
+            <div class="header-actions">
+                <button class="header-cart-btn" id="btn-cart" aria-haspopup="dialog" aria-expanded="false" aria-label="Abrir carrito de compras">
+                    <span aria-hidden="true">🛒</span>
+                    <span id="cart-count">0</span>
                 </button>
             </div>
         </div>
     </header>
-<<<<<<< HEAD
-=======
-
-    <section class="accessibility-features" aria-labelledby="a11y-title">
-        <div class="accessibility-features__container">
-            <h2 id="a11y-title" class="accessibility-features__title">Panel de Accesibilidad e Inclusión</h2>
-            <p class="accessibility-features__subtitle">Descubre cómo adaptar la plataforma a tus necesidades y fórmate con nosotros.</p>
-
-            <div class="accessibility-features__grid">
-                <article class="a11y-card">
-                    <header class="a11y-card__header">
-                        <span class="a11y-card__icon" aria-hidden="true">👁️</span>
-                        <h3 class="a11y-card__name">Accesibilidad Visual</h3>
-                    </header>
-                    <p class="a11y-card__description">Diseñado con la tipografía Atkinson Hyperlegible Next para optimizar la lectura en casos de baja visión y dislexia.</p>
-                    <span class="a11y-card__price">0,00 €</span>
-                    <a href="#" class="a11y-card__link" aria-label="Saber más sobre las opciones visuales gratuitas">Ver opciones</a>
-                </article>
-
-                <article class="a11y-card">
-                    <header class="a11y-card__header">
-                        <span class="a11y-card__icon" aria-hidden="true">⌨️</span>
-                        <h3 class="a11y-card__name">Navegación Motriz</h3>
-                    </header>
-                    <p class="a11y-card__description">Navegación 100% asistida por teclado. Hemos priorizado el orden de tabulación lógica e integrado un indicador de foco.</p>
-                    <span class="a11y-card__price">0,00 €</span>
-                    <a href="#" class="a11y-card__link" aria-label="Ver guía de navegación por teclado">Explorar guías</a>
-                </article>
-
-                <article class="a11y-card">
-                    <header class="a11y-card__header">
-                        <span class="a11y-card__icon" aria-hidden="true">📚</span>
-                        <h3 class="a11y-card__name">Inclusión Cognitiva</h3>
-                    </header>
-                    <p class="a11y-card__description">Aplicamos pautas de Lectura Fácil y reducción de distracciones visuales en todos nuestros contenidos.</p>
-                    <span class="a11y-card__price">0,00 €</span>
-                    <a href="#" class="a11y-card__link" aria-label="Inscribirse gratis en los cursos de inclusión cognitiva">Inscribirse gratis</a>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <section class="c-features">
-        <div class="c-features__grid">
-            <article class="c-features__item">
-                <h3 class="c-features__title">Accesibilidad Web</h3>
-                <p class="c-features__description">Aprende los fundamentos para crear sitios web inclusivos y funcionales para todos los usuarios.</p>
-            </article>
-
-            <article class="c-features__item">
-                <h3 class="c-features__title">Metodología BEM</h3>
-                <p class="c-features__description">Estructura tu código CSS de forma modular, escalable y fácil de mantener a largo plazo.</p>
-            </article>
-
-            <article class="c-features__item">
-                <h3 class="c-features__title">Diseño Responsivo</h3>
-                <p class="c-features__description">Adapta tus interfaces a cualquier dispositivo utilizando técnicas modernas de CSS Grid y Flexbox.</p>
-            </article>
-        </div>
-    </section>
->>>>>>> feature/MTY-21-seccion-features
 
     <main id="main-content">
-        
-        <!-- SECCIÓN 1: Catálogo de Cursos -->
-        <section class="catalog" id="catalogo" aria-labelledby="catalog-title">
-            <h2 class="catalog__title" id="catalog-title">Nuestros Cursos Adaptados</h2>
-            <div class="catalog__grid">
-                <article class="course-card">
-                    <div class="course-card__image-container">
-                        <img src="https://picsum.photos/300/200?random=1" alt="Ilustración sobre desarrollo web accesible" class="course-card__img">
-                    </div>
-                    <div class="course-card__content">
-                        <h3 class="course-card__title">HTML5 Semántico y Accesibilidad Web</h3>
-                        <p class="course-card__description">Aprende a maquetar sitios web utilizando estándares WCAG y etiquetas semánticas.</p>
-                        <p class="course-card__price" aria-label="Precio: 49 euros con 99 céntimos">49,99€</p>
-                        <button class="course-card__add-btn" aria-label="Añadir curso de HTML5 Semántico al carrito">Añadir al carrito</button>
-                    </div>
-                </article>
-
-                <article class="course-card">
-                    <div class="course-card__image-container">
-                        <img src="https://picsum.photos/300/200?random=2" alt="Esquema de cajas CSS" class="course-card__img">
-                    </div>
-                    <div class="course-card__content">
-                        <h3 class="course-card__title">CSS Moderno y Estilos Accesibles</h3>
-                        <p class="course-card__description">Domina Flexbox, Grid y combinaciones de color con el contraste idóneo.</p>
-                        <p class="course-card__price" aria-label="Precio: 39 euros con 99 céntimos">39,99€</p>
-                        <button class="course-card__add-btn" aria-label="Añadir curso de CSS Moderno al carrito">Añadir al carrito</button>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- SECCIÓN 2: Panel de Recursos (Movido aquí para cumplir los criterios de orden visual) -->
-        <section class="accessibility-features" aria-labelledby="a11y-title">
-            <div class="accessibility-features__container">
-                <h2 id="a11y-title" class="accessibility-features__title">Panel de Accesibilidad e Inclusión</h2>
-                <p class="accessibility-features__subtitle">Descubre cómo adaptar la plataforma a tus necesidades y fórmate con nosotros.</p>
-
-                <div class="accessibility-features__grid">
-                    
-                    <!-- Tarjeta 1: Visual -->
-                    <article class="a11y-card">
-                        <header class="a11y-card__header">
-                            <span class="a11y-card__icon" aria-hidden="true">👁️</span>
-                            <h3 class="a11y-card__name">Accesibilidad Visual</h3>
-                        </header>
-                        <p class="a11y-card__description">Diseñado con la tipografía Atkinson Hyperlegible Next para optimizar la lectura en casos de baja visión y dislexia. Próximamente podrás activar nuestro "Modo Calma".</p>
-                        <span class="a11y-card__price">0,00 €</span>
-                        <a href="#" class="a11y-card__link" aria-label="Saber más sobre las opciones visuales gratuitas">Ver opciones</a>
-                    </article>
-
-                    <!-- Tarjeta 2: Motriz -->
-                    <article class="a11y-card">
-                        <header class="a11y-card__header">
-                            <span class="a11y-card__icon" aria-hidden="true">⌨️</span>
-                            <h3 class="a11y-card__name">Navegación Motriz</h3>
-                        </header>
-                        <p class="a11y-card__description">Navegación 100% asistida por teclado. Hemos priorizado el orden de tabulación lógica e integrado un indicador de foco de alto contraste para que nunca te pierdas.</p>
-                        <span class="a11y-card__price">0,00 €</span>
-                        <a href="#" class="a11y-card__link" aria-label="Ver guía de navegación por teclado">Explorar guías</a>
-                    </article>
-
-                    <!-- Tarjeta 3: Cognitiva -->
-                    <article class="a11y-card">
-                        <header class="a11y-card__header">
-                            <span class="a11y-card__icon" aria-hidden="true">📚</span>
-                            <h3 class="a11y-card__name">Inclusión Cognitiva y Cursos</h3>
-                        </header>
-                        <p class="a11y-card__description">Aplicamos pautas de Lectura Fácil y reducción de distracciones visuales. Aprende más en nuestros cursos oficiales de desarrollo web accesible.</p>
-                        <span class="a11y-card__price">0,00 €</span>
-                        <a href="#" class="a11y-card__link" aria-label="Inscribirse gratis en los cursos de inclusión cognitiva">Inscribirse gratis</a>
-                    </article>
-
-                </div>
-            </div>
-        </section>
-
+        <article class="course-card">
+            <h3 class="course-card__title">Desarrollo Accesible</h3>
+            <p class="course-card__price">29,99€</p>
+            <button class="course-card__add-btn">Añadir al carrito</button>
+        </article>
     </main>
 
-    <section class="cart-sidebar" id="cart-sidebar" aria-labelledby="cart-sidebar-title" aria-hidden="true" tabindex="-1">
-        <div class="cart-sidebar__header">
-            <h2 class="cart-sidebar__title" id="cart-sidebar-title">Tu Cesta de Cursos</h2>
-            <button class="cart-sidebar__close-btn" id="btn-close-cart" aria-label="Cerrar carrito de compras">✕</button>
+    <section class="cart-sidebar" id="cart-sidebar" aria-hidden="true">
+        <div class="cart-sidebar-header">
+            <h2 class="cart-sidebar-title">Tu Cesta</h2>
+            <button class="cart-sidebar-close-btn" id="btn-close-cart" aria-label="Cerrar carrito">✕</button>
         </div>
-        <ul class="cart-sidebar__list" id="cart-items-list" aria-label="Productos en el carrito">
-            <li class="cart-sidebar__empty-message">Tu carrito está vacío actualmente.</li>
-        </ul>
-        <div class="cart-sidebar__footer">
-            <p class="cart-sidebar__total-text">Total:</p>
-            <p class="cart-sidebar__total-price" id="cart-total-price" aria-label="Total: 0 euros">0,00€</p>
-            <button class="cart-sidebar__checkout-btn" id="btn-checkout" disabled aria-label="Proceder al pago">Proceder al pago</button>
+        <ul class="cart-sidebar-list" id="cart-items-list"></ul>
+        <div class="cart-sidebar-footer">
+            <p>Total: <span id="cart-total-price">0,00€</span></p>
+            <button class="cart-sidebar-checkout-btn" id="btn-checkout" disabled>Finalizar compra</button>
         </div>
     </section>
 
-    <script type="module" src="src/js/main.js"></script>
+    <script src="src/js/main.js"></script>
 </body>
 </html>
-
