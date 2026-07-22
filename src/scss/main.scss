@@ -1,14 +1,34 @@
+
+/* src/scss/main.scss */
+
+// 1. Primero las variables, luego el reset
 @use 'variables';
 @use 'reset';
-@use 'accessibility';
-@use 'button';
-// Agrega aquí el resto de tus archivos (@use 'header', 'cart', etc.)
 
+// 2. Componentes modulares y específicos de la arquitectura
+@use 'header';
+@use 'hero';
+@use 'catalog';
+@use 'philosophy';
+@use 'features';
+@use 'accessibility';
+@use 'cart';
+@use 'button';
+
+// 3. Estilos globales y estructurales esenciales
 body {
   font-family: variables.$font-family-accessible;
   background-color: variables.$color-surface;
   color: variables.$color-on-surface;
   line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .skip-link {
@@ -25,5 +45,130 @@ body {
 
   @include variables.focus-visible-style;
 
-  &:focus { top: 16px; }
+  &:focus { 
+    top: 16px; 
+  }
+}
+
+// ==========================================
+// SECCIONES GENERALES DE LA LANDING
+// ==========================================
+
+/* Barra de estadísticas */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  padding: 2rem 1rem;
+  background-color: #f8f9fa;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .stat-number {
+      font-size: 1.75rem;
+      font-weight: bold;
+      color: variables.$color-primary;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: #555555;
+      margin-top: 0.25rem;
+      font-weight: 600;
+    }
+  }
+}
+
+/* Sección Corporativa */
+.corporate-section {
+  display: flex;
+  justify-content: center;
+  padding: 4rem 1rem 2rem 1rem;
+
+  .corporate-box {
+    text-align: center;
+    max-width: 750px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    
+    p {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .corporate-icon-badge {
+      margin-top: 1.25rem;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+/* Footer general */
+.footer-section {
+  text-align: center;
+  padding: 3rem 1rem 4rem 1rem;
+  background-color: variables.$color-surface;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: auto;
+
+  .footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: variables.$color-on-surface;
+      margin-bottom: 0.25rem;
+    }
+
+    p {
+      color: #666;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem 1.5rem;
+      margin-top: 0.5rem;
+
+      a {
+        color: variables.$color-primary;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.2s ease;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+body, html, #root {
+  background-color: #ffffff !important;
+  min-height: 100vh;
+  margin: 0;
 }

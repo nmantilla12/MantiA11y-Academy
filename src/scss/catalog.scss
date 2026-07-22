@@ -1,37 +1,166 @@
+/* src/scss/catalog.scss */
 @use 'variables';
 
-.catalog {
-  padding: 4rem 2rem;
-  
-  &-title {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: variables.$color-on-surface;
-  }
+.catalog-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 2.5rem auto;
+  padding: 0 1rem;
 
-  &-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: variables.$stack-lg; // Usamos el token de espaciado
-    max-width: 1200px;
-    margin: 0 auto;
+  .filter-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
   }
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 0 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .course-card {
-  border: 1px solid variables.$color-outline-variant;
-  border-radius: variables.$border-radius-lg;
-  padding: 1.5rem;
-  background-color: variables.$color-surface-container-lowest; // Fondo base del card
-  transition: transform 0.2s ease;
+  background-color: #FFFFFF;
+  border: 1px solid variables.$border-color;
+  border-radius: variables.$border-radius-md;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
-    border-color: variables.$color-primary; // Resaltado sutil al interactuar
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   }
 
-  // Si tu tarjeta tiene un enlace o botón interno, usa el mixin:
-  // @include variables.focus-visible-style;
+  .course-card-image-placeholder {
+    width: 100%;
+    height: 140px;
+    background-color: #e5e7eb;
+    border-radius: variables.$border-radius-sm;
+    margin-bottom: 1.25rem;
+  }
+
+  .course-card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .course-level-tag {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: variables.$color-primary;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .course-title {
+    color: variables.$color-primary;
+    font-size: 1.35rem;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+  }
+
+  .course-description {
+    color: variables.$text-gray;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Estilos para los bloques de temario integrados */
+  .course-syllabus {
+    margin: 1rem 0;
+    padding: 0.75rem 0;
+    border-top: 1px dashed variables.$border-color;
+    border-bottom: 1px dashed variables.$border-color;
+    text-align: left;
+    flex-grow: 1;
+
+    h3 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: variables.$color-primary;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .syllabus-block {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: variables.$color-primary;
+      margin-top: 0.5rem;
+    }
+
+    .syllabus-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      margin-top: 0.25rem;
+
+      li {
+        font-size: 0.8rem;
+        color: variables.$text-gray;
+        line-height: 1.4;
+
+        strong {
+          color: variables.$color-on-surface;
+        }
+      }
+    }
+
+    .cert-info {
+      font-size: 0.75rem;
+      color: variables.$text-gray;
+      font-style: italic;
+      margin-top: 0.5rem;
+    }
+  }
+
+  /* Distribución perfecta del precio y el botón sin solaparse */
+  .course-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 1.25rem;
+    border-top: 1px solid #f0f2f5;
+
+    .course-price {
+      color: variables.$color-on-surface;
+      font-size: 1.25rem;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .course-btn {
+      background-color: variables.$color-primary;
+      color: variables.$color-on-primary;
+      padding: 0.65rem 1rem;
+      border: none;
+      border-radius: variables.$border-radius-sm;
+      cursor: pointer;
+      font-weight: bold;
+      white-space: nowrap;
+      transition: filter 0.2s ease;
+
+      &:hover {
+        filter: brightness(0.9);
+      }
+
+      /* Indicador visible de foco accesible (Sombra/Contorno exigido) */
+      @include variables.focus-visible-style;
+    }
+  }
 }
-// En _variables.scss
-$stack-lg: 2rem; 
-$color-surface-container-lowest: #ffffff; // O el valor que prefieras

@@ -1,11 +1,15 @@
-// 1. Reset (base de todo)
-@import 'reset';
+/* src/scss/reset.scss */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-// 2. Variables (configuración)
-@import 'variables';
+ul {
+  list-style: none;
+}
 
-// 3. Tus componentes
-@import 'accessibility';
-@import 'button';
-@import 'carr';
-@import 'components/coursecard/style';
+a {
+  text-decoration: none;
+  color: inherit;
+}

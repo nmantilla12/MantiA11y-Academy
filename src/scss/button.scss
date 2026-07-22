@@ -1,8 +1,9 @@
+/* src/scss/button.scss */
 @use 'variables';
 
 .button {
   padding: 1rem 2rem;
-  border-radius: variables.$border-radius-lg;
+  border-radius: variables.$border-radius-md;
   border: none;
   font-family: variables.$font-family-accessible;
   cursor: pointer;

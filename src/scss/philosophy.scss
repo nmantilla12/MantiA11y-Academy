@@ -1,0 +1,68 @@
+/* src/scss/philosophy.scss */
+@use 'variables';
+
+.philosophy-section {
+  padding: 4rem 2rem;
+  background-color: #FFFFFF;
+
+  .philosophy-box {
+    background-color: variables.$dark-blue;
+    color: variables.$color-on-primary;
+    border-radius: variables.$border-radius-md;
+    padding: 3rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+
+    .philosophy-tag {
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+      color: #93C5FD;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.2;
+    }
+
+    p {
+      color: #CBD5E1;
+      font-size: 1.05rem;
+      max-width: 650px;
+      margin: 0 auto 3rem;
+      line-height: 1.5;
+    }
+
+    .stats-grid {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+
+      .stat-item {
+        .stat-number {
+          display: block;
+          font-size: 3rem;
+          font-weight: 800;
+          color: variables.$color-on-primary;
+          margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+          font-size: 0.85rem;
+          letter-spacing: 1px;
+          color: #93C5FD;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

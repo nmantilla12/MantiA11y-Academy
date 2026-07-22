@@ -1,25 +1,37 @@
-// ... (Tus variables actuales)
-$spacing-md: 1.5rem;
-$transition-speed: 0.2s;
-$shadow-elevation: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* src/scss/variables.scss */
 
-// Utilidad de accesibilidad: SkipLink
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: $color-primary; // Usamos tu variable de color principal
-  color: $color-on-primary;   // Usamos tu variable de color de texto
-  padding: $stack-md;
-  z-index: 100;
-  transition: top $transition-speed;
-  text-decoration: none;
-  font-family: $font-family-accessible;
-  font-weight: bold;
+// Paleta de colores principal
+$color-primary: #0A3663;
+$color-secondary: #0052CC;
+$dark-blue: #051D3B;
+$color-surface: #F8F9FA;
+$color-on-surface: #1A1A1A;
+$color-on-primary: #FFFFFF;
+$text-gray: #6B7280;
+$border-color: #E5E7EB;
 
-  &:focus {
-    top: 0;
-    // Usamos tu mixin para mantener la consistencia del foco
-    @include focus-visible-style; 
+// Tipografías y bordes
+$font-family-accessible: 'Inter', system-ui, -apple-system, sans-serif;
+$border-radius-sm: 6px;
+$border-radius-md: 12px;
+
+// Mixin reutilizable para el foco accesible (outline visible por teclado)
+@mixin focus-visible-style {
+  &:focus-visible {
+    outline: 3px solid #0052CC;
+    outline-offset: 2px;
   }
+}
+
+// Estilos globales y auxiliares de accesibilidad (clase .sr-only para lectores de pantalla)
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

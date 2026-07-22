@@ -1,40 +1,181 @@
-@import 'variables';
+/* src/scss/accessibility.scss */
+@use 'variables';
 
 .accessibility-features {
-    background-color: $color-surface-container-low;
+    background-color: variables.$color-surface;
     padding: 4rem 2rem;
-    font-family: $font-family-accessible;
+    font-family: variables.$font-family-accessible;
 
     &-container { max-width: 1200px; margin: 0 auto; }
-    &-title { color: $color-on-surface; font-size: 2rem; margin-bottom: 0.5rem; text-align: center; }
-    &-subtitle { color: $color-on-surface-variant; font-size: 1.1rem; margin-bottom: 3rem; text-align: center; }
-    &-grid { display: flex; flex-direction: row; gap: 1.5rem; justify-content: center; }
+    &-title { color: variables.$color-on-surface; font-size: 2rem; margin-bottom: 0.5rem; text-align: center; }
+    &-subtitle { color: variables.$text-gray; font-size: 1.1rem; margin-bottom: 3rem; text-align: center; }
+    &-grid { display: flex; flex-direction: row; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
 }
 
 .course-card {
-    background-color: $color-surface-container;
-    border: 1px solid $color-outline-variant;
-    border-radius: $border-radius-lg;
+    background-color: #FFFFFF;
+    border: 1px solid variables.$border-color;
+    border-radius: variables.$border-radius-md;
     padding: 2rem;
     flex: 1;
+    min-width: 280px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
-    h3 { color: $color-on-surface; font-size: 1.35rem; margin-bottom: 1rem; }
-    p { color: $color-on-surface-variant; font-size: 1rem; line-height: 1.5; margin-bottom: 1.5rem; }
-    &-price { color: $color-on-surface; font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem; }
+    h3 { color: variables.$color-primary; font-size: 1.35rem; margin-bottom: 1rem; }
+    p { color: variables.$text-gray; font-size: 1rem; line-height: 1.5; margin-bottom: 1.5rem; }
+    &-price { color: variables.$color-on-surface; font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem; }
 
     button {
-        background-color: $color-primary;
-        color: white;
+        background-color: variables.$color-primary;
+        color: variables.$color-on-primary;
         padding: 0.75rem 1rem;
         border: none;
-        border-radius: $border-radius-lg;
+        border-radius: variables.$border-radius-sm;
         cursor: pointer;
         font-weight: bold;
         align-self: flex-start;
         &:hover { filter: brightness(0.9); }
-        @include focus-visible-style;
+        @include variables.focus-visible-style;
     }
+}
+
+/* ========================================================= */
+/* WIDGET, PANEL FLOTANTE Y MODO ALTO CONTRASTE INTEGRADOS   */
+/* ========================================================= */
+
+.accessibility-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  font-family: variables.$font-family-accessible;
+
+  .accessibility-toggle-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: variables.$color-primary;
+    color: variables.$color-on-primary;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.08);
+    }
+  }
+
+  .accessibility-panel {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    width: 300px;
+    background-color: variables.$color-surface;
+    border: 2px solid variables.$color-primary;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+
+    .accessibility-panel-header {
+      background-color: variables.$color-primary;
+      color: variables.$color-on-primary;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: variables.$color-on-primary;
+      }
+
+      .accessibility-close-btn {
+        background: transparent;
+        border: none;
+        color: variables.$color-on-primary;
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+    }
+
+    .accessibility-panel-body {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+
+      .accessibility-option-btn {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        text-align: left;
+        background-color: #f0f2f5;
+        border: 1px solid #d0d7de;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background-color: #e2e8f0;
+        }
+
+        &.active {
+          background-color: variables.$color-primary;
+          color: variables.$color-on-primary;
+          border-color: variables.$color-primary;
+        }
+      }
+    }
+  }
+}
+
+// Modo de alto contraste AAA global para toda la aplicación
+body.contrast-mode {
+  background-color: #000 !important;
+  color: #fff !important;
+
+  .course-card, 
+  .cart-sidebar,
+  .feature-card,
+  .philosophy-box,
+  .corporate-box,
+  .stats-bar,
+  .footer-section,
+  .accessibility-panel {
+    background-color: #000 !important;
+    border: 2px solid #fff !important;
+    color: #fff !important;
+
+    .stat-number, .stat-label, p, h3, h2, span {
+      color: #fff !important;
+    }
+  }
+
+  .button-primary,
+  .btn-primary,
+  .course-btn,
+  .accessibility-toggle-btn {
+    background-color: #fff !important;
+    color: #000 !important;
+    font-weight: bold;
+    border: 2px solid #fff !important;
+  }
+
+  .footer-section {
+    border-top: 2px solid #fff !important;
+
+    .footer-links a {
+      color: #fff !important;
+      text-decoration: underline;
+    }
+  }
 }
