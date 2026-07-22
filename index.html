@@ -8,6 +8,9 @@
 </head>
 <body>
 
+    <!-- Contenedor donde React inyectará el contenido -->
+    <div id="root"></div>
+
     <header class="header">
         <a href="#main-content" class="header-skip-link">Saltar al contenido principal</a>
         <div class="header-container">
@@ -42,16 +45,16 @@
         </article>
     </main>
 
-    <!-- Sidebar del Carrito -->
-    <section class="cart-sidebar" id="cart-sidebar" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+    <!-- Modal del carrito con los IDs necesarios para el JS y accesibilidad -->
+    <section class="cart-sidebar" id="cart-modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="cart-title">
         <div class="cart-sidebar-header">
             <h2 class="cart-sidebar-title" id="cart-title">Tu Cesta</h2>
-            <button class="cart-sidebar-close-btn" id="btn-close-cart" aria-label="Cerrar carrito">✕</button>
+            <!-- Clase btn-close añadida para que el JS detecte el foco -->
+            <button class="cart-sidebar-close-btn btn-close" id="btn-close-cart" aria-label="Cerrar carrito">✕</button>
         </div>
         
-        <!-- Lista dinámica: el foco bajará naturalmente a estos elementos si existen -->
         <ul class="cart-sidebar-list" id="cart-items-list">
-            <!-- Los productos se inyectan aquí dinámicamente -->
+            <!-- Los items se inyectan mediante JS -->
         </ul>
         
         <div class="cart-sidebar-footer">
@@ -60,28 +63,10 @@
         </div>
     </section>
 
-    <!-- Script principal -->
-    <script src="src/js/carrito.js"></script>
+    <!-- Script de React -->
+    <script type="module" src="/src/main.jsx"></script>
     
-    <script>
-        // Lógica adicional para asegurar el foco al abrir
-        const btnCart = document.getElementById('btn-cart');
-        const cartSidebar = document.getElementById('cart-sidebar');
-        const btnClose = document.getElementById('btn-close-cart');
-
-        btnCart.addEventListener('click', () => {
-            cartSidebar.setAttribute('aria-hidden', 'false');
-            btnCart.setAttribute('aria-expanded', 'true');
-            // Mover el foco a la X al abrir para empezar la navegación
-            setTimeout(() => btnClose.focus(), 100);
-        });
-
-        btnClose.addEventListener('click', () => {
-            cartSidebar.setAttribute('aria-hidden', 'true');
-            btnCart.setAttribute('aria-expanded', 'false');
-            // Devolver el foco al botón que abrió el carrito
-            btnCart.focus();
-        });
-    </script>
+    <!-- Script de lógica de carrito -->
+    <script src="src/js/carrito.js"></script>
 </body>
 </html>

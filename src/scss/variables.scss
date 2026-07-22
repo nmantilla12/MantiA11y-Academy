@@ -1,31 +1,25 @@
-// Variables existentes...
-$color-primary: #6200ee;
-$color-on-primary: #ffffff;
-$color-surface-container: #f3edf7;
-$color-surface-container-low: #f7f2fa;
-$color-on-surface: #1d1b20;
-$color-on-surface-variant: #49454f;
-$color-outline-variant: #cac4d0;
-$font-family-accessible: 'Arial', sans-serif;
-$border-radius-lg: 12px;
-// --- Tokens adicionales requeridos por tus componentes ---
-$color-surface: #fdfbff;
-$color-surface-container-lowest: #ffffff;
-$border-radius-sm: 8px;
-$border-radius-full: 9999px;
-$stack-sm: 0.5rem;
-$stack-md: 1rem;
-$stack-lg: 2rem;
-
-
-// Mixin global
-@mixin focus-visible-style {
-    &:focus-visible {
-        outline: 3px solid $color-primary; 
-        outline-offset: 2px;
-    }
-}
-// Ejemplo de lo que podrías añadir en el futuro si lo necesitas:
+// ... (Tus variables actuales)
 $spacing-md: 1.5rem;
 $transition-speed: 0.2s;
 $shadow-elevation: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+// Utilidad de accesibilidad: SkipLink
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: $color-primary; // Usamos tu variable de color principal
+  color: $color-on-primary;   // Usamos tu variable de color de texto
+  padding: $stack-md;
+  z-index: 100;
+  transition: top $transition-speed;
+  text-decoration: none;
+  font-family: $font-family-accessible;
+  font-weight: bold;
+
+  &:focus {
+    top: 0;
+    // Usamos tu mixin para mantener la consistencia del foco
+    @include focus-visible-style; 
+  }
+}

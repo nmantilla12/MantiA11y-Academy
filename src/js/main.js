@@ -1,9 +1,10 @@
-const Button = ({ onClick, children }) => {
-  return (
-    <button onClick={onClick} style={{ padding: '8px 16px', cursor: 'pointer' }}>
-      {children}
-    </button>
-  );
-};
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App'; // Asegúrate de que apunte bien a App.jsx
+import './index.css';    // O tus estilos globales
 
-export default Button;
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+);
