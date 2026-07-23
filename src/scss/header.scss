@@ -64,14 +64,15 @@
     align-items: center;
     margin-left: auto;
 
-    &-btn {
+    &-btn,
+    .accessibility-btn {
       background: variables.$color-surface;
       border: 1px solid variables.$border-color;
       border-radius: variables.$border-radius-sm;
       padding: 0.5rem 0.75rem;
       font-size: 1rem;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.2s, background-color 0.2s;
 
       &:hover {
         background-color: variables.$border-color;
@@ -101,5 +102,27 @@
     }
 
     @include variables.focus-visible-style;
+  }
+}
+
+/* Estilos globales para cuando se active el modo de alto contraste */
+body.high-contrast {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+
+  .header {
+    background-color: #000000 !important;
+    border-bottom: 1px solid #ffff00;
+
+    .header-logo-link,
+    .header-menu-link,
+    .accessibility-btn {
+      color: #ffff00 !important;
+    }
+
+    .accessibility-btn {
+      background-color: #222222;
+      border-color: #ffff00;
+    }
   }
 }
