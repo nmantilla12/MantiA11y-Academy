@@ -1,29 +1,29 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// 1. Crear el contexto de accesibilidad
-const AccessibilityContext = createContext();
+// 1. Exportación corregida del contexto para evitar el SyntaxError en App.jsx
+export const AccessibilityContext = createContext();
 
-// 2. Crear y exportar el Provider completo
+// 2. Proveedor completo con persistencia y control de accesibilidad
 export function AccessibilityProvider({ children }) {
-  // Estado para el modo de alto contraste
+  const [fontDyslexia, setFontDyslexia] = useState(false);
+  const [calmMode, setCalmMode] = useState(false);
+  const [readingGuide, setReadingGuide] = useState(false);
+
   const [highContrast, setHighContrast] = useState(() => {
     const savedContrast = localStorage.getItem('manti_high_contrast');
     return savedContrast ? JSON.parse(savedContrast) : false;
   });
 
-  // Estado para el tamaño de fuente ('normal', 'large', 'xlarge')
   const [fontSize, setFontSize] = useState(() => {
     const savedFontSize = localStorage.getItem('manti_font_size');
     return savedFontSize || 'normal';
   });
 
-  // Estado para lectores de pantalla / ayudas visuales o foco visible mejorado
   const [enhancedFocus, setEnhancedFocus] = useState(() => {
     const savedFocus = localStorage.getItem('manti_enhanced_focus');
     return savedFocus ? JSON.parse(savedFocus) : false;
   });
 
-  // Sincronizar y aplicar clases o atributos al DOM raíz (document.body) según las preferencias
   useEffect(() => {
     localStorage.setItem('manti_high_contrast', JSON.stringify(highContrast));
     if (highContrast) {
@@ -48,7 +48,6 @@ export function AccessibilityProvider({ children }) {
     }
   }, [enhancedFocus]);
 
-  // Funciones de control de accesibilidad
   const toggleHighContrast = () => {
     setHighContrast(prev => !prev);
   };
@@ -63,8 +62,10 @@ export function AccessibilityProvider({ children }) {
     setEnhancedFocus(prev => !prev);
   };
 
-  // Restablecer todos los valores de accesibilidad por defecto
   const resetAccessibility = () => {
+    setFontDyslexia(false);
+    setCalmMode(false);
+    setReadingGuide(false);
     setHighContrast(false);
     setFontSize('normal');
     setEnhancedFocus(false);
@@ -76,7 +77,14 @@ export function AccessibilityProvider({ children }) {
   return (
     <AccessibilityContext.Provider
       value={{
+        fontDyslexia,
+        setFontDyslexia,
+        calmMode,
+        setCalmMode,
+        readingGuide,
+        setReadingGuide,
         highContrast,
+        setHighContrast,
         toggleHighContrast,
         fontSize,
         changeFontSize,
@@ -90,7 +98,7 @@ export function AccessibilityProvider({ children }) {
   );
 }
 
-// 3. Hook personalizado para consumir el contexto de accesibilidad fácilmente en componentes
+// 3. Hook personalizado para consumir el contexto de forma segura
 export function useAccessibility() {
   const context = useContext(AccessibilityContext);
   if (!context) {

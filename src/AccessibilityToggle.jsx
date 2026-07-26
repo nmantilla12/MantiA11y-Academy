@@ -1,23 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useAccessibility } from './AccessibilityContext';
 
 export function AccessibilityToggle() {
-  const [highContrast, setHighContrast] = useState(false);
-
-  useEffect(() => {
-    if (highContrast) {
-      document.body.classList.add('high-contrast');
-    } else {
-      document.body.classList.remove('high-contrast');
-    }
-  }, [highContrast]);
+  const { highContrast, toggleHighContrast } = useAccessibility();
 
   return (
-    <button 
-      onClick={() => setHighContrast(!highContrast)}
-      aria-label="Activar modo de alto contraste"
-      className="accessibility-btn"
-    >
-      {highContrast ? 'Desactivar Alto Contraste' : '♿ Alto Contraste'}
-    </button>
+    <div className="accessibility-bar" style={{ display: 'flex', justifyContent: 'flex-end', padding: '0.5rem 1rem', background: '#ffffff', borderBottom: '1px solid #eaeaea' }}>
+      <button 
+        onClick={toggleHighContrast}
+        className="accessibility-btn"
+        style={{
+          background: highContrast ? '#1f1f1f' : '#0b57d0',
+          color: '#ffffff',
+          border: 'none',
+          padding: '0.4rem 0.8rem',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          fontSize: '0.85rem',
+          fontWeight: '600',
+          transition: 'background 0.2s ease'
+        }}
+        aria-pressed={highContrast}
+        aria-label="Alternar modo de alto contraste"
+      >
+        {highContrast ? 'Desactivar Alto Contraste' : '♿ Alto Contraste'}
+      </button>
+    </div>
   );
 }

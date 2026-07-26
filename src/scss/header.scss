@@ -1,128 +1,48 @@
-/* src/scss/header.scss */
-@use 'variables';
+// src/scss/header.scss
 
-.header {
-  background-color: #FFFFFF;
-  border-bottom: 1px solid variables.$border-color;
+.header-accessibility-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: #f9f9f9;
+  border-bottom: 2px solid #000;
   position: sticky;
   top: 0;
-  z-index: 900;
-  width: 100%;
+  zIndex: 1000;
 
-  &-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-  }
-
-  &-logo-link {
-    font-family: variables.$font-family-accessible;
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: variables.$color-primary;
-    text-decoration: none;
-
-    .header-logo-accent {
-      color: variables.$color-secondary;
-    }
-  }
-
-  &-nav {
-    display: flex;
-    align-items: center;
-
-    .header-menu-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-
-      .header-menu-link {
-        font-family: variables.$font-family-accessible;
-        font-size: 0.85rem;
-        font-weight: 700;
-        color: variables.$text-gray;
-        text-decoration: none;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        transition: color 0.2s;
-
-        &:hover {
-          color: variables.$color-primary;
-        }
-
-        @include variables.focus-visible-style;
-      }
-    }
-  }
-
-  .a11y-panel {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-
-    &-btn,
-    .accessibility-btn {
-      background: variables.$color-surface;
-      border: 1px solid variables.$border-color;
-      border-radius: variables.$border-radius-sm;
-      padding: 0.5rem 0.75rem;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.2s, background-color 0.2s;
-
-      &:hover {
-        background-color: variables.$border-color;
-      }
-
-      @include variables.focus-visible-style;
-    }
-  }
-
-  &-cart-btn {
-    background-color: variables.$color-primary;
-    color: variables.$color-on-primary;
-    border: none;
-    border-radius: variables.$border-radius-sm;
-    padding: 0.5rem 1rem;
-    font-family: variables.$font-family-accessible;
-    font-weight: 600;
-    font-size: 0.95rem;
+  .header-btn {
+    background: #000;
+    color: #fff;
+    border: 2px solid #000;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
     cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    transition: filter 0.2s;
+    transition: background-color 0.2s ease;
 
     &:hover {
-      filter: brightness(1.2);
+      background-color: #333;
     }
-
-    @include variables.focus-visible-style;
   }
-}
 
-/* Estilos globales para cuando se active el modo de alto contraste */
-body.high-contrast {
-  background-color: #000000 !important;
-  color: #ffff00 !important;
+  .header-nav {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
 
-  .header {
-    background-color: #000000 !important;
-    border-bottom: 1px solid #ffff00;
+    a {
+      font-weight: bold;
+      text-decoration: none;
+      color: #000;
 
-    .header-logo-link,
-    .header-menu-link,
-    .accessibility-btn {
-      color: #ffff00 !important;
-    }
-
-    .accessibility-btn {
-      background-color: #222222;
-      border-color: #ffff00;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }

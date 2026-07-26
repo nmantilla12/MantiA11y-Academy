@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 // Importación de imágenes desde la carpeta de assets
@@ -8,13 +8,26 @@ import communityTeamImg from './assets/images/especialista.png';
 
 // Importación de datos, contexto y componente de accesibilidad
 import { catalogData } from './data.jsx';
-import { AccessibilityProvider } from './AccessibilityContext.jsx';
+import { AccessibilityProvider, AccessibilityContext } from './AccessibilityContext.jsx';
 import { AccessibilityToggle } from './AccessibilityToggle';
 
-
-function App() {
+function MainAppContent() {
   const [cart, setCart] = useState([]);
   const [activeFilter, setActiveFilter] = useState('Todos');
+  
+  // Estados para controlar los menús laterales y el modal de metodología
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isA11yOpen, setIsA11yOpen] = useState(false);
+  const [isMethodologyOpen, setIsMethodologyOpen] = useState(false);
+
+  // Consumir el contexto de accesibilidad de forma segura
+  const accessibility = useContext(AccessibilityContext) || {};
+  const { 
+    fontDyslexia = false, setFontDyslexia = () => {}, 
+    calmMode = false, setCalmMode = () => {}, 
+    readingGuide = false, setReadingGuide = () => {},
+    highContrast = false, setHighContrast = () => {} 
+  } = accessibility;
   
   const addToCart = (product) => {
     setCart([...cart, product]);
@@ -31,292 +44,509 @@ function App() {
   });
 
   return (
-    <AccessibilityProvider>
-      <Router>
-        <div className="app-container">
-          
-          {/* BARRA DE ACCESIBILIDAD / HEADER SUPERIOR */}
-          <header className="header-accessibility-bar" style={{ padding: '1rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#f9f9f9', borderBottom: '1px solid #eaeaea' }}>
-            <nav style={{ display: 'flex', gap: '1.5rem' }}>
-              <Link to="/" style={{ fontWeight: 'bold', textDecoration: 'none', color: '#333' }}>🏠 Inicio</Link>
-              <Link to="/carrito" style={{ fontWeight: 'bold', textDecoration: 'none', color: '#333' }}>🛒 Carrito ({cart.length})</Link>
-            </nav>
-            <AccessibilityToggle />
-          </header>
+    <div className="app-container" style={{
+      fontFamily: fontDyslexia ? '"OpenDyslexic", sans-serif, Arial' : 'inherit',
+      filter: calmMode ? 'saturate(0.5) contrast(0.9)' : 'none',
+      backgroundColor: highContrast ? '#000000' : 'inherit',
+      color: highContrast ? '#ffffff' : 'inherit'
+    }}>
+      
+      {/* BARRA DE ACCESIBILIDAD / HEADER SUPERIOR */}
+      <header className="header-accessibility-bar" style={{ 
+        padding: '1rem', 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center', 
+        backgroundColor: highContrast ? '#111111' : '#f9f9f9', 
+        borderBottom: '2px solid #000',
+        position: 'sticky',
+        top: 0,
+        zIndex: 1000
+      }}>
+        <button 
+          onClick={() => setIsNavOpen(true)}
+          aria-label="Abrir menú de navegación"
+          style={{
+            background: '#000',
+            color: '#fff',
+            border: '2px solid #000',
+            padding: '0.5rem 0.75rem',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            fontWeight: 'bold',
+            fontSize: '1rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.4rem'
+          }}
+        >
+          ☰ Menú
+        </button>
 
-          <Routes>
-            {/* RUTA 1: LA LANDING PRINCIPAL (Tu código intacto) */}
-            <Route path="/" element={
-              <>
-                {/* 1. SECCIÓN HERO */}
-                <section className="hero-container" aria-label="Bienvenida">
-                  <div className="hero-badge">APRENDIZAJE ACCESIBILIDAD DIGITAL</div>
-                  <div className="hero-content-wrapper" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '2rem', flexWrap: 'wrap' }}>
-                    <div className="hero-content" style={{ flex: '1 1 45%' }}>
-                      <h1 className="hero-title">
-                        Diseña y Desarrolla para <em>Todos</em>.
-                      </h1>
-                      <p className="hero-description">
-                        MantiA11y Academy es la plataforma educativa líder en español enfocada en Diseño Universal, Accesibilidad Web y Neurodiversidad.
-                      </p>
-                      <div className="hero-buttons">
-                        <a href="#catalog" className="btn-primary">Explorar Cursos</a>
-                        <button className="btn-secondary">Nuestra Metodología</button>
-                      </div>
-                    </div>
-                    <div className="hero-image-container" style={{ flex: '1 1 45%', maxWidth: '550px' }}>
-                      <img 
-                        src={heroDashboardImg} 
-                        alt="Especialista trabajando frente a un portátil con un panel analítico de accesibilidad web" 
-                        className="hero-img"
-                        style={{ width: '100%', borderRadius: '8px', display: 'block' }}
-                      />
-                    </div>
+        <nav style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+          <Link to="/" style={{ fontWeight: 'bold', textDecoration: 'none', color: highContrast ? '#fff' : '#000' }}>🏠 Inicio</Link>
+          <Link to="/carrito" style={{ fontWeight: 'bold', textDecoration: 'none', color: highContrast ? '#fff' : '#000' }}>🛒 Carrito ({cart.length})</Link>
+        </nav>
+
+        <button 
+          onClick={() => setIsA11yOpen(true)}
+          aria-label="Abrir panel de accesibilidad y neurodivergencia"
+          style={{
+            background: '#000',
+            color: '#fff',
+            border: '2px solid #000',
+            padding: '0.5rem 0.75rem',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            fontWeight: 'bold',
+            fontSize: '1rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.4rem'
+          }}
+        >
+          👁️ Accesibilidad
+        </button>
+      </header>
+
+      {/* MENÚ LATERAL IZQUIERDO (NAVEGACIÓN) */}
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: isNavOpen ? 0 : '-100%',
+        width: '280px',
+        height: '100%',
+        backgroundColor: '#ffffff',
+        boxShadow: '4px 0 15px rgba(0,0,0,0.2)',
+        transition: 'left 0.3s ease-in-out',
+        zIndex: 1100,
+        padding: '1.5rem',
+        boxSizing: 'border-box',
+        borderRight: '3px solid #000',
+        overflowY: 'auto',
+        color: '#000'
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: '900', color: '#000', margin: 0 }}>Menú de Navegación</h2>
+          <button 
+            onClick={() => setIsNavOpen(false)}
+            aria-label="Cerrar menú"
+            style={{ background: '#000', color: '#fff', border: 'none', padding: '0.4rem 0.8rem', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '1rem' }}
+          >
+            ✕
+          </button>
+        </div>
+        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <li><Link to="/" onClick={() => setIsNavOpen(false)} style={{ display: 'block', padding: '0.75rem', background: '#0056b3', color: '#fff', borderRadius: '6px', textDecoration: 'none', fontWeight: 'bold' }}>🎓 Cursos</Link></li>
+          <li><a href="#catalog" onClick={() => setIsNavOpen(false)} style={{ display: 'block', padding: '0.75rem', background: '#f1f1f1', color: '#000', borderRadius: '6px', textDecoration: 'none', fontWeight: 'bold' }}>👥 Nosotros</a></li>
+          <li>
+            <button 
+              onClick={() => { setIsNavOpen(false); setIsA11yOpen(true); }}
+              style={{ width: '100%', textAlign: 'left', display: 'block', padding: '0.75rem', background: '#f1f1f1', color: '#000', borderRadius: '6px', textDecoration: 'none', fontWeight: 'bold', border: 'none', cursor: 'pointer' }}
+            >
+              ⚙️ Ajustes (Accesibilidad)
+            </button>
+          </li>
+          <li><Link to="/carrito" onClick={() => setIsNavOpen(false)} style={{ display: 'block', padding: '0.75rem', background: '#f1f1f1', color: '#000', borderRadius: '6px', textDecoration: 'none', fontWeight: 'bold' }}>🛒 Carrito</Link></li>
+        </ul>
+      </div>
+
+      {/* PANEL LATERAL DERECHO (ACCESIBILIDAD FUNCIONAL) */}
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        right: isA11yOpen ? 0 : '-100%',
+        width: '320px',
+        height: '100%',
+        backgroundColor: '#ffffff',
+        boxShadow: '-4px 0 15px rgba(0,0,0,0.2)',
+        transition: 'right 0.3s ease-in-out',
+        zIndex: 1100,
+        padding: '1.5rem',
+        boxSizing: 'border-box',
+        borderLeft: '3px solid #000',
+        overflowY: 'auto',
+        color: '#000'
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: '900', color: '#000', margin: 0 }}>Accesibilidad AAA</h2>
+          <button 
+            onClick={() => setIsA11yOpen(false)}
+            aria-label="Cerrar panel de accesibilidad"
+            style={{ background: '#000', color: '#fff', border: 'none', padding: '0.4rem 0.8rem', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '1rem' }}
+          >
+            ✕
+          </button>
+        </div>
+        
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+          <div>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem', color: '#000' }}>Tipo de letra accesible (Dislexia)</p>
+            <div style={{ display: 'flex', gap: '0.5rem' }}>
+              <button 
+                onClick={() => setFontDyslexia(true)}
+                style={{ flex: 1, padding: '0.5rem', background: fontDyslexia ? '#0056b3' : '#000', color: '#fff', border: '2px solid #000', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer' }}
+              >
+                OpenDyslexic
+              </button>
+              <button 
+                onClick={() => setFontDyslexia(false)}
+                style={{ flex: 1, padding: '0.5rem', background: !fontDyslexia ? '#0056b3' : '#fff', color: !fontDyslexia ? '#fff' : '#000', border: '2px solid #000', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer' }}
+              >
+                Estándar
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem', color: '#000' }}>Modo Visual (Autismo / Calma Sensorial)</p>
+            <div 
+              onClick={() => setCalmMode(!calmMode)}
+              style={{ padding: '0.75rem', background: calmMode ? '#d4edda' : '#f4f4f4', border: '1px solid #ccc', borderRadius: '6px', cursor: 'pointer' }}
+            >
+              <span style={{ fontWeight: 'bold', display: 'block', marginBottom: '0.25rem' }}>🍃 Modo Calma {calmMode ? '✓ (Activo)' : ''}</span>
+              <span style={{ fontSize: '0.85rem', color: '#555' }}>Reduce saturación y distracciones visuales.</span>
+            </div>
+          </div>
+
+          <div>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem', color: '#000' }}>Guía de Lectura</p>
+            <button 
+              onClick={() => setReadingGuide(!readingGuide)}
+              style={{ width: '100%', padding: '0.5rem', border: '1px solid #000', borderRadius: '4px', textAlign: 'center', fontWeight: 'bold', background: readingGuide ? '#000' : '#fff', color: readingGuide ? '#fff' : '#000', cursor: 'pointer' }}
+            >
+              Foco de Línea {readingGuide ? '✓ (Activo)' : 'U'}
+            </button>
+          </div>
+
+          <div>
+            <p style={{ fontWeight: 'bold', marginBottom: '0.5rem', color: '#000' }}>Contraste</p>
+            <button 
+              onClick={() => setHighContrast(!highContrast)}
+              style={{ width: '100%', padding: '0.5rem', background: highContrast ? '#fff' : '#000', color: highContrast ? '#000' : '#fff', borderRadius: '4px', fontWeight: 'bold', textAlign: 'center', border: '2px solid #000', cursor: 'pointer' }}
+            >
+              Alto Contraste AAA {highContrast ? '✓' : '◐'}
+            </button>
+          </div>
+        </div>
+
+        <div style={{ marginTop: '2rem' }}>
+          <AccessibilityToggle />
+        </div>
+      </div>
+
+      {/* MODAL DE METODOLOGÍA (SE ACTIVA AL CLICAR EL BOTÓN) */}
+      {isMethodologyOpen && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'rgba(0,0,0,0.6)',
+          zIndex: 1200,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '1rem'
+        }}>
+          <div style={{
+            background: '#fff',
+            color: '#000',
+            padding: '2rem',
+            borderRadius: '8px',
+            maxWidth: '600px',
+            width: '100%',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+            position: 'relative'
+          }}>
+            <button 
+              onClick={() => setIsMethodologyOpen(false)}
+              style={{ position: 'absolute', top: '1rem', right: '1rem', background: '#000', color: '#fff', border: 'none', padding: '0.4rem 0.8rem', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
+            >
+              ✕
+            </button>
+            <h2 style={{ marginTop: 0 }}>Nuestra Metodología Inclusiva</h2>
+            <p style={{ lineHeight: '1.6' }}>
+              En <strong>MantiA11y Academy</strong> implementamos estrictamente el marco de <em>Diseño Universal para el Aprendizaje (DUA)</em> y las normativas internacionales de accesibilidad WCAG nivel AAA. Nuestra metodología se compone de:
+            </p>
+            <ul style={{ lineHeight: '1.6', paddingLeft: '1.2rem' }}>
+              <li><strong>Adaptación Cognitiva:</strong> Contenidos estructurados para facilitar la lectura en personas con dislexia y autismo.</li>
+              <li><strong>Flexibilidad Sensorial:</strong> Opciones visuales para mitigar la fatiga y la sobrecarga digital.</li>
+              <li><strong>Práctica Guiada:</strong> Ejercicios reales orientados a la auditoría y desarrollo web inclusivo.</li>
+            </ul>
+            <button 
+              onClick={() => setIsMethodologyOpen(false)}
+              style={{ marginTop: '1rem', background: '#0056b3', color: '#fff', border: 'none', padding: '0.75rem 1.5rem', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
+            >
+              Entendido, cerrar
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* GUÍA DE LECTURA VISUAL (SI ESTÁ ACTIVA) */}
+      {readingGuide && (
+        <div style={{
+          position: 'fixed',
+          top: '50%',
+          left: 0,
+          width: '100%',
+          height: '40px',
+          borderTop: '2px dashed #ff0000',
+          borderBottom: '2px dashed #ff0000',
+          backgroundColor: 'rgba(255, 255, 0, 0.15)',
+          pointerEvents: 'none',
+          zIndex: 999
+        }} />
+      )}
+
+      {/* BACKDROP GENERAL PARA MENÚS */}
+      {(isNavOpen || isA11yOpen) && (
+        <div 
+          onClick={() => { setIsNavOpen(false); setIsA11yOpen(false); }}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            zIndex: 1050
+          }}
+        />
+      )}
+
+      <Routes>
+        {/* RUTA 1: LANDING PRINCIPAL */}
+        <Route path="/" element={
+          <>
+            <section className="hero-container" aria-label="Bienvenida" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
+              <div className="hero-badge" style={{ margin: '0 auto 1rem auto', display: 'inline-block' }}>APRENDIZAJE ACCESIBILIDAD DIGITAL</div>
+              <div className="hero-content-wrapper" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem', maxWidth: '900px', margin: '0 auto' }}>
+                <div className="hero-content" style={{ width: '100%' }}>
+                  <h1 className="hero-title" style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>
+                    Diseña y Desarrolla para <em>Todos</em>.
+                  </h1>
+                  <p className="hero-description" style={{ maxWidth: '700px', margin: '0 auto 2rem auto', lineHeight: '1.6' }}>
+                    MantiA11y Academy es la plataforma educativa líder en español enfocada en Diseño Universal, Accesibilidad Web y Neurodiversidad (Dislexia, Autismo y Autonomía Cognitiva).
+                  </p>
+                  <div className="hero-buttons" style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+                    <a href="#catalog" className="btn-primary" style={{ padding: '0.75rem 1.5rem', background: '#0056b3', color: '#fff', textDecoration: 'none', borderRadius: '4px', fontWeight: 'bold' }}>Explorar Cursos</a>
+                    <button 
+                      onClick={() => setIsMethodologyOpen(true)}
+                      className="btn-secondary"
+                      style={{ padding: '0.75rem 1.5rem', background: '#e2e8f0', color: '#000', border: 'none', borderRadius: '4px', fontWeight: 'bold', cursor: 'pointer' }}
+                    >
+                      Nuestra Metodología
+                    </button>
                   </div>
-                </section>
-
-                {/* 2. BARRA DE ESTADÍSTICAS */}
-                <section className="stats-bar">
-                  <div className="stat-box">
-                    <span className="stat-number">15+</span>
-                    <span className="stat-label">CURSOS EXPERTOS</span>
-                  </div>
-                  <div className="stat-box">
-                    <span className="stat-number">5k+</span>
-                    <span className="stat-label">ALUMNOS ACTIVOS</span>
-                  </div>
-                  <div className="stat-box">
-                    <span className="stat-number">WCAG</span>
-                    <span className="stat-label">ESPEC. 2.2</span>
-                  </div>
-                  <div className="stat-box">
-                    <span className="stat-number">100%</span>
-                    <span className="stat-label">UNIVERSAL</span>
-                  </div>
-                </section>
-                
-                {/* SECCIÓN DE RECURSOS Y DISLEXIA */}
-                <section className="resources-section" style={{ padding: '4rem 2rem', maxWidth: '1200px', margin: '0 auto' }}>
-                  <div className="resources-container" style={{ display: 'flex', alignItems: 'center', gap: '3rem', flexWrap: 'wrap' }}>
-                    <div className="resources-image-wrapper" style={{ flex: '1 1 45%', maxWidth: '500px' }}>
-                      <img 
-                        src={dyslexiaSpecialistImg} 
-                        alt="Especialista en dislexia revisando recursos y pautas de lectura accesible en una biblioteca" 
-                        className="resources-img"
-                        style={{ width: '100%', borderRadius: '8px', display: 'block' }}
-                      />
-                    </div>
-                    <div className="resources-content" style={{ flex: '1 1 45%' }}>
-                      <span className="section-tag" style={{ fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase' }}>ASESORAMIENTO ESPECIALIZADO</span>
-                      <h2 style={{ fontSize: '2rem', margin: '0.5rem 0 1rem 0' }}>Dislexia y Accesibilidad Cognitiva</h2>
-                      <p style={{ lineHeight: '1.6' }}>
-                        Integramos pautas tipográficas, contrastes optimizados y estrategias de apoyo cognitivo para garantizar que la lectura y la navegación digital sean plenamente accesibles para personas con dislexia.
-                      </p>
-                    </div>
-                  </div>
-                </section>
-
-                {/* 3. CATÁLOGO FORMATIVO */}
-                <main id="catalog" className="catalog-section" tabIndex="-1">
-                  <div className="catalog-header">
-                    <span className="section-number">1. CATÁLOGO FORMATIVO</span>
-                    <h2>Catálogo Formativo</h2>
-                    <p>Formaciones intensivas con certificación profesional en accesibilidad digital.</p>
-                    
-                    <div className="filter-buttons" role="group" aria-label="Filtros de cursos">
-                      <button 
-                        className={activeFilter === 'Todos' ? 'filter-btn active' : 'filter-btn'}
-                        onClick={() => setActiveFilter('Todos')}
-                      >
-                        Todos
-                      </button>
-                      <button 
-                        className={activeFilter === 'Diseño' ? 'filter-btn active' : 'filter-btn'}
-                        onClick={() => setActiveFilter('Diseño')}
-                      >
-                        Diseño
-                      </button>
-                      <button 
-                        className={activeFilter === 'Desarrollo' ? 'filter-btn active' : 'filter-btn'}
-                        onClick={() => setActiveFilter('Desarrollo')}
-                      >
-                        Desarrollo
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="catalog-grid">
-                    {filteredCourses && filteredCourses.map(course => (
-                      <div key={course.id} className="course-card">
-                        
-                        <div className="course-card-image-container" style={{ width: '100%', height: '170px', overflow: 'hidden' }}>
-                          <img 
-                            src={course.image} 
-                            alt={course.title} 
-                            className="course-card-img" 
-                            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                          />
-                        </div>
-
-                        <div className="course-card-body">
-                          <span className="course-level-tag">{course.level || 'INTERMEDIO'}</span>
-                          <h3 className="course-title">{course.title}</h3>
-                          <p className="course-description">{course.description}</p>
-                          
-                          {course.id === 4 && (
-                            <div className="course-syllabus">
-                              <h3>Contenidos de la Formación:</h3>
-                              <ul className="syllabus-list">
-                                <li><strong>TEMA 1.</strong> Dificultades de aprendizaje</li>
-                                <li><strong>TEMA 2.</strong> Estimulación cognitiva y dificultades de aprendizaje</li>
-                                <li><strong>TEMA 3.</strong> Estrategias para mejorar la capacidad de aprender</li>
-                                <li><strong>TEMA 4.</strong> Intervención emocional en las dificultades de aprendizaje</li>
-                              </ul>
-                            </div>
-                          )}
-
-                          {course.id === 5 && (
-                            <div className="course-syllabus">
-                              <h3>Contenidos de la Formación:</h3>
-                              <ul className="syllabus-list">
-                                <li><strong>TEMA 1.</strong> Aproximación a la discapacidad</li>
-                                <li><strong>TEMA 2.</strong> Discapacidad y familia</li>
-                                <li><strong>TEMA 3.</strong> La discapacidad en el ámbito escolar</li>
-                                <li><strong>TEMA 4.</strong> Apoyo conductual positivo</li>
-                                <li><strong>TEMA 5.</strong> Discapacidad y ocio inclusivo</li>
-                                <li><strong>TEMA 6.</strong> Tránsito de la vida adulta</li>
-                                <li><strong>TEMA 7.</strong> Inclusión en el ámbito laboral</li>
-                              </ul>
-                            </div>
-                          )}
-
-                          {course.id === 6 && (
-                            <div className="course-syllabus">
-                              <h3>Contenidos de la Formación:</h3>
-                              <div className="syllabus-block"><strong>Inteligencia Emocional:</strong></div>
-                              <ul className="syllabus-list">
-                                <li>TEMA 1. Conceptos y fundamentación</li>
-                                <li>TEMA 2. El reto en las organizaciones</li>
-                                <li>TEMA 3. Aplicación práctica</li>
-                              </ul>
-                              <div className="syllabus-block" style={{ marginTop: '0.4rem' }}><strong>Método Montessori (0-6 años):</strong></div>
-                              <ul className="syllabus-list">
-                                <li>TEMA 0-1. Introducción y principios</li>
-                                <li>TEMA 2-3. Aplicación 0-3 y 3-6 años</li>
-                                <li>TEMA 4. Banco de actividades</li>
-                              </ul>
-                            </div>
-                          )}
-
-                          <div className="course-footer">
-                            <span className="course-price">{course.price} €</span>
-                            <button className="course-btn" onClick={() => addToCart(course)}>
-                              Añadir al Carrito
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </main>
-
-                {/* 4. SECCIÓN CORPORATIVA */}
-                <section className="corporate-section">
-                  <div className="corporate-box dark-card" style={{ maxWidth: '1100px', margin: '0 auto', padding: '2rem' }}>
-                    <div className="corporate-image-container" style={{ marginBottom: '1.5rem', borderRadius: '8px', overflow: 'hidden' }}>
-                      <img 
-                        src={communityTeamImg} 
-                        alt="Panel digital que muestra rostros diversos de la comunidad de estudiantes y profesionales en videollamada" 
-                        className="corporate-img"
-                        style={{ width: '100%', maxHeight: '350px', objectFit: 'cover', display: 'block' }}
-                      />
-                    </div>
-                    <h2>¿Tu empresa necesita accesibilidad?</h2>
-                    <p>Ofrecemos planes de formación corporativa y auditorías técnicas personalizadas para equipos de diseño y desarrollo.</p>
-                    <button className="btn-corporate">Contacto Corporativo</button>
-                    <div className="corporate-icon-badge">♿</div>
-                  </div>
-                </section>
-              </>
-            } />
-
-            {/* RUTA 2: DETALLE DEL CURSO (Basado en Figma) */}
-            <Route path="/curso/:id" element={
-              <div style={{ maxWidth: '900px', margin: '2rem auto', padding: '0 1rem' }}>
-                <p style={{ color: '#666', fontSize: '0.9rem' }}><Link to="/">Cursos</Link> &gt; <strong>2. Detalle del Curso</strong></p>
-                <h1 style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '1rem' }}>WCAG 2.2 Essentials: Diseño Inclusivo Moderno</h1>
-                <div style={{ display: 'flex', gap: '1rem', margin: '1rem 0' }}>
-                  <span style={{ background: '#e2e8f0', padding: '0.25rem 0.75rem', borderRadius: '4px' }}>⏱️ 12 Horas</span>
-                  <span style={{ background: '#e2e8f0', padding: '0.25rem 0.75rem', borderRadius: '4px' }}>📚 24 Clases</span>
                 </div>
-                <h3 style={{ marginTop: '1.5rem' }}>Sobre este curso</h3>
-                <p style={{ lineHeight: '1.6', color: '#444' }}>
-                  Domina las últimas actualizaciones de las Pautas de Accesibilidad para el Contenido Web (WCAG) 2.2. Aprenderás a implementar los nuevos criterios de éxito enfocados en usuarios con discapacidades cognitivas y de aprendizaje, así como mejoras para usuarios móviles.
-                </p>
-                <div style={{ marginTop: '2rem' }}>
-                  <h3>Plan de Estudios</h3>
-                  <div style={{ background: '#f8f9fa', padding: '1rem', borderRadius: '8px', border: '1px solid #ddd', marginTop: '1rem' }}>
-                    <h4>Módulo 1: Fundamentos de Accesibilidad</h4>
-                    <p>1.1 Introducción al Diseño Universal (08:20)</p>
-                    <p>1.2 Historia de las WCAG (15 min)</p>
-                  </div>
+                <div className="hero-image-container" style={{ width: '100%', maxWidth: '650px', marginTop: '1rem' }}>
+                  <img 
+                    src={heroDashboardImg} 
+                    alt="Especialista trabajando frente a un portátil con un panel analítico de accesibilidad web" 
+                    className="hero-img"
+                    style={{ width: '100%', borderRadius: '8px', display: 'block' }}
+                  />
                 </div>
               </div>
-            } />
+            </section>
 
-            {/* RUTA 3: CARRITO DE COMPRAS (Basado en Figma) */}
-            <Route path="/carrito" element={
-              <div style={{ maxWidth: '800px', margin: '2rem auto', padding: '0 1rem' }}>
-                <h2 style={{ textAlign: 'center' }}>3. Carrito de Compras</h2>
-                <p style={{ textAlign: 'center', color: '#666', marginBottom: '2rem' }}>Revisa los cursos seleccionados antes de finalizar tu suscripción.</p>
+            <section className="stats-bar">
+              <div className="stat-box">
+                <span className="stat-number">15+</span>
+                <span className="stat-label">CURSOS EXPERTOS</span>
+              </div>
+              <div className="stat-box">
+                <span className="stat-number">5k+</span>
+                <span className="stat-label">ALUMNOS ACTIVOS</span>
+              </div>
+              <div className="stat-box">
+                <span className="stat-number">WCAG</span>
+                <span className="stat-label">NIVEL AAA</span>
+              </div>
+              <div className="stat-box">
+                <span className="stat-number">100%</span>
+                <span className="stat-label">NEUROINCLUYENTE</span>
+              </div>
+            </section>
+            
+            <section className="resources-section" style={{ padding: '4rem 2rem', maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              <div className="resources-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
+                <div className="resources-image-wrapper" style={{ width: '100%', maxWidth: '550px' }}>
+                  <img 
+                    src={dyslexiaSpecialistImg} 
+                    alt="Especialista en dislexia revisando recursos y pautas de lectura accesible en una biblioteca" 
+                    className="resources-img"
+                    style={{ width: '100%', borderRadius: '8px', display: 'block', margin: '0 auto' }}
+                  />
+                </div>
+                <div className="resources-content" style={{ width: '100%' }}>
+                  <span className="section-tag" style={{ fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase', display: 'inline-block', marginBottom: '0.5rem' }}>ASESORAMIENTO ESPECIALIZADO</span>
+                  <h2 style={{ fontSize: '2rem', margin: '0.5rem 0 1rem 0' }}>Dislexia, Autismo y Accesibilidad Cognitiva</h2>
+                  <p style={{ lineHeight: '1.6', maxWidth: '750px', margin: '0 auto' }}>
+                    Integramos pautas tipográficas estrictas para dislexia, entornos de calma sensorial para personas dentro del espectro autista y apoyos cognitivos que garantizan una navegación plenamente autónoma.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* CATÁLOGO FORMATIVO DINÁMICO */}
+            <main id="catalog" className="catalog-section" tabIndex="-1">
+              <div className="catalog-header">
+                <span className="section-number">1. CATÁLOGO FORMATIVO</span>
+                <h2>Catálogo Formativo</h2>
+                <p>Formaciones intensivas con certificación profesional en accesibilidad digital y neurodiversidad.</p>
                 
-                {cart.length === 0 ? (
-                  <p style={{ textAlign: 'center' }}>Tu carrito está vacío. <Link to="/">Volver al catálogo</Link></p>
-                ) : (
-                  <div>
-                    {cart.map((item, index) => (
-                      <div key={index} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#fff', padding: '1rem', border: '1px solid #ddd', borderRadius: '8px', marginBottom: '1rem' }}>
-                        <div>
-                          <h4>{item.title}</h4>
-                          <p>Precio: <strong>{item.price} €</strong></p>
-                        </div>
-                        <button onClick={() => removeFromCart(index)} style={{ background: '#ff4d4d', color: '#fff', border: 'none', padding: '0.5rem 1rem', borderRadius: '4px', cursor: 'pointer' }}>
-                          🗑️ Eliminar
+                <div className="filter-buttons" role="group" aria-label="Filtros de cursos">
+                  <button 
+                    className={activeFilter === 'Todos' ? 'filter-btn active' : 'filter-btn'}
+                    onClick={() => setActiveFilter('Todos')}
+                  >
+                    Todos
+                  </button>
+                  <button 
+                    className={activeFilter === 'Diseño' ? 'filter-btn active' : 'filter-btn'}
+                    onClick={() => setActiveFilter('Diseño')}
+                  >
+                    Diseño
+                  </button>
+                  <button 
+                    className={activeFilter === 'Desarrollo' ? 'filter-btn active' : 'filter-btn'}
+                    onClick={() => setActiveFilter('Desarrollo')}
+                  >
+                    Desarrollo
+                  </button>
+                </div>
+              </div>
+
+              <div className="catalog-grid">
+                {filteredCourses && filteredCourses.map(course => (
+                  <div key={course.id} className="course-card" style={{ background: highContrast ? '#222' : '#fff', color: highContrast ? '#fff' : '#000', border: '1px solid #ddd', borderRadius: '8px', overflow: 'hidden' }}>
+                    
+                    <div className="course-card-image-container" style={{ width: '100%', height: '170px', overflow: 'hidden' }}>
+                      <img 
+                        src={course.image} 
+                        alt={course.title} 
+                        className="course-card-img" 
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                      />
+                    </div>
+
+                    <div className="course-card-body" style={{ padding: '1.5rem' }}>
+                      <span className="course-level-tag">{course.level || 'INTERMEDIO'}</span>
+                      <h3 className="course-title">{course.title}</h3>
+                      <p className="course-description">{course.description}</p>
+                      
+                      <div className="course-footer" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1.5rem' }}>
+                        <span className="course-price" style={{ fontWeight: 'bold' }}>{course.price} €</span>
+                        <button className="course-btn" onClick={() => addToCart(course)} style={{ padding: '0.5rem 1rem', background: '#0056b3', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
+                          Añadir al Carrito
                         </button>
                       </div>
-                    ))}
-
-                    <div style={{ background: '#f8f9fa', padding: '1.5rem', borderRadius: '8px', border: '1px solid #ddd', marginTop: '2rem' }}>
-                      <h3>Resumen del Pedido</h3>
-                      <p>Subtotal: <strong>{cart.reduce((acc, curr) => acc + curr.price, 0)} €</strong></p>
-                      <p>IVA (21%): Incluido</p>
-                      <hr style={{ margin: '1rem 0' }} />
-                      <h4>Total: {cart.reduce((acc, curr) => acc + curr.price, 0)} €</h4>
-                      <button style={{ width: '100%', marginTop: '1rem', padding: '0.75rem', background: '#0056b3', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
-                        Finalizar Contratación →
-                      </button>
                     </div>
                   </div>
-                )}
+                ))}
               </div>
-            } />
-          </Routes>
+            </main>
 
-          {/* 5. FOOTER */}
-          <footer className="footer-section">
-            <div className="footer-content">
-              <h3>MantiA11y Academy</h3>
-              <p>© 2026 MantiA11y Academy. Diseño Universal y Accesibilidad.</p>
-              <div className="footer-links">
-                <a href="#privacy">Política de Privacidad</a>
-                <a href="#terms">Términos de Servicio</a>
-                <a href="#accessibility">Declaración de Accesibilidad</a>
-                <a href="#contact">Contacto</a>
+            <section className="corporate-section">
+              <div className="corporate-box dark-card" style={{ maxWidth: '1100px', margin: '0 auto', padding: '2rem', textAlign: 'center' }}>
+                <div className="corporate-image-container" style={{ marginBottom: '1.5rem', borderRadius: '8px', overflow: 'hidden' }}>
+                  <img 
+                    src={communityTeamImg} 
+                    alt="Panel digital que muestra rostros diversos de la comunidad de estudiantes y profesionales en videollamada" 
+                    className="corporate-img"
+                    style={{ width: '100%', maxHeight: '350px', objectFit: 'cover', display: 'block' }}
+                  />
+                </div>
+                <h2>¿Tu empresa necesita accesibilidad AAA y neuroinclusión?</h2>
+                <p style={{ maxWidth: '700px', margin: '0 auto 1.5rem auto' }}>Ofrecemos planes de formación corporativa y auditorías técnicas adaptadas para personas con dislexia, autismo y diversidad cognitiva.</p>
+                <div className="corporate-icon-badge">♿</div>
               </div>
+            </section>
+          </>
+        } />
+
+        {/* RUTA 2: DETALLE DEL CURSO */}
+        <Route path="/curso/:id" element={
+          <div style={{ maxWidth: '900px', margin: '2rem auto', padding: '0 1rem' }}>
+            <p style={{ color: '#666', fontSize: '0.9rem' }}><Link to="/">Cursos</Link> &gt; <strong>2. Detalle del Curso</strong></p>
+            <h1 style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '1rem' }}>WCAG 2.2 Essentials: Diseño Inclusivo, Dislexia y Neurodiversidad</h1>
+            <div style={{ display: 'flex', gap: '1rem', margin: '1rem 0', flexWrap: 'wrap' }}>
+              <span style={{ background: '#e2e8f0', padding: '0.25rem 0.75rem', borderRadius: '4px' }}>⏱️ 12 Horas</span>
+              <span style={{ background: '#e2e8f0', padding: '0.25rem 0.75rem', borderRadius: '4px' }}>📚 24 Clases</span>
+              <span style={{ background: '#000', color: '#fff', padding: '0.25rem 0.75rem', borderRadius: '4px', fontWeight: 'bold' }}>AAA Compliant</span>
             </div>
-          </footer>
+            <h3 style={{ marginTop: '1.5rem' }}>Sobre este curso</h3>
+            <p style={{ lineHeight: '1.6', color: '#444' }}>
+              Domina las últimas actualizaciones de las Pautas de Accesibilidad (WCAG) nivel AAA, enfocadas específicamente en criterios de éxito para usuarios con autismo, dislexia y dificultades de procesamiento cognitivo.
+            </p>
+          </div>
+        } />
 
+        {/* RUTA 3: CARRITO DE COMPRAS */}
+        <Route path="/carrito" element={
+          <div style={{ maxWidth: '800px', margin: '2rem auto', padding: '0 1rem' }}>
+            <h2 style={{ textAlign: 'center' }}>3. Carrito de Compras</h2>
+            <p style={{ textAlign: 'center', color: '#666', marginBottom: '2rem' }}>Revisa los cursos seleccionados antes de finalizar tu suscripción.</p>
+            
+            {cart.length === 0 ? (
+              <p style={{ textAlign: 'center' }}>Tu carrito está vacío. <Link to="/">Volver al catálogo</Link></p>
+            ) : (
+              <div>
+                {cart.map((item, index) => (
+                  <div key={index} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#fff', padding: '1rem', border: '1px solid #ddd', borderRadius: '8px', marginBottom: '1rem', flexWrap: 'wrap', gap: '1rem', color: '#000' }}>
+                    <div>
+                      <h4>{item.title}</h4>
+                      <p>Precio: <strong>{item.price} €</strong></p>
+                    </div>
+                    <button onClick={() => removeFromCart(index)} style={{ background: '#ff4d4d', color: '#fff', border: 'none', padding: '0.5rem 1rem', borderRadius: '4px', cursor: 'pointer' }}>
+                      🗑️ Eliminar
+                    </button>
+                  </div>
+                ))}
+
+                <div style={{ background: '#f8f9fa', color: '#000', padding: '1.5rem', borderRadius: '8px', border: '1px solid #ddd', marginTop: '2rem' }}>
+                  <h3>Resumen del Pedido</h3>
+                  <p>Subtotal: <strong>{cart.reduce((acc, curr) => acc + curr.price, 0)} €</strong></p>
+                  <p>IVA (21%): Incluido</p>
+                  <hr style={{ margin: '1rem 0' }} />
+                  <h4>Total: {cart.reduce((acc, curr) => acc + curr.price, 0)} €</h4>
+                  <button style={{ width: '100%', marginTop: '1rem', padding: '0.75rem', background: '#0056b3', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
+                    Finalizar Contratación →
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        } />
+      </Routes>
+
+      {/* FOOTER */}
+      <footer className="footer-section" style={{ padding: '2rem', textAlign: 'center', borderTop: '1px solid #ddd', marginTop: '4rem' }}>
+        <div className="footer-content">
+          <h3>MantiA11y Academy</h3>
+          <p>© 2026 MantiA11y Academy. Accesibilidad Web Nivel AAA, Dislexia y Neurodiversidad.</p>
+          <div className="footer-links" style={{ marginTop: '0.5rem', display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+            <a href="#privacy">Política de Privacidad</a>
+            <a href="#terms">Términos de Servicio</a>
+            <a href="#accessibility">Declaración de Accesibilidad AAA</a>
+            <a href="mailto:mantiayacademymantillapena@gmail.com">Contacto</a>
+          </div>
         </div>
+      </footer>
+
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <AccessibilityProvider>
+      <Router>
+        <MainAppContent />
       </Router>
     </AccessibilityProvider>
   );
