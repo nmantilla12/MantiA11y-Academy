@@ -1,72 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MantiA11y Academy - Cursos de Desarrollo Web Accesibles</title>
-    <link rel="stylesheet" href="src/css/styles.css">
-</head>
-<body>
-
-    <!-- Contenedor donde React inyectará el contenido -->
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MantiA11y Academy</title>
+  </head>
+  <body>
     <div id="root"></div>
-
-    <header class="header">
-        <a href="#main-content" class="header-skip-link">Saltar al contenido principal</a>
-        <div class="header-container">
-            <div class="header-logo">
-                <a href="/" class="header-logo-link" aria-label="MantiA11y Academy - Inicio">
-                    <span class="header-logo-text">Manti<span class="header-logo-accent">A11y</span> Academy</span>
-                </a>
-            </div>
-            
-            <section class="a11y-panel" aria-label="Panel de accesibilidad">
-                <button class="a11y-panel-btn" id="btn-contrast" aria-label="Activar alto contraste">🌓 Contraste</button>
-                <button class="a11y-panel-btn" id="btn-text-up" aria-label="Aumentar tamaño de fuente">A+</button>
-                <button class="a11y-panel-btn" id="btn-text-down" aria-label="Disminuir tamaño de fuente">A-</button>
-            </section>
-
-            <div class="header-actions">
-                <button class="header-cart-btn" id="btn-cart" aria-haspopup="dialog" aria-expanded="false" aria-label="Abrir carrito de compras">
-                    <span aria-hidden="true">🛒</span>
-                    <span id="cart-count">0</span>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <main id="main-content">
-        <article class="course-card">
-            <h3 class="course-card__title">Desarrollo Accesible</h3>
-            <p class="course-card__price">29,99€</p>
-            <button class="course-card__add-btn" data-name="Desarrollo Accesible" data-price="29.99">
-                Añadir al carrito
-            </button>
-        </article>
-    </main>
-
-    <!-- Modal del carrito con los IDs necesarios para el JS y accesibilidad -->
-    <section class="cart-sidebar" id="cart-modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="cart-title">
-        <div class="cart-sidebar-header">
-            <h2 class="cart-sidebar-title" id="cart-title">Tu Cesta</h2>
-            <!-- Clase btn-close añadida para que el JS detecte el foco -->
-            <button class="cart-sidebar-close-btn btn-close" id="btn-close-cart" aria-label="Cerrar carrito">✕</button>
-        </div>
-        
-        <ul class="cart-sidebar-list" id="cart-items-list">
-            <!-- Los items se inyectan mediante JS -->
-        </ul>
-        
-        <div class="cart-sidebar-footer">
-            <p>Total: <span id="cart-total-price">0,00€</span></p>
-            <button class="cart-sidebar-checkout-btn" id="btn-checkout" disabled>Finalizar compra</button>
-        </div>
-    </section>
-
-    <!-- Script de React -->
     <script type="module" src="/src/main.jsx"></script>
-    
-    <!-- Script de lógica de carrito -->
-    <script src="src/js/carrito.js"></script>
-</body>
+  </body>
 </html>

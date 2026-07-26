@@ -1,3 +1,4 @@
+/* src/scss/cart.scss */
 @use 'variables';
 
 .cart-sidebar {
@@ -7,7 +8,7 @@
   width: 100%;
   max-width: 450px;
   height: 100vh;
-  background-color: variables.$color-surface-container;
+  background-color: #FFFFFF;
   box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
@@ -25,14 +26,14 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem;
-    border-bottom: 1px solid variables.$color-outline-variant;
+    border-bottom: 1px solid variables.$border-color;
   }
 
   &-title {
     font-family: variables.$font-family-accessible; 
     font-size: 1.25rem;
     font-weight: 700;
-    color: variables.$color-on-surface;
+    color: variables.$color-primary;
   }
 
   &-close-btn {
@@ -45,7 +46,7 @@
     transition: color 0.2s ease;
 
     &:hover {
-      color: variables.$color-primary; 
+      color: variables.$color-secondary; 
     }
     @include variables.focus-visible-style;
   }
@@ -64,7 +65,7 @@
     justify-content: space-between; 
     align-items: center; 
     padding: 0.75rem 0; 
-    border-bottom: 1px solid variables.$color-outline-variant;
+    border-bottom: 1px solid variables.$border-color;
   }
 
   &-actions {
@@ -73,10 +74,10 @@
     align-items: center;
 
     button {
-      padding: variables.$stack-sm;
+      padding: 0.4rem 0.75rem;
       border-radius: variables.$border-radius-sm;
-      border: 1px solid variables.$color-outline-variant;
-      background: variables.$color-surface-container-lowest;
+      border: 1px solid variables.$border-color;
+      background: variables.$color-surface;
       cursor: pointer;
       @include variables.focus-visible-style;
     }
@@ -85,21 +86,21 @@
   &-empty-message {
     font-family: variables.$font-family-accessible;
     text-align: center;
-    color: variables.$color-on-surface-variant; 
+    color: variables.$text-gray; 
     font-size: 1rem;
     margin-top: 2rem;
   }
 
   &-footer {
     padding: 1.5rem;
-    border-top: 1px solid variables.$color-outline-variant; 
-    background-color: variables.$color-surface-container-low;
+    border-top: 1px solid variables.$border-color; 
+    background-color: variables.$color-surface;
   }
 
   &-total-text {
     font-family: variables.$font-family-accessible;
     font-size: 0.875rem;
-    color: variables.$color-on-surface-variant;
+    color: variables.$text-gray;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: 0.25rem;
@@ -119,7 +120,7 @@
     background-color: variables.$color-primary; 
     color: variables.$color-on-primary;
     border: none;
-    border-radius: variables.$border-radius-lg;
+    border-radius: variables.$border-radius-sm;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
@@ -132,8 +133,8 @@
     @include variables.focus-visible-style;
 
     &:disabled {
-      background-color: variables.$color-outline-variant;
-      color: variables.$color-on-surface-variant;
+      background-color: variables.$border-color;
+      color: variables.$text-gray;
       cursor: not-allowed;
     }
   }

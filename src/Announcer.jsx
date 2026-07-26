@@ -1,3 +1,4 @@
+/* src/components/common/Announcer.jsx */
 import React from 'react';
 
 const Announcer = ({ message }) => {
@@ -5,7 +6,8 @@ const Announcer = ({ message }) => {
     <div 
       role="status" 
       aria-live="polite" 
-      className="sr-only" // Clase para ocultar visualmente pero mantener accesible
+      aria-atomic="true"
+      className="sr-only"
     >
       {message}
     </div>

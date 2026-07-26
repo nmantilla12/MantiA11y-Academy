@@ -1,14 +1,44 @@
+/* src/scss/main.scss */
+
+// 1. Primero las variables, luego el reset
 @use 'variables';
 @use 'reset';
-@use 'accessibility';
-@use 'button';
-// Agrega aquí el resto de tus archivos (@use 'header', 'cart', etc.)
 
-body {
+// 2. Componentes modulares y específicos de la arquitectura
+@use 'header';
+@use 'hero';
+@use 'catalog';
+@use 'philosophy';
+@use 'features';
+@use 'accessibility';
+@use 'cart';
+@use 'button';
+
+// 3. Estilos globales y estructurales esenciales
+body, html, #root {
+  background-color: #ffffff !important;
   font-family: variables.$font-family-accessible;
-  background-color: variables.$color-surface;
-  color: variables.$color-on-surface;
+  color: #1f1f1f; // Color de texto base general forzado a oscuro
   line-height: 1.5;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+// Asegurar que todos los títulos y textos generales mantengan un color oscuro legible
+h1, h2, h3, h4, h5, h6 {
+  color: #1f1f1f;
+}
+
+p, span, li {
+  color: #333333;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #ffffff;
 }
 
 .skip-link {
@@ -25,5 +55,131 @@ body {
 
   @include variables.focus-visible-style;
 
-  &:focus { top: 16px; }
+  &:focus { 
+    top: 16px; 
+  }
+}
+
+// ==========================================
+// SECCIONES GENERALES DE LA LANDING
+// ==========================================
+
+/* Barra de estadísticas */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  padding: 2rem 1rem;
+  background-color: #f8f9fa;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .stat-number {
+      font-size: 1.75rem;
+      font-weight: bold;
+      color: variables.$color-primary;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: #333333; // Texto oscuro legible
+      margin-top: 0.25rem;
+      font-weight: 600;
+    }
+  }
+}
+
+/* Sección Corporativa */
+.corporate-section {
+  display: flex;
+  justify-content: center;
+  padding: 4rem 1rem 2rem 1rem;
+  background-color: #ffffff;
+
+  .corporate-box {
+    text-align: center;
+    max-width: 750px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    color: #1f1f1f; // Forzar texto oscuro en la caja corporativa
+    
+    h2 {
+      color: #1f1f1f;
+    }
+
+    p {
+      color: #444444; // Texto oscuro legible para la descripción corporativa
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .corporate-icon-badge {
+      margin-top: 1.25rem;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+/* Footer general */
+.footer-section {
+  text-align: center;
+  padding: 3rem 1rem 4rem 1rem;
+  background-color: #ffffff;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: auto;
+
+  .footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #1f1f1f; // Título oscuro en el footer
+      margin-bottom: 0.25rem;
+    }
+
+    p {
+      color: #555555; // Texto oscuro legible en el footer
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem 1.5rem;
+      margin-top: 0.5rem;
+
+      a {
+        color: variables.$color-primary;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.2s ease;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
 }

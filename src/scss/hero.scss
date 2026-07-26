@@ -1,47 +1,93 @@
+/* src/scss/hero.scss */
 @use 'variables';
 
-.hero {
-  padding: 4rem 2rem;
-  background-color: variables.$color-surface-container; // Ajustado
-  text-align: center;
-  border-bottom: 2px solid variables.$color-outline-variant;
+.hero-container {
+  background-color: variables.$color-primary;
+  color: variables.$color-on-primary;
+  padding: 4rem 2rem 5rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
-  &-container {
-    max-width: 1000px;
-    margin: 0 auto;
+  .hero-badge {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: variables.$color-on-primary;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
   }
 
-  &-badge {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background: rgba(variables.$color-primary, 0.1);
-    border-radius: variables.$border-radius-full; // Ajustado
-    margin-bottom: variables.$stack-md; // Ajustado
-  }
+  .hero-content {
+    max-width: 700px;
 
-  &-title {
-    font-size: 3rem;
-    color: variables.$color-primary;
-    margin-bottom: variables.$stack-md; // Ajustado
-
-    &-accent {
-      font-style: italic;
-      color: variables.$color-on-surface; // Sustituido: color-secondary no existía en variables
+    .hero-step {
+      display: block;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+      color: #93C5FD;
+      margin-bottom: 0.75rem;
     }
-  }
 
-  &-description {
-    font-size: 1.25rem;
-    color: variables.$color-on-surface-variant;
-    margin-bottom: variables.$stack-lg; // Ajustado
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+    .hero-title {
+      font-size: 2.75rem;
+      line-height: 1.2;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
 
-  &-actions {
-    display: flex;
-    justify-content: center;
-    gap: variables.$stack-md; // Ajustado
+      em {
+        font-style: italic;
+        font-weight: 300;
+      }
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #E2E8F0;
+      margin-bottom: 2rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+
+      .btn-primary {
+        background-color: #0070F3;
+        color: variables.$color-on-primary;
+        padding: 0.75rem 1.75rem;
+        border-radius: variables.$border-radius-sm;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.2s;
+
+        &:hover {
+          background-color: #0051B3;
+        }
+
+        @include variables.focus-visible-style;
+      }
+
+      .btn-secondary {
+        background-color: variables.$color-on-primary;
+        color: variables.$color-primary;
+        padding: 0.75rem 1.75rem;
+        border-radius: variables.$border-radius-sm;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: background 0.2s;
+
+        &:hover {
+          background-color: #F1F5F9;
+        }
+
+        @include variables.focus-visible-style;
+      }
+    }
   }
 }
