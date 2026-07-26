@@ -235,7 +235,7 @@ function MainAppContent() {
         </div>
       </div>
 
-      {/* MODAL DE METODOLOGÍA (SE ACTIVA AL CLICAR EL BOTÓN) */}
+      {/* MODAL DE METODOLOGÍA */}
       {isMethodologyOpen && (
         <div style={{
           position: 'fixed',
@@ -268,13 +268,8 @@ function MainAppContent() {
             </button>
             <h2 style={{ marginTop: 0 }}>Nuestra Metodología Inclusiva</h2>
             <p style={{ lineHeight: '1.6' }}>
-              En <strong>MantiA11y Academy</strong> implementamos estrictamente el marco de <em>Diseño Universal para el Aprendizaje (DUA)</em> y las normativas internacionales de accesibilidad WCAG nivel AAA. Nuestra metodología se compone de:
+              En <strong>MantiA11y Academy</strong> implementamos estrictamente el marco de <em>Diseño Universal para el Aprendizaje (DUA)</em> y las normativas internacionales de accesibilidad WCAG nivel AAA.
             </p>
-            <ul style={{ lineHeight: '1.6', paddingLeft: '1.2rem' }}>
-              <li><strong>Adaptación Cognitiva:</strong> Contenidos estructurados para facilitar la lectura en personas con dislexia y autismo.</li>
-              <li><strong>Flexibilidad Sensorial:</strong> Opciones visuales para mitigar la fatiga y la sobrecarga digital.</li>
-              <li><strong>Práctica Guiada:</strong> Ejercicios reales orientados a la auditoría y desarrollo web inclusivo.</li>
-            </ul>
             <button 
               onClick={() => setIsMethodologyOpen(false)}
               style={{ marginTop: '1rem', background: '#0056b3', color: '#fff', border: 'none', padding: '0.75rem 1.5rem', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
@@ -285,7 +280,7 @@ function MainAppContent() {
         </div>
       )}
 
-      {/* GUÍA DE LECTURA VISUAL (SI ESTÁ ACTIVA) */}
+      {/* GUÍA DE LECTURA VISUAL */}
       {readingGuide && (
         <div style={{
           position: 'fixed',
@@ -329,7 +324,7 @@ function MainAppContent() {
                     Diseña y Desarrolla para <em>Todos</em>.
                   </h1>
                   <p className="hero-description" style={{ maxWidth: '700px', margin: '0 auto 2rem auto', lineHeight: '1.6' }}>
-                    MantiA11y Academy es la plataforma educativa líder en español enfocada en Diseño Universal, Accesibilidad Web y Neurodiversidad (Dislexia, Autismo y Autonomía Cognitiva).
+                    MantiA11y Academy es la plataforma educativa líder en español enfocada en Diseño Universal, Accesibilidad Web y Neurodiversidad.
                   </p>
                   <div className="hero-buttons" style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
                     <a href="#catalog" className="btn-primary" style={{ padding: '0.75rem 1.5rem', background: '#0056b3', color: '#fff', textDecoration: 'none', borderRadius: '4px', fontWeight: 'bold' }}>Explorar Cursos</a>
@@ -346,7 +341,6 @@ function MainAppContent() {
                   <img 
                     src={heroDashboardImg} 
                     alt="Especialista trabajando frente a un portátil con un panel analítico de accesibilidad web" 
-                    className="hero-img"
                     style={{ width: '100%', borderRadius: '8px', display: 'block' }}
                   />
                 </div>
@@ -378,7 +372,6 @@ function MainAppContent() {
                   <img 
                     src={dyslexiaSpecialistImg} 
                     alt="Especialista en dislexia revisando recursos y pautas de lectura accesible en una biblioteca" 
-                    className="resources-img"
                     style={{ width: '100%', borderRadius: '8px', display: 'block', margin: '0 auto' }}
                   />
                 </div>
@@ -386,7 +379,7 @@ function MainAppContent() {
                   <span className="section-tag" style={{ fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase', display: 'inline-block', marginBottom: '0.5rem' }}>ASESORAMIENTO ESPECIALIZADO</span>
                   <h2 style={{ fontSize: '2rem', margin: '0.5rem 0 1rem 0' }}>Dislexia, Autismo y Accesibilidad Cognitiva</h2>
                   <p style={{ lineHeight: '1.6', maxWidth: '750px', margin: '0 auto' }}>
-                    Integramos pautas tipográficas estrictas para dislexia, entornos de calma sensorial para personas dentro del espectro autista y apoyos cognitivos que garantizan una navegación plenamente autónoma.
+                    Integramos pautas tipográficas estrictas para dislexia, entornos de calma sensorial para personas dentro del espectro autista y apoyos cognitivos.
                   </p>
                 </div>
               </div>
@@ -400,45 +393,22 @@ function MainAppContent() {
                 <p>Formaciones intensivas con certificación profesional en accesibilidad digital y neurodiversidad.</p>
                 
                 <div className="filter-buttons" role="group" aria-label="Filtros de cursos">
-                  <button 
-                    className={activeFilter === 'Todos' ? 'filter-btn active' : 'filter-btn'}
-                    onClick={() => setActiveFilter('Todos')}
-                  >
-                    Todos
-                  </button>
-                  <button 
-                    className={activeFilter === 'Diseño' ? 'filter-btn active' : 'filter-btn'}
-                    onClick={() => setActiveFilter('Diseño')}
-                  >
-                    Diseño
-                  </button>
-                  <button 
-                    className={activeFilter === 'Desarrollo' ? 'filter-btn active' : 'filter-btn'}
-                    onClick={() => setActiveFilter('Desarrollo')}
-                  >
-                    Desarrollo
-                  </button>
+                  <button className={activeFilter === 'Todos' ? 'filter-btn active' : 'filter-btn'} onClick={() => setActiveFilter('Todos')}>Todos</button>
+                  <button className={activeFilter === 'Diseño' ? 'filter-btn active' : 'filter-btn'} onClick={() => setActiveFilter('Diseño')}>Diseño</button>
+                  <button className={activeFilter === 'Desarrollo' ? 'filter-btn active' : 'filter-btn'} onClick={() => setActiveFilter('Desarrollo')}>Desarrollo</button>
                 </div>
               </div>
 
               <div className="catalog-grid">
                 {filteredCourses && filteredCourses.map(course => (
                   <div key={course.id} className="course-card" style={{ background: highContrast ? '#222' : '#fff', color: highContrast ? '#fff' : '#000', border: '1px solid #ddd', borderRadius: '8px', overflow: 'hidden' }}>
-                    
                     <div className="course-card-image-container" style={{ width: '100%', height: '170px', overflow: 'hidden' }}>
-                      <img 
-                        src={course.image} 
-                        alt={course.title} 
-                        className="course-card-img" 
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                      />
+                      <img src={course.image} alt={course.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                     </div>
-
                     <div className="course-card-body" style={{ padding: '1.5rem' }}>
                       <span className="course-level-tag">{course.level || 'INTERMEDIO'}</span>
                       <h3 className="course-title">{course.title}</h3>
                       <p className="course-description">{course.description}</p>
-                      
                       <div className="course-footer" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1.5rem' }}>
                         <span className="course-price" style={{ fontWeight: 'bold' }}>{course.price} €</span>
                         <button className="course-btn" onClick={() => addToCart(course)} style={{ padding: '0.5rem 1rem', background: '#0056b3', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
@@ -454,15 +424,10 @@ function MainAppContent() {
             <section className="corporate-section">
               <div className="corporate-box dark-card" style={{ maxWidth: '1100px', margin: '0 auto', padding: '2rem', textAlign: 'center' }}>
                 <div className="corporate-image-container" style={{ marginBottom: '1.5rem', borderRadius: '8px', overflow: 'hidden' }}>
-                  <img 
-                    src={communityTeamImg} 
-                    alt="Panel digital que muestra rostros diversos de la comunidad de estudiantes y profesionales en videollamada" 
-                    className="corporate-img"
-                    style={{ width: '100%', maxHeight: '350px', objectFit: 'cover', display: 'block' }}
-                  />
+                  <img src={communityTeamImg} alt="Comunidad" style={{ width: '100%', maxHeight: '350px', objectFit: 'cover', display: 'block' }} />
                 </div>
                 <h2>¿Tu empresa necesita accesibilidad AAA y neuroinclusión?</h2>
-                <p style={{ maxWidth: '700px', margin: '0 auto 1.5rem auto' }}>Ofrecemos planes de formación corporativa y auditorías técnicas adaptadas para personas con dislexia, autismo y diversidad cognitiva.</p>
+                <p style={{ maxWidth: '700px', margin: '0 auto 1.5rem auto' }}>Ofrecemos planes de formación corporativa y auditorías técnicas.</p>
                 <div className="corporate-icon-badge">♿</div>
               </div>
             </section>
@@ -481,7 +446,7 @@ function MainAppContent() {
             </div>
             <h3 style={{ marginTop: '1.5rem' }}>Sobre este curso</h3>
             <p style={{ lineHeight: '1.6', color: '#444' }}>
-              Domina las últimas actualizaciones de las Pautas de Accesibilidad (WCAG) nivel AAA, enfocadas específicamente en criterios de éxito para usuarios con autismo, dislexia y dificultades de procesamiento cognitivo.
+              Domina las últimas actualizaciones de las Pautas de Accesibilidad (WCAG) nivel AAA.
             </p>
           </div>
         } />
@@ -510,11 +475,23 @@ function MainAppContent() {
 
                 <div style={{ background: '#f8f9fa', color: '#000', padding: '1.5rem', borderRadius: '8px', border: '1px solid #ddd', marginTop: '2rem' }}>
                   <h3>Resumen del Pedido</h3>
-                  <p>Subtotal: <strong>{cart.reduce((acc, curr) => acc + curr.price, 0)} €</strong></p>
+                  <p>Subtotal: <strong>{cart.reduce((acc, curr) => acc + Number(curr.price || 0), 0)} €</strong></p>
                   <p>IVA (21%): Incluido</p>
                   <hr style={{ margin: '1rem 0' }} />
-                  <h4>Total: {cart.reduce((acc, curr) => acc + curr.price, 0)} €</h4>
-                  <button style={{ width: '100%', marginTop: '1rem', padding: '0.75rem', background: '#0056b3', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
+                  <h4>Total: {cart.reduce((acc, curr) => acc + Number(curr.price || 0), 0)} €</h4>
+                  <button 
+                    onClick={() => {
+                      if (cart.length === 0) {
+                        alert("El carrito está vacío.");
+                        return;
+                      }
+                      
+                      // Vaciamos el carrito y redirigimos a la pantalla interna de simulación de éxito
+                      setCart([]);
+                      window.location.href = "/checkout-exitoso";
+                    }}
+                    style={{ width: '100%', marginTop: '1rem', padding: '0.75rem', background: '#0056b3', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
+                  >
                     Finalizar Contratación →
                   </button>
                 </div>
@@ -522,6 +499,24 @@ function MainAppContent() {
             )}
           </div>
         } />
+
+        {/* RUTA 4: SIMULACIÓN DE ÉXITO DE PAGO */}
+        <Route path="/checkout-exitoso" element={
+          <div style={{ maxWidth: '600px', margin: '4rem auto', padding: '2rem', textAlign: 'center', background: '#fff', borderRadius: '8px', border: '1px solid #ddd', color: '#000' }}>
+            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎉</div>
+            <h2 style={{ color: '#28a745', marginBottom: '1rem' }}>¡Contratación Exitosa!</h2>
+            <p style={{ lineHeight: '1.6', color: '#555', marginBottom: '2rem' }}>
+              Simulación completada con éxito. En un entorno de producción real, aquí recibirías tu factura y el acceso inmediato a tus cursos en la plataforma de MantiA11y Academy.
+            </p>
+            <Link 
+              to="/" 
+              style={{ display: 'inline-block', padding: '0.75rem 1.5rem', background: '#0056b3', color: '#fff', textDecoration: 'none', borderRadius: '4px', fontWeight: 'bold' }}
+            >
+              Volver al Inicio
+            </Link>
+          </div>
+        } />
+
       </Routes>
 
       {/* FOOTER */}
