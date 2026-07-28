@@ -1,26 +1,118 @@
 import React, { useState, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
-// Importación de imágenes desde la carpeta de assets
+// Importación de imágenes desde la carpeta de assets (ajustadas según tus indicaciones)
 import heroDashboardImg from './assets/images/manager.png';
-import dyslexiaSpecialistImg from './assets/images/dyslexia.png';
-import communityTeamImg from './assets/images/especialista.png';
+import neurodivergentesImg from './assets/images/neurodivergentes.jpg';
+import dyslexiaSpecialistImg from './assets/images/dislexia.png';
+import communityTeamImg from './assets/images/educacion.jpg';
+import specialistImg from './assets/images/especialista.png';
 
 // Importación de datos, contexto y componente de accesibilidad
 import { catalogData } from './data.jsx';
 import { AccessibilityProvider, AccessibilityContext } from './AccessibilityContext.jsx';
 import { AccessibilityToggle } from './AccessibilityToggle';
 
+// -----------------------------------------------------------------------------
+// COMPONENTE: CourseCard (Aislado para cumplir estrictamente las Reglas de Hooks)
+// -----------------------------------------------------------------------------
+function CourseCard({ course, highContrast, addToCart }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div 
+      className="course-card" 
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{ 
+        background: highContrast ? '#222' : '#fff', 
+        color: highContrast ? '#fff' : '#000', 
+        border: isHovered ? '2px solid #0056b3' : '1px solid #ddd', 
+        borderRadius: '8px', 
+        overflow: 'hidden', 
+        display: 'flex', 
+        flexDirection: 'column', 
+        justifyContent: 'space-between',
+        transform: isHovered ? 'translateY(-4px)' : 'none',
+        boxShadow: isHovered ? '0 8px 20px rgba(0,86,179,0.15)' : '0 2px 4px rgba(0,0,0,0.05)',
+        transition: 'all 0.25s ease'
+      }}
+    >
+      <div>
+        <div className="course-card-image-container" style={{ width: '100%', height: '170px', overflow: 'hidden' }}>
+          <img 
+            src={course.image} 
+            alt={course.title} 
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.3s ease', transform: isHovered ? 'scale(1.03)' : 'scale(1)' }} 
+          />
+        </div>
+        <div className="course-card-body" style={{ padding: '1.5rem' }}>
+          <span className="course-level-tag" style={{ display: 'inline-block', padding: '0.2rem 0.6rem', background: '#e2e8f0', color: '#1e293b', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>
+            {course.level || 'INTERMEDIO'}
+          </span>
+          
+          <h3 
+            className="course-title" 
+            style={{ 
+              fontSize: '1.2rem', 
+              margin: '0.5rem 0', 
+              color: isHovered ? '#0056b3' : (highContrast ? '#fff' : '#000'),
+              textDecoration: isHovered ? 'underline' : 'none',
+              transition: 'color 0.2s ease'
+            }}
+          >
+            {course.title}
+          </h3>
+
+          <p className="course-description" style={{ fontSize: '0.9rem', lineHeight: '1.5', color: highContrast ? '#ddd' : '#555' }}>
+            {course.description}
+          </p>
+          
+          {course.competenciaGeneral && (
+            <div style={{ marginTop: '1rem', padding: '0.75rem', background: highContrast ? '#111' : '#f1f5f9', borderRadius: '6px', fontSize: '0.85rem' }}>
+              <strong style={{ display: 'block', marginBottom: '0.25rem', color: highContrast ? '#60a5fa' : '#0056b3' }}>Objetivo:</strong>
+              <p style={{ margin: 0 }}>{course.competenciaGeneral}</p>
+            </div>
+          )}
+
+          {course.contenidos && (
+            <div style={{ marginTop: '0.75rem' }}>
+              <strong style={{ fontSize: '0.85rem', display: 'block', marginBottom: '0.25rem' }}>Temario Principal:</strong>
+              <ul style={{ paddingLeft: '1rem', margin: 0, fontSize: '0.8rem', color: highContrast ? '#ccc' : '#444' }}>
+                {course.contenidos.slice(0, 3).map((tema, idx) => (
+                  <li key={idx} style={{ marginBottom: '0.2rem' }}>{tema}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+      
+      <div className="course-footer" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 1.5rem 1.5rem 1.5rem' }}>
+        <span className="course-price" style={{ fontWeight: 'bold', fontSize: '1.1rem' }}>{course.price} €</span>
+        <button 
+          className="course-btn" 
+          onClick={() => addToCart(course)} 
+          style={{ padding: '0.5rem 1rem', background: '#0056b3', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}
+        >
+          Añadir al Carrito
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// -----------------------------------------------------------------------------
+// COMPONENTE: MainAppContent (Contiene toda la lógica y rutas)
+// -----------------------------------------------------------------------------
 function MainAppContent() {
   const [cart, setCart] = useState([]);
   const [activeFilter, setActiveFilter] = useState('Todos');
   
-  // Estados para controlar los menús laterales y el modal de metodología
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isA11yOpen, setIsA11yOpen] = useState(false);
   const [isMethodologyOpen, setIsMethodologyOpen] = useState(false);
 
-  // Consumir el contexto de accesibilidad de forma segura
   const accessibility = useContext(AccessibilityContext) || {};
   const { 
     fontDyslexia = false, setFontDyslexia = () => {}, 
@@ -38,6 +130,14 @@ function MainAppContent() {
     setCart(cart.filter((_, index) => index !== indexToRemove));
   };
 
+  const handleFilterClick = (category) => {
+    setActiveFilter(category);
+    const catalogElement = document.getElementById('catalog');
+    if (catalogElement) {
+      catalogElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   const filteredCourses = catalogData.filter(course => {
     if (activeFilter === 'Todos') return true;
     return course.category === activeFilter;
@@ -51,7 +151,7 @@ function MainAppContent() {
       color: highContrast ? '#ffffff' : 'inherit'
     }}>
       
-      {/* BARRA DE ACCESIBILIDAD / HEADER SUPERIOR */}
+      {/* 1. BARRA DE ACCESIBILIDAD / HEADER SUPERIOR */}
       <header className="header-accessibility-bar" style={{ 
         padding: '1rem', 
         display: 'flex', 
@@ -85,6 +185,7 @@ function MainAppContent() {
 
         <nav style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
           <Link to="/" style={{ fontWeight: 'bold', textDecoration: 'none', color: highContrast ? '#fff' : '#000' }}>🏠 Inicio</Link>
+          <Link to="/nosotros" style={{ fontWeight: 'bold', textDecoration: 'none', color: highContrast ? '#fff' : '#000' }}>👥 Nosotros</Link>
           <Link to="/carrito" style={{ fontWeight: 'bold', textDecoration: 'none', color: highContrast ? '#fff' : '#000' }}>🛒 Carrito ({cart.length})</Link>
         </nav>
 
@@ -109,7 +210,7 @@ function MainAppContent() {
         </button>
       </header>
 
-      {/* MENÚ LATERAL IZQUIERDO (NAVEGACIÓN) */}
+      {/* 2. MENÚ LATERAL IZQUIERDO (NAVEGACIÓN) */}
       <div style={{
         position: 'fixed',
         top: 0,
@@ -137,21 +238,32 @@ function MainAppContent() {
           </button>
         </div>
         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <li><Link to="/" onClick={() => setIsNavOpen(false)} style={{ display: 'block', padding: '0.75rem', background: '#0056b3', color: '#fff', borderRadius: '6px', textDecoration: 'none', fontWeight: 'bold' }}>🎓 Cursos</Link></li>
-          <li><a href="#catalog" onClick={() => setIsNavOpen(false)} style={{ display: 'block', padding: '0.75rem', background: '#f1f1f1', color: '#000', borderRadius: '6px', textDecoration: 'none', fontWeight: 'bold' }}>👥 Nosotros</a></li>
+          <li>
+            <button 
+              onClick={() => {
+                setIsNavOpen(false);
+                const catalogEl = document.getElementById('catalog');
+                if (catalogEl) catalogEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }} 
+              style={{ width: '100%', textAlign: 'left', display: 'block', padding: '0.75rem', background: '#0056b3', color: '#fff', borderRadius: '6px', textDecoration: 'none', fontWeight: 'bold', border: 'none', cursor: 'pointer' }}
+            >
+              🎓 Cursos
+            </button>
+          </li>
+          <li><Link to="/nosotros" onClick={() => setIsNavOpen(false)} style={{ display: 'block', padding: '0.75rem', background: '#f1f1f1', color: '#000', borderRadius: '6px', textDecoration: 'none', fontWeight: 'bold' }}>👥 Nosotros</Link></li>
           <li>
             <button 
               onClick={() => { setIsNavOpen(false); setIsA11yOpen(true); }}
               style={{ width: '100%', textAlign: 'left', display: 'block', padding: '0.75rem', background: '#f1f1f1', color: '#000', borderRadius: '6px', textDecoration: 'none', fontWeight: 'bold', border: 'none', cursor: 'pointer' }}
             >
-               Ajustes (Accesibilidad)
+              ⚙️ Ajustes (Accesibilidad)
             </button>
           </li>
           <li><Link to="/carrito" onClick={() => setIsNavOpen(false)} style={{ display: 'block', padding: '0.75rem', background: '#f1f1f1', color: '#000', borderRadius: '6px', textDecoration: 'none', fontWeight: 'bold' }}>🛒 Carrito</Link></li>
         </ul>
       </div>
 
-      {/* PANEL LATERAL DERECHO (ACCESIBILIDAD FUNCIONAL) */}
+      {/* 3. PANEL LATERAL DERECHO (ACCESIBILIDAD FUNCIONAL) */}
       <div style={{
         position: 'fixed',
         top: 0,
@@ -235,7 +347,7 @@ function MainAppContent() {
         </div>
       </div>
 
-      {/* MODAL DE METODOLOGÍA */}
+      {/* 4. MODAL DE METODOLOGÍA */}
       {isMethodologyOpen && (
         <div style={{
           position: 'fixed',
@@ -280,7 +392,7 @@ function MainAppContent() {
         </div>
       )}
 
-      {/* GUÍA DE LECTURA VISUAL */}
+      {/* 5. GUÍA DE LECTURA VISUAL */}
       {readingGuide && (
         <div style={{
           position: 'fixed',
@@ -296,7 +408,7 @@ function MainAppContent() {
         }} />
       )}
 
-      {/* BACKDROP GENERAL PARA MENÚS */}
+      {/* 6. BACKDROP GENERAL PARA MENÚS */}
       {(isNavOpen || isA11yOpen) && (
         <div 
           onClick={() => { setIsNavOpen(false); setIsA11yOpen(false); }}
@@ -312,12 +424,14 @@ function MainAppContent() {
         />
       )}
 
+      {/* 7. RUTAS DE LA APLICACIÓN */}
       <Routes>
         {/* RUTA 1: LANDING PRINCIPAL */}
         <Route path="/" element={
           <>
             <section className="hero-container" aria-label="Bienvenida" style={{ textAlign: 'center', padding: '4rem 2rem' }}>
               <div className="hero-badge" style={{ margin: '0 auto 1rem auto', display: 'inline-block' }}>APRENDIZAJE ACCESIBILIDAD DIGITAL</div>
+              
               <div className="hero-content-wrapper" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem', maxWidth: '900px', margin: '0 auto' }}>
                 <div className="hero-content" style={{ width: '100%' }}>
                   <h1 className="hero-title" style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>
@@ -337,11 +451,13 @@ function MainAppContent() {
                     </button>
                   </div>
                 </div>
+
+                {/* IMAGEN DE NEURODIVERGENTES INTEGRADA EN LA PARTE SUPERIOR */}
                 <div className="hero-image-container" style={{ width: '100%', maxWidth: '650px', marginTop: '1rem' }}>
                   <img 
-                    src={heroDashboardImg} 
-                    alt="Especialista trabajando frente a un portátil con un panel analítico de accesibilidad web" 
-                    style={{ width: '100%', borderRadius: '8px', display: 'block' }}
+                    src={neurodivergentesImg} 
+                    alt="Ilustración representativa de neurodivergencia en MantiA11y Academy" 
+                    style={{ width: '100%', borderRadius: '8px', display: 'block', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
                   />
                 </div>
               </div>
@@ -386,42 +502,69 @@ function MainAppContent() {
             </section>
 
             {/* CATÁLOGO FORMATIVO DINÁMICO */}
-            <main id="catalog" className="catalog-section" tabIndex="-1">
-              <div className="catalog-header">
-                <span className="section-number">1. CATÁLOGO FORMATIVO</span>
-                <h2>Catálogo Formativo</h2>
-                <p>Formaciones intensivas con certificación profesional en accesibilidad digital y neurodiversidad.</p>
+            <main id="catalog" className="catalog-section" tabIndex="-1" style={{ padding: '2rem' }}>
+              <div className="catalog-header" style={{ textAlign: 'center' }}>
+                <h2 style={{ fontSize: '2.2rem', marginBottom: '0.5rem', fontWeight: '900' }}>Catálogo Formativo</h2>
+                <p style={{ color: highContrast ? '#ccc' : '#555', fontSize: '1.05rem' }}>Formaciones intensivas con certificación profesional en accesibilidad digital y neurodiversidad.</p>
                 
-                <div className="filter-buttons" role="group" aria-label="Filtros de cursos">
-                  <button className={activeFilter === 'Todos' ? 'filter-btn active' : 'filter-btn'} onClick={() => setActiveFilter('Todos')}>Todos</button>
-                  <button className={activeFilter === 'Diseño' ? 'filter-btn active' : 'filter-btn'} onClick={() => setActiveFilter('Diseño')}>Diseño</button>
-                  <button className={activeFilter === 'Desarrollo' ? 'filter-btn active' : 'filter-btn'} onClick={() => setActiveFilter('Desarrollo')}>Desarrollo</button>
+                {/* BOTONES DE FILTRO */}
+                <div className="filter-buttons" role="group" aria-label="Filtros de cursos" style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
+                  <button 
+                    onClick={() => handleFilterClick('Todos')}
+                    style={{
+                      padding: '0.6rem 1.25rem',
+                      borderRadius: '6px',
+                      fontWeight: 'bold',
+                      cursor: 'pointer',
+                      border: '2px solid #0056b3',
+                      backgroundColor: activeFilter === 'Todos' ? '#0056b3' : '#f8f9fa',
+                      color: activeFilter === 'Todos' ? '#ffffff' : '#0056b3',
+                      transition: 'all 0.2s ease'
+                    }}
+                  >
+                    Todos
+                  </button>
+                  <button 
+                    onClick={() => handleFilterClick('Diseño')}
+                    style={{
+                      padding: '0.6rem 1.25rem',
+                      borderRadius: '6px',
+                      fontWeight: 'bold',
+                      cursor: 'pointer',
+                      border: '2px solid #0056b3',
+                      backgroundColor: activeFilter === 'Diseño' ? '#0056b3' : '#f8f9fa',
+                      color: activeFilter === 'Diseño' ? '#ffffff' : '#0056b3',
+                      transition: 'all 0.2s ease'
+                    }}
+                  >
+                    Diseño
+                  </button>
+                  <button 
+                    onClick={() => handleFilterClick('Desarrollo')}
+                    style={{
+                      padding: '0.6rem 1.25rem',
+                      borderRadius: '6px',
+                      fontWeight: 'bold',
+                      cursor: 'pointer',
+                      border: '2px solid #0056b3',
+                      backgroundColor: activeFilter === 'Desarrollo' ? '#0056b3' : '#f8f9fa',
+                      color: activeFilter === 'Desarrollo' ? '#ffffff' : '#0056b3',
+                      transition: 'all 0.2s ease'
+                    }}
+                  >
+                    Desarrollo
+                  </button>
                 </div>
               </div>
 
-              <div className="catalog-grid">
+              <div className="catalog-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', marginTop: '2rem', maxWidth: '1100px', marginInline: 'auto' }}>
                 {filteredCourses && filteredCourses.map(course => (
-                  <div key={course.id} className="course-card" style={{ background: highContrast ? '#222' : '#fff', color: highContrast ? '#fff' : '#000', border: '1px solid #ddd', borderRadius: '8px', overflow: 'hidden' }}>
-                    <div className="course-card-image-container" style={{ width: '100%', height: '170px', overflow: 'hidden' }}>
-                      <img src={course.image} alt={course.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                    </div>
-                    <div className="course-card-body" style={{ padding: '1.5rem' }}>
-                      <span className="course-level-tag">{course.level || 'INTERMEDIO'}</span>
-                      <h3 className="course-title">{course.title}</h3>
-                      <p className="course-description">{course.description}</p>
-                      <div className="course-footer" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1.5rem' }}>
-                        <span className="course-price" style={{ fontWeight: 'bold' }}>{course.price} €</span>
-                        <button className="course-btn" onClick={() => addToCart(course)} style={{ padding: '0.5rem 1rem', background: '#0056b3', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
-                          Añadir al Carrito
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                  <CourseCard key={course.id} course={course} highContrast={highContrast} addToCart={addToCart} />
                 ))}
               </div>
             </main>
 
-            <section className="corporate-section">
+            <section className="corporate-section" style={{ marginTop: '4rem' }}>
               <div className="corporate-box dark-card" style={{ maxWidth: '1100px', margin: '0 auto', padding: '2rem', textAlign: 'center' }}>
                 <div className="corporate-image-container" style={{ marginBottom: '1.5rem', borderRadius: '8px', overflow: 'hidden' }}>
                   <img src={communityTeamImg} alt="Comunidad" style={{ width: '100%', maxHeight: '350px', objectFit: 'cover', display: 'block' }} />
@@ -434,24 +577,38 @@ function MainAppContent() {
           </>
         } />
 
-        {/* RUTA 2: DETALLE DEL CURSO */}
-        <Route path="/curso/:id" element={
-          <div style={{ maxWidth: '900px', margin: '2rem auto', padding: '0 1rem' }}>
-            <p style={{ color: '#666', fontSize: '0.9rem' }}><Link to="/">Cursos</Link> &gt; <strong>2. Detalle del Curso</strong></p>
-            <h1 style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '1rem' }}>WCAG 2.2 Essentials: Diseño Inclusivo, Dislexia y Neurodiversidad</h1>
-            <div style={{ display: 'flex', gap: '1rem', margin: '1rem 0', flexWrap: 'wrap' }}>
-              <span style={{ background: '#e2e8f0', padding: '0.25rem 0.75rem', borderRadius: '4px' }}>⏱️ 12 Horas</span>
-              <span style={{ background: '#e2e8f0', padding: '0.25rem 0.75rem', borderRadius: '4px' }}>📚 24 Clases</span>
-              <span style={{ background: '#000', color: '#fff', padding: '0.25rem 0.75rem', borderRadius: '4px', fontWeight: 'bold' }}>AAA Compliant</span>
+        {/* RUTA: SOBRE NOSOTROS */}
+        <Route path="/nosotros" element={
+          <div style={{ maxWidth: '900px', margin: '3rem auto', padding: '0 1.5rem', lineHeight: '1.7' }}>
+            <p style={{ color: '#666', fontSize: '0.9rem', marginBottom: '1rem' }}><Link to="/">Inicio</Link> &gt; <strong>Sobre Nosotros</strong></p>
+            <h1 style={{ fontSize: '2.5rem', fontWeight: '900', marginBottom: '1.5rem' }}>Quiénes Somos</h1>
+            
+            <div style={{ background: highContrast ? '#111' : '#f8f9fa', padding: '2rem', borderRadius: '8px', border: '1px solid #ddd', marginBottom: '2rem' }}>
+              <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Nuestra Misión</h2>
+              <p>
+                En <strong>MantiA11y Academy</strong> creemos firmemente que la web debe ser un espacio universal, equitativo y sin barreras. Nuestra misión es formar a la próxima generación de diseñadores y desarrolladores bajo rigurosos estándares de accesibilidad digital (WCAG nivel AAA) y neuroinclusión (dislexia, autismo y accesibilidad cognitiva).
+              </p>
             </div>
-            <h3 style={{ marginTop: '1.5rem' }}>Sobre este curso</h3>
-            <p style={{ lineHeight: '1.6', color: '#444' }}>
-              Domina las últimas actualizaciones de las Pautas de Accesibilidad (WCAG) nivel AAA.
-            </p>
+
+            <h3 style={{ fontSize: '1.3rem', marginBottom: '1rem' }}>Por qué elegir MantiA11y Academy</h3>
+            <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem', paddingLeft: '1.2rem', marginBottom: '2rem' }}>
+              <li><strong>Enfoque Práctico:</strong> Formaciones basadas en casos de uso reales y herramientas modernas de desarrollo web.</li>
+              <li><strong>Accesibilidad Nativa:</strong> No tratamos la accesibilidad como un complemento posterior, sino como la base fundamental de cualquier arquitectura digital.</li>
+              <li><strong>Compromiso con la Neurodiversidad:</strong> Diseño de interfaces y metodologías que se adaptan a distintas necesidades sensoriales y cognitivas.</li>
+            </ul>
+
+            <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+              <Link 
+                to="/" 
+                style={{ display: 'inline-block', padding: '0.75rem 1.5rem', background: '#0056b3', color: '#fff', textDecoration: 'none', borderRadius: '4px', fontWeight: 'bold' }}
+              >
+                ← Volver al Catálogo de Cursos
+              </Link>
+            </div>
           </div>
         } />
 
-        {/* RUTA 3: CARRITO DE COMPRAS */}
+        {/* RUTA: CARRITO DE COMPRAS */}
         <Route path="/carrito" element={
           <div style={{ maxWidth: '800px', margin: '2rem auto', padding: '0 1rem' }}>
             <h2 style={{ textAlign: 'center' }}>3. Carrito de Compras</h2>
@@ -485,8 +642,6 @@ function MainAppContent() {
                         alert("El carrito está vacío.");
                         return;
                       }
-                      
-                      // Vaciamos el carrito y redirigimos a la pantalla interna de simulación de éxito
                       setCart([]);
                       window.location.href = "/checkout-exitoso";
                     }}
@@ -500,13 +655,13 @@ function MainAppContent() {
           </div>
         } />
 
-        {/* RUTA 4: SIMULACIÓN DE ÉXITO DE PAGO */}
+        {/* RUTA: SIMULACIÓN DE ÉXITO DE PAGO */}
         <Route path="/checkout-exitoso" element={
           <div style={{ maxWidth: '600px', margin: '4rem auto', padding: '2rem', textAlign: 'center', background: '#fff', borderRadius: '8px', border: '1px solid #ddd', color: '#000' }}>
             <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎉</div>
             <h2 style={{ color: '#28a745', marginBottom: '1rem' }}>¡Contratación Exitosa!</h2>
-            <p style={{ lineHeight: '1.6', color: '#555', marginBottom: '2rem' }}>
-              Simulación completada con éxito. En un entorno de producción real, aquí recibirías tu factura y el acceso inmediato a tus cursos en la plataforma de MantiA11y Academy.
+            <p style={{ lineHeight: '1.6', marginBottom: '2rem' }}>
+              Gracias por confiar en <strong>MantiA11y Academy</strong>. Hemos procesado tu suscripción correctamente y enviado las credenciales de acceso a tu correo electrónico.
             </p>
             <Link 
               to="/" 
@@ -516,28 +671,15 @@ function MainAppContent() {
             </Link>
           </div>
         } />
-
       </Routes>
-
-      {/* FOOTER */}
-      <footer className="footer-section" style={{ padding: '2rem', textAlign: 'center', borderTop: '1px solid #ddd', marginTop: '4rem' }}>
-        <div className="footer-content">
-          <h3>MantiA11y Academy</h3>
-          <p>© 2026 MantiA11y Academy. Accesibilidad Web Nivel AAA, Dislexia y Neurodiversidad.</p>
-          <div className="footer-links" style={{ marginTop: '0.5rem', display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-            <a href="#privacy">Política de Privacidad</a>
-            <a href="#terms">Términos de Servicio</a>
-            <a href="#accessibility">Declaración de Accesibilidad AAA</a>
-            <a href="mailto:mantiayacademymantillapena@gmail.com">Contacto</a>
-          </div>
-        </div>
-      </footer>
-
     </div>
   );
 }
 
-function App() {
+// -----------------------------------------------------------------------------
+// EXPORTACIÓN PRINCIPAL
+// -----------------------------------------------------------------------------
+export default function App() {
   return (
     <AccessibilityProvider>
       <Router>
@@ -546,5 +688,3 @@ function App() {
     </AccessibilityProvider>
   );
 }
-
-export default App;

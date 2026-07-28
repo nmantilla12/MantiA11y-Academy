@@ -10,7 +10,19 @@ export const catalogData = [
     price: 150,
     level: "Avanzado",
     description: "Domina las últimas actualizaciones de las Pautas de Accesibilidad (WCAG) nivel AAA para usuarios con autismo, dislexia y dificultades de procesamiento.",
-    image: "/src/assets/images/manager.png"
+    image: "/src/assets/images/wcag.jpg",
+    competenciaGeneral: "Dominar los criterios de conformidad WCAG 2.2 nivel AAA para garantizar la plena accesibilidad en arquitecturas web modernas.",
+    contenidos: [
+      "TEMA 1. INTRODUCCIÓN A LAS WCAG 2.2 Y PRINCIPIOS POUR",
+      "TEMA 2. PERCEPCIÓN VISUAL Y ADAPTACIÓN PARA DISLEXIA",
+      "TEMA 3. NAVEGACIÓN POR TECLADO Y ESTRUCTURA SEMÁNTICA",
+      "TEMA 4. COMPRENSIBILIDAD Y ROBUSTEZ EN COMPONENTES REACT"
+    ],
+    unidades: [
+      "Comprender y aplicar los cuatro principios fundamentales de accesibilidad web (Perceptible, Operable, Comprensible y Robusto).",
+      "Configurar hojas de estilo y tipografías que minimicen la fatiga visual y mitiguen las barreras de lectura.",
+      "Auditar flujos de navegación complejos asegurando un orden de foco lógico y asistido por tecnologías de apoyo."
+    ]
   },
   {
     id: 2,
@@ -19,7 +31,19 @@ export const catalogData = [
     price: 180,
     level: "Avanzado",
     description: "Aprende a construir componentes de interfaz interactivos y totalmente accesibles para lectores de pantalla y navegación por teclado.",
-    image: "/src/assets/images/manager.png"
+    image: "/src/assets/images/manager.png",
+    competenciaGeneral: "Construir aplicaciones de página única (SPA) robustas mediante el uso avanzado de atributos WAI-ARIA y gestión de estados accesibles en React.",
+    contenidos: [
+      "TEMA 1. FUNDAMENTOS DE WAI-ARIA EN APLICACIONES MODERNAS",
+      "TEMA 2. GESTIÓN DE FOCO Y MODALES ACCESIBLES EN REACT",
+      "TEMA 3. PRUEBAS AUTOMATIZADAS DE ACCESIBILIDAD CON AXE",
+      "TEMA 4. OPTIMIZACIÓN DE LECTORES DE PANTALLA"
+    ],
+    unidades: [
+      "Implementar roles, estados y propiedades ARIA de manera correcta sin redundar el marcado semántico nativo.",
+      "Desarrollar componentes interactivos (como menús desplegables y modales) que capturen y devuelvan el foco de forma fluida.",
+      "Integrar herramientas de testing de accesibilidad en el pipeline de desarrollo front-end."
+    ]
   },
   {
     id: 3,
@@ -28,7 +52,19 @@ export const catalogData = [
     price: 130,
     level: "Intermedio",
     description: "Crea experiencias de usuario calmadas, predecibles y amigables para personas dentro del espectro autista y fatiga cognitiva.",
-    image: "/src/assets/images/dyslexia.png"
+    image: "/src/assets/images/autismo.jpg",
+    competenciaGeneral: "Diseñar interfaces gráficas calmadas que reduzcan la carga cognitiva y eviten detonantes de sobreestimulación sensorial.",
+    contenidos: [
+      "TEMA 1. PSICOLOGÍA DEL COLOR Y BAJA SATURACIÓN",
+      "TEMA 2. DISEÑO PREDECIBLE Y CONSISTENCIA ESTRUCTURAL",
+      "TEMA 3. GESTIÓN DE ANIMACIONES Y REDUCCIÓN DE MOVIMIENTO",
+      "TEMA 4. CREACIÓN DE ESPACIOS DE CALMA DIGITAL"
+    ],
+    unidades: [
+      "Seleccionar paletas cromáticas de bajo contraste agresivo orientadas a la comodidad visual prolongada.",
+      "Estructurar patrones de interacción predecibles que minimicen la ansiedad y la fatiga mental del usuario.",
+      "Respetar las preferencias del sistema operativo respecto al movimiento reducido (prefers-reduced-motion)."
+    ]
   },
   {
     id: 4,
@@ -37,7 +73,19 @@ export const catalogData = [
     price: 140,
     level: "Intermedio",
     description: "Implementa pautas tipográficas estrictas, contrastes óptimos y estructuras de lectura facilitada para entornos digitales.",
-    image: "/src/assets/images/dyslexia.png"
+    image: "/src/assets/images/dislexia.png",
+    competenciaGeneral: "Aplicar pautas tipográficas, espaciados y maquetaciones orientadas a facilitar la descodificación lectora en personas con dislexia.",
+    contenidos: [
+      "TEMA 1. BARRERAS TIPOGRÁFICAS EN LA PANTALLA",
+      "TEMA 2. USO DE FUENTES ACCESIBLES Y JERARQUÍAS CLARAS",
+      "TEMA 3. INTERLINEADO, ALINEACIÓN Y LONGITUD DE LÍNEA ÓPTIMA",
+      "TEMA 4. MAQUETACIÓN DE TEXTOS EN LENGUAJE CLARO"
+    ],
+    unidades: [
+      "Identificar y corregir elementos gráficos y tipográficos que dificultan la lectura fluida.",
+      "Implementar configuraciones de diseño adaptadas a las recomendaciones internacionales para dislexia.",
+      "Redactar y estructurar contenidos bajo los principios de lectura fácil y comprensión directa."
+    ]
   },
   {
     id: 5,
@@ -46,7 +94,19 @@ export const catalogData = [
     price: 160,
     level: "Intermedio",
     description: "Metodologías de apoyo, adaptaciones de puestos y diseño de rutinas visuales para la integración de talento neurodivergente.",
-    image: "/src/assets/images/especialista.png"
+    image: "/src/assets/images/neurodiversidad.jpg",
+    competenciaGeneral: "Desarrollar planes de adaptación tecnológica y metodologías de apoyo para la inclusión efectiva de talento neurodivergente en equipos de desarrollo.",
+    contenidos: [
+      "TEMA 1. EL TALENTO NEURODIVERGENTE EN EQUIPOS AGILES",
+      "TEMA 2. ADAPTACIONES ERGONÓMICAS Y COGNITIVAS DEL ENTORNO DE TRABAJO",
+      "TEMA 3. RUTINAS VISUALES Y SISTEMAS DE ORGANIZACIÓN",
+      "TEMA 4. COMUNICACIÓN EFECTIVA Y LIDERAZGO INCLUSIVO"
+    ],
+    unidades: [
+      "Comprender las fortalezas y necesidades específicas de los perfiles neurodivergentes en el sector tecnológico.",
+      "Diseñar adaptaciones en los flujos de trabajo de los sprints para fomentar la autonomía y reducir el estrés laboral.",
+      "Establecer canales de comunicación claros, estructurados y libres de ambigüedades."
+    ]
   },
   {
     id: 6,
@@ -55,9 +115,20 @@ export const catalogData = [
     price: 120,
     level: "Intermedio",
     description: "Aplicación de principios de autonomía y estimulación cognitiva centrada en la persona para el diseño de servicios inclusivos.",
-    image: "/src/assets/images/especialista.png"
+    image: "/src/assets/images/cognitiva.jpg",
+    competenciaGeneral: "Integrar los principios del método Montessori adaptado y la inteligencia emocional en el diseño de experiencias de usuario centradas en la autonomía.",
+    contenidos: [
+      "TEMA 1. PRINCIPIOS DE AUTONOMÍA Y PEDAGOGÍA MONTESSORI",
+      "TEMA 2. DISEÑO DE EXPERIENCIAS CENTRADAS EN LA PERSONA",
+      "TEMA 3. INTELIGENCIA EMOCIONAL APLICADA AL DISEÑO DE SERVICIOS",
+      "TEMA 4. EVALUACIÓN DE LA USABILIDAD EMOCIONAL"
+    ],
+    unidades: [
+      "Traducir los conceptos de autoeducación y autonomía del método Montessori a interfaces digitales interactivas.",
+      "Diseñar recorridos de usuario que empoderen al usuario y refuercen su confianza digital.",
+      "Analizar el impacto emocional de las interacciones en plataformas educativas y de servicios."
+    ]
   },
-  // --- CURSOS INTEGRADOS DE LA SEGUNDA LANDING Y METODOLOGÍA ---
   {
     id: 7,
     title: "Máster en Intervención con Personas de Educación Especial",
@@ -65,7 +136,7 @@ export const catalogData = [
     price: 200,
     level: "Avanzado",
     description: "Conocer las herramientas adecuadas para trabajar con personas con discapacidad en las diferentes esferas de su vida.",
-    image: "/src/assets/images/manager.png",
+    image: "/src/assets/images/educacion.jpg",
     competenciaGeneral: "Conocer las herramientas adecuadas para trabajar con personas con discapacidad en las diferentes esferas de su vida.",
     contenidos: [
       "TEMA 1. APROXIMACIÓN A LA DISCAPACIDAD",
@@ -93,7 +164,7 @@ export const catalogData = [
     price: 140,
     level: "Intermedio",
     description: "Identificar los diferentes tipos de dificultades de aprendizaje y conocer algunas estrategias y técnicas fundamentales de intervención psicopedagógica.",
-    image: "/src/assets/images/dyslexia.png",
+    image: "/src/assets/images/diferencias.jpg",
     competenciaGeneral: "Identificar los diferentes tipos de dificultades de aprendizaje y conocer algunas estrategias y técnicas fundamentales de intervención psicopedagógica.",
     contenidos: [
       "TEMA 1. DIFICULTADES DE APRENDIZAJE",
@@ -115,7 +186,7 @@ export const catalogData = [
     price: 130,
     level: "Básico",
     description: "Aplicar los principios de la pedagogía científica en el periodo 0-6 años en el contexto familiar, social y escolar.",
-    image: "/src/assets/images/especialista.png",
+    image: "/src/assets/images/montesori.png",
     detallePrivado: "Enseñanza de carácter privado y Número de Registro 15593121 a Fecha de 29",
     competenciaGeneral: "Aplicar los principios de la pedagogía científica en el periodo 0-6 años en el contexto familiar, social y escolar.",
     contenidos: [
@@ -130,36 +201,12 @@ export const catalogData = [
       "Conocer herramientas, actividades y materiales para la implementación de la educación montessori para niños/as de 0 a 6 años.",
       "Saber evaluar las diferentes etapas de desarrollo infantil para ofrecer actividades específicas que acompañen su desarrollo físico, intelectual y emocional."
     ]
-  },
-  {
-    id: 10,
-    title: "Inteligencia Emocional",
-    category: "Desarrollo",
-    price: 150,
-    level: "Intermedio",
-    description: "Adquirir nuevos conocimientos y competencias profesionales, para poder intervenir a nivel organizacional dentro del entorno laboral, mediante un enfoque orientado al desarrollo de competencias emocionales.",
-    image: "/src/assets/images/manager.png",
-    competenciaGeneral: "Adquirir nuevos conocimientos y competencias profesionales, para poder intervenir a nivel organizacional dentro del entorno laboral, mediante un enfoque orientado al desarrollo de competencias emocionales.",
-    contenidos: [
-      "TEMA 1. INTELIGENCIA EMOCIONAL EN LAS ORGANIZACIONES: CONCEPTOS Y FUNDAMENTACIÓN",
-      "TEMA 2. LAS EMOCIONES EN EL AMBIENTE LABORAL: EL RETO PARA LAS ORGANIZACIONES",
-      "TEMA 3. APLICACIÓN PRÁCTICA DE LA INTELIGENCIA EMOCIONAL"
-    ],
-    unidades: [
-      "Comprender el concepto de Inteligencia Emocional.",
-      "Conocer los distintos modelos y teorías de la Inteligencia Emocional.",
-      "Saber diferenciar entre los tipos y funciones de las emociones básicas.",
-      "Conocer las distintas aplicaciones prácticas de la inteligencia emocional dentro de la organización.",
-      "Conocer las características propias de un líder.",
-      "Discriminar entre los distintos tipos de liderazgo.",
-      "Aplicar la comunicación asertiva como herramienta de la inteligencia emocional."
-    ]
   }
 ];
 
 export const methodologyData = {
-  title: "Nuestra Metodología",
-  description: "En MantiA11y Academy aplicamos un enfoque pedagógico inclusivo, modular y adaptado a las necesidades reales del entorno educativo y profesional. Nuestras formaciones combinan la teoría fundamentada con la práctica directa, garantizando la adquisición de competencias aplicables desde el primer día."
+  title: "Nuestra Metodología Inclusiva",
+  description: "En MantiA11y Academy aplicamos un enfoque pedagógico riguroso basado en el Diseño Universal para el Aprendizaje (DUA). Cada formación equilibra la fundamentación teórica con la implementación práctica en código y diseño, asegurando que adquieras competencias profesionales listas para transformar el entorno digital en un espacio sin barreras."
 };
 
 export const accessibilityProfiles = [
