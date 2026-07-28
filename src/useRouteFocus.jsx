@@ -9,7 +9,7 @@ const RouteFocus = () => {
     // Busca el encabezado principal de la página actual
     const mainHeading = document.querySelector('h1');
     if (mainHeading) {
-      // Necesitamos hacer el elemento "focusable" sin romper la semántica
+      
       mainHeading.setAttribute('tabindex', '-1');
       mainHeading.focus();
     }

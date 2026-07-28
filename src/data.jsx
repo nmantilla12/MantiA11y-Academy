@@ -1,3 +1,7 @@
+// ==========================================
+// MantiA11y Academy - Catálogo y Datos Globales
+// ==========================================
+
 export const catalogData = [
   {
     id: 1,

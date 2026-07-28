@@ -1,6 +1,6 @@
 /* src/components/layout/Layout.jsx */
 import React from 'react';
-import Header from '../components/header/header'; // Ajusta esta ruta según la ubicación exacta de tu componente Header
+import Header from '../components/header/header'; 
 
 const Layout = ({ children, cart, removeFromCart }) => {
   return (

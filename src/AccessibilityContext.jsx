@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// 1. Exportación corregida del contexto para evitar el SyntaxError en App.jsx
+
 export const AccessibilityContext = createContext();
 
 // 2. Proveedor completo con persistencia y control de accesibilidad

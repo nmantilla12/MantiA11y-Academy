@@ -144,7 +144,7 @@ function MainAppContent() {
               onClick={() => { setIsNavOpen(false); setIsA11yOpen(true); }}
               style={{ width: '100%', textAlign: 'left', display: 'block', padding: '0.75rem', background: '#f1f1f1', color: '#000', borderRadius: '6px', textDecoration: 'none', fontWeight: 'bold', border: 'none', cursor: 'pointer' }}
             >
-              ⚙️ Ajustes (Accesibilidad)
+               Ajustes (Accesibilidad)
             </button>
           </li>
           <li><Link to="/carrito" onClick={() => setIsNavOpen(false)} style={{ display: 'block', padding: '0.75rem', background: '#f1f1f1', color: '#000', borderRadius: '6px', textDecoration: 'none', fontWeight: 'bold' }}>🛒 Carrito</Link></li>
