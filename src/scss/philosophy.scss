@@ -66,3 +66,26 @@
     }
   }
 }
+
+/* ========================================================= */
+/* INTEGRACIÓN CON MODO DE ALTO CONTRASTE GLOBAL             */
+/* ========================================================= */
+body.high-contrast-mode {
+  .philosophy-section {
+    background-color: #000 !important;
+
+    .philosophy-box {
+      background-color: #000 !important;
+      border: 2px solid #fff !important;
+      color: #fff !important;
+
+      .philosophy-tag,
+      h2,
+      p,
+      .stats-grid .stat-item .stat-number,
+      .stats-grid .stat-item .stat-label {
+        color: #fff !important;
+      }
+    }
+  }
+}

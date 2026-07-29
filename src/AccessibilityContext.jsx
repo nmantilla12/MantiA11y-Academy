@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-
 export const AccessibilityContext = createContext();
 
 // 2. Proveedor completo con persistencia y control de accesibilidad

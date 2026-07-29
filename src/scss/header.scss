@@ -1,5 +1,112 @@
-// src/scss/header.scss
+/* src/scss/header.scss */
+@use 'variables';
 
+.header {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid variables.$border-color;
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  width: 100%;
+
+  &-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  &-logo-link {
+    font-family: variables.$font-family-accessible;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: variables.$color-primary;
+    text-decoration: none;
+
+    .header-logo-accent {
+      color: variables.$color-secondary;
+    }
+  }
+
+  &-nav {
+    display: flex;
+    align-items: center;
+
+    .header-menu-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 1.5rem;
+
+      .header-menu-link {
+        font-family: variables.$font-family-accessible;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: variables.$text-gray;
+        text-decoration: none;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        transition: color 0.2s;
+
+        &:hover {
+          color: variables.$color-primary;
+        }
+
+        @include variables.focus-visible-style;
+      }
+    }
+  }
+
+  .a11y-panel {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+
+    &-btn {
+      background: variables.$color-surface;
+      border: 1px solid variables.$border-color;
+      border-radius: variables.$border-radius-sm;
+      padding: 0.5rem 0.75rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      &:hover {
+        background-color: variables.$border-color;
+      }
+
+      @include variables.focus-visible-style;
+    }
+  }
+
+  &-cart-btn {
+    background-color: variables.$color-primary;
+    color: variables.$color-on-primary;
+    border: none;
+    border-radius: variables.$border-radius-sm;
+    padding: 0.5rem 1rem;
+    font-family: variables.$font-family-accessible;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: filter 0.2s;
+
+    &:hover {
+      filter: brightness(1.2);
+    }
+
+    @include variables.focus-visible-style;
+  }
+}
+
+// Bloque de la barra de accesibilidad superior del header
 .header-accessibility-bar {
   display: flex;
   justify-content: space-between;
@@ -9,7 +116,7 @@
   border-bottom: 2px solid #000;
   position: sticky;
   top: 0;
-  zIndex: 1000;
+  z-index: 1000;
 
   .header-btn {
     background: #000;
@@ -43,6 +150,58 @@
       &:hover {
         text-decoration: underline;
       }
+    }
+  }
+}
+
+/* ========================================================= */
+/* INTEGRACIÓN CON MODO DE ALTO CONTRASTE GLOBAL             */
+/* ========================================================= */
+body.high-contrast-mode {
+  .header {
+    background-color: #000 !important;
+    border-bottom: 2px solid #fff !important;
+
+    .header-logo-link {
+      color: #fff !important;
+      .header-logo-accent {
+        color: #fff !important;
+      }
+    }
+
+    .header-menu-link {
+      color: #fff !important;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .a11y-panel-btn {
+      background-color: #000 !important;
+      color: #fff !important;
+      border: 2px solid #fff !important;
+    }
+
+    &-cart-btn {
+      background-color: #fff !important;
+      color: #000 !important;
+      border: 2px solid #fff !important;
+      font-weight: bold;
+    }
+  }
+
+  .header-accessibility-bar {
+    background-color: #000 !important;
+    border-bottom: 2px solid #fff !important;
+
+    .header-btn {
+      background: #fff !important;
+      color: #000 !important;
+      border: 2px solid #fff !important;
+    }
+
+    .header-nav a {
+      color: #fff !important;
     }
   }
 }

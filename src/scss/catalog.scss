@@ -164,3 +164,37 @@
     }
   }
 }
+
+/* ========================================================= */
+/* INTEGRACIÓN CON MODO DE ALTO CONTRASTE GLOBAL             */
+/* ========================================================= */
+body.high-contrast-mode {
+  .course-card {
+    background-color: #000 !important;
+    border: 2px solid #fff !important;
+    color: #fff !important;
+
+    .course-title,
+    .course-level-tag,
+    .course-description,
+    .course-price,
+    .course-syllabus h3,
+    .course-syllabus .syllabus-block,
+    .course-syllabus .syllabus-list li,
+    .course-syllabus .syllabus-list li strong,
+    .course-syllabus .cert-info {
+      color: #fff !important;
+    }
+
+    .course-footer {
+      border-top-color: #fff !important;
+    }
+
+    .course-btn {
+      background-color: #fff !important;
+      color: #000 !important;
+      border: 2px solid #fff !important;
+      font-weight: bold;
+    }
+  }
+}

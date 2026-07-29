@@ -91,3 +91,45 @@
     }
   }
 }
+
+/* ========================================================= */
+/* INTEGRACIÓN CON MODO DE ALTO CONTRASTE GLOBAL             */
+/* ========================================================= */
+body.high-contrast-mode {
+  .hero-container {
+    background-color: #000 !important;
+    color: #fff !important;
+    border-bottom: 2px solid #fff !important;
+
+    .hero-badge {
+      background-color: #000 !important;
+      color: #fff !important;
+      border: 1px solid #fff !important;
+    }
+
+    .hero-content {
+      .hero-step {
+        color: #fff !important;
+      }
+
+      .hero-title,
+      .hero-description {
+        color: #fff !important;
+      }
+
+      .hero-buttons {
+        .btn-primary,
+        .btn-secondary {
+          background-color: #fff !important;
+          color: #000 !important;
+          border: 2px solid #fff !important;
+          font-weight: bold;
+
+          &:hover {
+            background-color: #ccc !important;
+          }
+        }
+      }
+    }
+  }
+}
