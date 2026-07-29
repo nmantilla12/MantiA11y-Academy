@@ -1,4 +1,5 @@
 /* src/scss/variables.scss */
+@use "sass:color";
 
 // Paleta de colores principal
 $color-primary: #0A3663;
@@ -48,7 +49,7 @@ $border-radius-md: 12px;
   transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: darken(#0056b3, 10%);
+    background-color: color.adjust(#0056b3, $lightness: -10%);
   }
 }
 
