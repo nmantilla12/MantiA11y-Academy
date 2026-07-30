@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 
 // Importación de imágenes desde la carpeta de assets
 import heroDashboardImg from './assets/images/manager.png';
@@ -113,6 +113,9 @@ function MainAppContent() {
   const [isA11yOpen, setIsA11yOpen] = useState(false);
   const [isMethodologyOpen, setIsMethodologyOpen] = useState(false);
 
+  // Declaras el hook aquí para que esté disponible en todo el componente
+  const navigate = useNavigate(); 
+
   const accessibility = useContext(AccessibilityContext) || {};
   const { 
     fontDyslexia = false, setFontDyslexia = () => {}, 
@@ -120,6 +123,7 @@ function MainAppContent() {
     readingGuide = false, setReadingGuide = () => {},
     highContrast = false, setHighContrast = () => {} 
   } = accessibility;
+
   
   const addToCart = (product) => {
     setCart([...cart, product]);
@@ -617,7 +621,7 @@ function MainAppContent() {
             </div>
           } />
 
-          {/* RUTA: CARRITO DE COMPRAS */}
+{/* RUTA: CARRITO DE COMPRAS */}
           <Route path="/carrito" element={
             <div style={{ maxWidth: '800px', margin: '2rem auto', padding: '0 1rem' }}>
               <h2 style={{ textAlign: 'center' }}>3. Carrito de Compras</h2>
@@ -650,8 +654,8 @@ function MainAppContent() {
                         if (cart.length === 0) {
                           alert("El carrito está vacío.");
                         } else {
-                          alert("¡Gracias por tu compra en MantiA11y Academy!");
-                          setCart([]);
+                          setCart([]); // Vaciamos el carrito
+                          navigate('/exito'); // Redirigimos a la vista de Implementación Exitosa
                         }
                       }}
                       style={{ 
@@ -674,10 +678,61 @@ function MainAppContent() {
               )}
             </div>
           } />
+
+          {/* RUTA: IMPLEMENTACIÓN EXITOSA */}
+          <Route path="/exito" element={
+            <div style={{ maxWidth: '600px', margin: '2rem auto', padding: '2rem 1rem', textAlign: 'center', background: '#121212', color: '#fff', borderRadius: '12px' }}>
+              
+              {/* Icono de verificación verde */}
+              <div style={{ width: '70px', height: '70px', background: '#d4edda', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem auto', fontSize: '2rem', color: '#28a745' }}>
+                ✓
+              </div>
+
+              <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>5. Implementación Exitosa</h2>
+              <p style={{ color: '#cbd5e1', marginBottom: '2rem', lineHeight: '1.5' }}>
+                ¡Felicidades! Tu inscripción se ha completado correctamente. Ahora eres parte del cambio hacia un mundo digital más inclusivo.
+              </p>
+
+              {/* Tarjeta 1: Dashboard de Calidad */}
+              <div style={{ background: '#f8f9fa', color: '#000', padding: '1.5rem', borderRadius: '12px', textAlign: 'left', marginBottom: '1.5rem', border: '1px solid #ddd' }}>
+                <h3 style={{ fontSize: '1.2rem', color: '#0056b3', marginBottom: '0.5rem' }}>🗂️ Dashboard de Calidad</h3>
+                <p style={{ fontSize: '0.9rem', color: '#555', marginBottom: '1rem' }}>
+                  Accede a tu panel centralizado para gestionar tus progresos, ver métricas de accesibilidad en tiempo real y coordinar tus equipos.
+                </p>
+                <button onClick={() => alert('Redirigiendo al Dashboard...')} style={{ background: '#0056b3', color: '#fff', border: 'none', padding: '0.6rem 1.2rem', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', width: '100%' }}>
+                  🚀 Ir al Dashboard
+                </button>
+              </div>
+
+              {/* Tarjeta 2: Reporte de Auditoría */}
+              <div style={{ background: '#f8f9fa', color: '#000', padding: '1.5rem', borderRadius: '12px', textAlign: 'left', marginBottom: '1.5rem', border: '1px solid #ddd' }}>
+                <h3 style={{ fontSize: '1.2rem', color: '#854d0e', marginBottom: '0.5rem' }}>📊 Reporte de Auditoría</h3>
+                <p style={{ fontSize: '0.9rem', color: '#555', marginBottom: '1rem' }}>
+                  Tu reporte inicial de cumplimiento WCAG 2.1 ya está listo. Descarga el PDF detallado con recomendaciones técnicas priorizadas.
+                </p>
+                <button onClick={() => alert('Descargando reporte PDF...')} style={{ background: 'transparent', color: '#0056b3', border: '2px solid #0056b3', padding: '0.6rem 1.2rem', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', width: '100%' }}>
+                  📥 Descargar Reporte
+                </button>
+              </div>
+
+              {/* Soporte / Contacto inferior */}
+              <div style={{ background: '#f8f9fa', color: '#000', padding: '1rem', borderRadius: '8px', fontSize: '0.85rem', textAlign: 'center' }}>
+                <p style={{ margin: 0, color: '#555' }}>
+                  ¿Necesitas asistencia técnica para navegar por el dashboard? Nuestro equipo de soporte especializado está disponible 24/7. <a href="mailto:mantiayacademymantillapena@gmail.com" style={{ color: '#0056b3', fontWeight: 'bold' }}>Habla con nosotros.</a>
+                </p>
+              </div>
+
+              <div style={{ marginTop: '2rem' }}>
+                <Link to="/" style={{ color: '#60a5fa', textDecoration: 'none', fontWeight: 'bold' }}>← Volver al inicio</Link>
+              </div>
+
+            </div>
+          } />
+
         </Routes>
       </div>
 
-      {/* 8. FOOTER ARREGLADO Y FIJADO CORRECTAMENTE ABAJO */}
+      {/* FOOTER */}
       <footer style={{
         backgroundColor: highContrast ? '#111111' : '#1e293b',
         color: '#ffffff',
@@ -705,7 +760,6 @@ function MainAppContent() {
             <h4 style={{ fontSize: '1rem', marginBottom: '1rem', color: '#60a5fa' }}>Enlaces Rápidos</h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.9rem' }}>
               <li><Link to="/" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Inicio / Cursos</Link></li>
-              <li><Link to="/nosotros" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Sobre Nosotros</Link></li>
               <li><Link to="/carrito" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Carrito de Compras</Link></li>
             </ul>
           </div>
